@@ -4,20 +4,104 @@ class ThreatGraphDashboard {
         this.neo4jUrl = 'bolt://localhost:7687';
         this.neo4jUser = 'neo4j';
         this.neo4jPassword = 'cloudsecurity';
+        this.cartographyService = new CartographyService();
         this.init();
     }
 
     init() {
-        this.loadStatistics();
-        this.setupEventListeners();
-        this.displayScenarios();
+        console.log('ThreatGraphDashboard init starting...');
+        
+        // Add a small delay to ensure all DOM elements are rendered
+        setTimeout(() => {
+            this.initializeComponents();
+        }, 50);
+    }
+    
+    initializeComponents() {
+        console.log('Initializing components...');
+        try {
+            this.loadStatistics();
+            this.setupEventListeners();
+            this.displayScenarios();
+            console.log('All components initialized successfully');
+        } catch (error) {
+            console.error('Error initializing components:', error);
+        }
+    }
+
+    async startAssetDiscovery() {
+        console.log('Starting asset discovery...');
+        await this.cartographyService.startAssetDiscovery();
     }
 
     setupEventListeners() {
         // No standalone query buttons - all queries are now integrated into scenarios
     }
 
+    initializeDiscoveryPanel() {
+        // Add asset discovery panel to the dashboard
+        const dashboardGrid = document.querySelector('.dashboard-grid');
+        
+        const discoveryPanel = document.createElement('div');
+        discoveryPanel.className = 'card';
+        discoveryPanel.innerHTML = `
+            <h3>🗺️ Asset Discovery</h3>
+            <div id="discoveryContent">
+                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                    <p style="margin: 0 0 10px 0; font-weight: bold; color: #155724;">
+                        🔍 Cartography Integration
+                    </p>
+                    <p style="margin: 0; color: #155724; font-size: 0.9em;">
+                        Experience realistic cloud asset discovery workflows that reveal hidden infrastructure and attack paths.
+                    </p>
+                </div>
+                
+                <div id="discoveryStatus" style="margin-bottom: 15px;">
+                    <div style="background: #f8f9fa; padding: 12px; border-radius: 6px; text-align: center;">
+                        <p style="margin: 0; color: #6c757d;">Ready to discover cloud infrastructure</p>
+                        <div style="margin-top: 10px;">
+                            <span style="font-size: 0.8em; color: #6c757d;">
+                                📊 Discovered Assets: <span id="discoveredCount">0</span> | 
+                                🔗 Relationships: <span id="relationshipCount">0</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center;">
+                    <button 
+                        id="discoverBtn" 
+                        onclick="window.threatDashboard.startAssetDiscovery()"
+                        style="background: linear-gradient(135deg, #28a745, #20c997); color: white; border: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; font-size: 1em;"
+                        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(40,167,69,0.3)'"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'"
+                    >
+                        🔍 Discover Infrastructure
+                    </button>
+                </div>
+                
+                <div id="discoveryProgress" style="display: none; margin-top: 15px;">
+                    <div style="background: #fff3cd; padding: 12px; border-radius: 6px; border-left: 3px solid #ffc107;">
+                        <div style="font-weight: bold; color: #856404; margin-bottom: 8px;">
+                            Discovery in Progress...
+                        </div>
+                        <div id="discoveryPhase" style="color: #856404; font-size: 0.9em;"></div>
+                        <div style="background: #e0e0e0; height: 6px; border-radius: 3px; margin-top: 8px; overflow: hidden;">
+                            <div id="discoveryBar" style="background: linear-gradient(90deg, #ffc107, #fd7e14); height: 100%; width: 0%; transition: width 0.5s ease;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Insert after the first card (scenarios)
+        dashboardGrid.insertBefore(discoveryPanel, dashboardGrid.children[1]);
+    }
+
     displayScenarios() {
+        console.log('displayScenarios: Starting...');
+        const scenarioTabs = document.getElementById('scenarioTabs');
+        console.log('scenarioTabs element:', scenarioTabs);
         const scenarios = [
             {
                 name: "AWS Privilege Escalation",
@@ -66,24 +150,67 @@ class ThreatGraphDashboard {
                 description: "Azure AD federated with AWS → cross-cloud escalation → federated identity abuse",
                 severity: "CRITICAL",
                 techniques: ["T1078.004", "T1550.001", "T1098.001"],
+            },
+            {
+                name: "Real-World Asset Discovery Attack Path",
+                description: "Attacker uses cloud service discovery to identify and exploit overprivileged resources",
+                severity: "HIGH",
+                techniques: ["T1526", "T1087", "T1069", "T1548", "T1134"],
+                requiresDiscovery: true
+            },
+            {
+                name: "Cross-Cloud Infrastructure Attack via Asset Discovery",
+                description: "Automated discovery reveals hidden cross-cloud trust relationships enabling multi-cloud attacks",
+                severity: "CRITICAL", 
+                techniques: ["T1538", "T1526", "T1550.001", "T1199", "T1078"],
+                requiresDiscovery: true
             }
         ];
 
-        const scenarioList = document.getElementById('scenarioList');
-        scenarioList.innerHTML = scenarios.map(scenario => `
-            <li class="scenario-item" onclick="window.threatDashboard.exploreScenario('${scenario.name}')">
-                <div class="scenario-header">
-                    <div class="scenario-name">${scenario.name}</div>
-                </div>
-                <div class="scenario-description">${scenario.description}</div>
-                <div class="scenario-footer">
-                    <div class="severity ${scenario.severity}">${scenario.severity}</div>
-                    <div style="font-size: 0.8em; color: #6c757d;">
-                        MITRE: ${scenario.techniques.join(', ')}
-                    </div>
-                </div>
-            </li>
+        if (!scenarioTabs) {
+            console.error('scenarioTabs element not found!');
+            // Try to find it with a fallback
+            const container = document.querySelector('.scenario-selector-container');
+            console.log('scenario-selector-container found:', container);
+            return;
+        }
+        
+        // Sort scenarios by risk level: CRITICAL first, then HIGH, then others
+        const riskOrder = { 'CRITICAL': 0, 'HIGH': 1, 'MEDIUM': 2, 'LOW': 3 };
+        const sortedScenarios = scenarios.sort((a, b) => {
+            return (riskOrder[a.severity] || 99) - (riskOrder[b.severity] || 99);
+        });
+        
+        console.log('Rendering', sortedScenarios.length, 'scenarios in risk order');
+        scenarioTabs.innerHTML = sortedScenarios.map((scenario, index) => `
+            <div class="scenario-tab ${index === 0 ? 'active' : ''}" onclick="window.threatDashboard.selectScenario('${scenario.name}')">
+                <div class="scenario-title">${scenario.name}</div>
+                <div class="scenario-risk risk-${scenario.severity.toLowerCase()}">${scenario.severity}</div>
+                ${scenario.requiresDiscovery ? '<div style="font-size: 0.6em; margin-top: 2px;">🗺️ Discovery</div>' : ''}
+            </div>
         `).join('');
+        console.log('Scenarios rendered, innerHTML length:', scenarioTabs.innerHTML.length);
+        
+        // Initialize with first scenario selected
+        if (scenarios.length > 0) {
+            // Delay to ensure DOM is ready
+            setTimeout(() => {
+                this.updateOverviewPanel(scenarios[0].name);
+            }, 100);
+        }
+    }
+
+    selectScenario(scenarioName) {
+        // Update active tab
+        document.querySelectorAll('.scenario-tab').forEach(tab => {
+            tab.classList.remove('active');
+            if (tab.onclick && tab.onclick.toString().includes(scenarioName)) {
+                tab.classList.add('active');
+            }
+        });
+        
+        // Update scenario information panel
+        this.updateOverviewPanel(scenarioName);
     }
 
     exploreScenario(scenarioName) {
@@ -253,6 +380,49 @@ ORDER BY FederationSteps
 LIMIT 10`,
                 description: "This query traces multi-cloud identity federation attacks from Azure AD guest users to AWS production accounts.",
                 expectedResults: "Shows how external Azure AD contractor escalates through OIDC federation to AWS production account access."
+            },
+            'Real-World Asset Discovery Attack Path': {
+                query: `// Show attack paths revealed through automated asset discovery
+MATCH path = (start)-[*1..4]->(sensitive)
+WHERE start.discovered_via_cartography = true
+  AND sensitive.contains_pii = true
+RETURN 
+    start.name as EntryPoint,
+    labels(start)[0] as EntryPointType,
+    start.discovery_time as DiscoveredAt,
+    sensitive.name as SensitiveTarget,
+    sensitive.type as TargetType,
+    length(path) as AttackSteps,
+    [node in nodes(path) | labels(node)[0] + ': ' + coalesce(node.name, node.id)] as AttackPath,
+    [rel in relationships(path) | type(rel)] as RelationshipTypes,
+    'Discovered via Cartography asset enumeration' as AttackMethod
+ORDER BY AttackSteps ASC
+LIMIT 10`,
+                description: "This query identifies attack paths that become visible only through automated cloud asset discovery, showing how Cartography-style enumeration reveals hidden privilege escalation opportunities.",
+                expectedResults: "Shows infrastructure relationships discovered through automated enumeration that enable privilege escalation to sensitive data stores."
+            },
+            'Cross-Cloud Infrastructure Attack via Asset Discovery': {
+                query: `// Identify cross-cloud relationships discovered through asset mapping
+MATCH path = (source)-[r*1..3]->(target)
+WHERE source.discovered_via_cartography = true 
+  AND target.discovered_via_cartography = true
+  AND source.cloud_provider IS NOT NULL
+  AND target.cloud_provider IS NOT NULL
+  AND source.cloud_provider <> target.cloud_provider
+RETURN 
+    source.cloud_provider as SourceCloud,
+    source.name as SourceResource,
+    labels(source)[0] as SourceType,
+    target.cloud_provider as TargetCloud,
+    target.name as TargetResource,
+    labels(target)[0] as TargetType,
+    [rel in r | type(rel)] as TrustMechanism,
+    length(path) as TrustSteps,
+    'Cross-cloud relationship discovered via automated mapping' as DiscoveryMethod
+ORDER BY TrustSteps ASC
+LIMIT 10`,
+                description: "This query reveals cross-cloud trust relationships and federation paths discovered through comprehensive asset mapping, showing hidden multi-cloud attack vectors.",
+                expectedResults: "Shows federated identity relationships and cross-cloud trust paths that enable attackers to pivot between different cloud providers and escalate to high-privilege targets."
             }
         };
 
@@ -273,6 +443,11 @@ LIMIT 10`,
         
         console.log('overviewTitle element:', overviewTitle);
         console.log('overviewContent element:', overviewContent);
+        
+        // Debug: Check if this is a discovery scenario
+        if (scenarioName === 'Real-World Asset Discovery Attack Path' || scenarioName === 'Cross-Cloud Infrastructure Attack via Asset Discovery') {
+            console.log('DEBUG: Processing discovery scenario:', scenarioName);
+        }
         
         const scenarioInfo = {
             'AWS Privilege Escalation': {
@@ -338,6 +513,22 @@ LIMIT 10`,
                 techniques: ['T1078.004 (Valid Accounts: Cloud Accounts)', 'T1550.001 (Use Alternate Authentication Material: Application Access Token)', 'T1098.001 (Account Manipulation: Additional Cloud Credentials)'],
                 riskLevel: 'CRITICAL',
                 steps: ['External Azure AD guest user without MFA accesses OIDC provider', 'OIDC provider trusts Azure AD and issues AWS federated role tokens', 'Cross-account trust grants access to AWS production account with sensitive data']
+            },
+            'Real-World Asset Discovery Attack Path': {
+                icon: '🗺️',
+                analysis: 'This query demonstrates how attackers use cloud service discovery to identify overprivileged resources and exploit them for privilege escalation.',
+                expectedResults: 'Shows how discovered AWS infrastructure reveals attack paths from EC2 instances through IAM roles to sensitive S3 buckets with PII data.',
+                techniques: ['T1526 (Cloud Service Discovery)', 'T1087 (Account Discovery)', 'T1069 (Permission Groups Discovery)', 'T1548 (Abuse Elevation Control Mechanism)', 'T1134 (Access Token Manipulation)'],
+                riskLevel: 'HIGH',
+                steps: ['Asset discovery reveals overprivileged EC2 instance with admin IAM role', 'Instance metadata service provides access to IAM role credentials', 'Admin role grants access to sensitive S3 buckets containing customer PII']
+            },
+            'Cross-Cloud Infrastructure Attack via Asset Discovery': {
+                icon: '☁️',
+                analysis: 'This query shows how automated discovery reveals hidden cross-cloud trust relationships that enable multi-cloud attacks.',
+                expectedResults: 'Shows how discovered Azure AD users can access AWS resources through federation relationships revealed by asset discovery scanning.',
+                techniques: ['T1526 (Cloud Service Discovery)', 'T1538 (Cloud Service Dashboard)', 'T1550.001 (Use Alternate Authentication Material)', 'T1199 (Trusted Relationship)', 'T1078.004 (Valid Accounts: Cloud Accounts)'],
+                riskLevel: 'HIGH',
+                steps: ['Discovery reveals cross-cloud federation trust relationship', 'Azure AD guest user without MFA identified as external risk', 'Federation grants access to AWS resources through trusted relationship']
             }
         };
         
@@ -504,7 +695,8 @@ LIMIT 10`,
 
     // New function to run table analysis queries
     runScenarioTableQuery(scenarioName) {
-        console.log('Running table query for:', scenarioName);
+        console.log('DEBUG: runScenarioTableQuery called with:', scenarioName);
+        console.log('DEBUG: typeof scenarioName:', typeof scenarioName);
         
         // Get the tabular query for this scenario
         const queries = {
@@ -600,13 +792,54 @@ RETURN
     [rel in relationships(path) | type(rel)] as FederationMethods
 ORDER BY FederationSteps
 LIMIT 10`
+            },
+            'Real-World Asset Discovery Attack Path': {
+                query: `MATCH path = (start)-[*1..4]->(sensitive)
+WHERE start.discovered_via_cartography = true
+  AND sensitive.contains_pii = true
+RETURN 
+    start.name as EntryPoint,
+    labels(start)[0] as EntryPointType,
+    start.discovery_time as DiscoveredAt,
+    sensitive.name as SensitiveTarget,
+    sensitive.type as TargetType,
+    length(path) as AttackSteps,
+    [node in nodes(path) | labels(node)[0] + ': ' + coalesce(node.name, node.id)] as AttackPath,
+    [rel in relationships(path) | type(rel)] as RelationshipTypes
+ORDER BY AttackSteps ASC
+LIMIT 10`
+            },
+            'Cross-Cloud Infrastructure Attack via Asset Discovery': {
+                query: `MATCH path = (source)-[r*1..3]->(target)
+WHERE source.discovered_via_cartography = true 
+  AND target.discovered_via_cartography = true
+  AND source.cloud_provider IS NOT NULL
+  AND target.cloud_provider IS NOT NULL
+  AND source.cloud_provider <> target.cloud_provider
+RETURN 
+    source.cloud_provider as SourceCloud,
+    source.name as SourceResource,
+    labels(source)[0] as SourceType,
+    target.cloud_provider as TargetCloud,
+    target.name as TargetResource,
+    labels(target)[0] as TargetType,
+    [rel in r | type(rel)] as TrustMechanism,
+    length(path) as TrustSteps
+ORDER BY TrustSteps ASC
+LIMIT 10`
             }
         };
 
         const queryData = queries[scenarioName];
+        console.log('DEBUG: Looking for queryData for scenario:', scenarioName);
+        console.log('DEBUG: Available queries:', Object.keys(queries));
+        console.log('DEBUG: queryData found:', !!queryData);
+        
         if (queryData) {
             this.showQueryInScenario(scenarioName, queryData.query, 'Table Analysis', '📊');
             this.openInNeo4j(queryData.query);
+        } else {
+            console.error('DEBUG: No query found for scenario:', scenarioName);
         }
     }
 
@@ -662,13 +895,36 @@ LIMIT 5`,
 WHERE pkg.compromised = true
 RETURN path
 ORDER BY length(path)
+LIMIT 5`,
+            
+            'Real-World Asset Discovery Attack Path': `MATCH path = (start)-[*1..4]->(sensitive)
+WHERE start.discovered_via_cartography = true
+  AND sensitive.contains_pii = true
+RETURN path
+ORDER BY length(path)
+LIMIT 5`,
+            
+            'Cross-Cloud Infrastructure Attack via Asset Discovery': `MATCH path = (source)-[r*1..3]->(target)
+WHERE source.discovered_via_cartography = true 
+  AND target.discovered_via_cartography = true
+  AND source.cloud_provider IS NOT NULL
+  AND target.cloud_provider IS NOT NULL
+  AND source.cloud_provider <> target.cloud_provider
+RETURN path
+ORDER BY length(path) 
 LIMIT 5`
         };
 
         const query = graphQueries[scenarioName];
+        console.log('DEBUG: Graph query lookup for scenario:', scenarioName);
+        console.log('DEBUG: Available graph queries:', Object.keys(graphQueries));
+        console.log('DEBUG: Graph query found:', !!query);
+        
         if (query) {
             this.showQueryInScenario(scenarioName, query, 'Graph Visualization', '🌐');
             this.openInNeo4j(query);
+        } else {
+            console.error('DEBUG: No graph query found for scenario:', scenarioName);
         }
     }
 
@@ -742,6 +998,22 @@ LIMIT 5`
                 techniques: ['T1195.002 (Supply Chain Compromise: Compromise Software Supply Chain)', 'T1610 (Deploy Container)', 'T1611 (Escape to Host)'],
                 riskLevel: 'CRITICAL',
                 steps: ['Compromised package deployed in container environment', 'Container escape leads to host compromise', 'Host compromise leads to full infrastructure control']
+            },
+            'Real-World Asset Discovery Attack Path': {
+                icon: '🗺️',
+                analysis: 'This query demonstrates how attackers use cloud service discovery to identify overprivileged resources and exploit them for privilege escalation.',
+                expectedResults: 'Shows how discovered AWS infrastructure reveals attack paths from EC2 instances through IAM roles to sensitive S3 buckets with PII data.',
+                techniques: ['T1526 (Cloud Service Discovery)', 'T1087 (Account Discovery)', 'T1069 (Permission Groups Discovery)', 'T1548 (Abuse Elevation Control Mechanism)', 'T1134 (Access Token Manipulation)'],
+                riskLevel: 'HIGH',
+                steps: ['Asset discovery reveals overprivileged EC2 instance with admin IAM role', 'Instance metadata service provides access to IAM role credentials', 'Admin role grants access to sensitive S3 buckets containing customer PII']
+            },
+            'Cross-Cloud Infrastructure Attack via Asset Discovery': {
+                icon: '🌐',
+                analysis: 'This query shows how automated discovery reveals hidden cross-cloud trust relationships that enable multi-cloud attacks.',
+                expectedResults: 'Shows discovered Azure AD contractor with cross-cloud federation access to AWS production resources through OIDC trust relationships.',
+                techniques: ['T1538 (Cloud Service Dashboard)', 'T1526 (Cloud Service Discovery)', 'T1550.001 (Use Alternate Authentication Material)', 'T1199 (Trusted Relationship)', 'T1078 (Valid Accounts)'],
+                riskLevel: 'CRITICAL',
+                steps: ['Asset discovery reveals external Azure AD guest user without MFA', 'Discovery identifies OIDC federation trust between Azure and AWS', 'Contractor exploits federation to access AWS production account with sensitive data']
             }
         };
         
@@ -819,20 +1091,85 @@ LIMIT 5`
         helpContent.innerHTML = `
             <div class="help-section">
                 <h3>🚀 Quick Start</h3>
-                <p><strong>1. Select a scenario</strong> from the left panel to see detailed analysis information.</p>
-                <p><strong>2. Click "🚀 Run Analysis"</strong> to open Neo4j Browser with the query pre-loaded.</p>
-                <p><strong>3. Login to Neo4j</strong> with username: <code>neo4j</code> and password: <code>cloudsecurity</code></p>
-                <p><strong>4. Hit the play button (▶️)</strong> to execute the query and see results.</p>
+                <p><strong>1. Select a scenario</strong> from the attack scenarios grid to see detailed analysis information.</p>
+                <p><strong>2. For Asset Discovery Scenarios (9-10):</strong> First click "🔍 Discover Infrastructure" to simulate Cartography asset discovery, then select scenarios 9 or 10.</p>
+                <p><strong>3. Click "📊 Table Analysis" or "🌐 Graph Visualization"</strong> to run the scenario query.</p>
+                <p><strong>4. Login to Neo4j</strong> with username: <code>neo4j</code> and password: <code>cloudsecurity</code></p>
+                <p><strong>5. Hit the play button (▶️)</strong> to execute the query and see results.</p>
+                <div style="background: #e3f2fd; padding: 12px; border-radius: 6px; margin-top: 15px; border-left: 3px solid #2196f3;">
+                    <strong style="color: #1976d2;">🗺️ About Cartography Integration:</strong>
+                    <p style="margin: 5px 0 0 0; color: #1976d2; font-size: 0.9em;">
+                        This lab integrates with <a href="https://github.com/lyft/cartography" target="_blank" style="color: #1976d2; font-weight: bold;">Cartography</a>, 
+                        an open-source tool for mapping cloud infrastructure. The asset discovery simulation demonstrates how 
+                        Cartography reveals hidden attack paths by enumerating cloud resources and their relationships.
+                    </p>
+                </div>
             </div>
 
             <div class="help-section">
                 <h3>🎯 Attack Scenarios</h3>
-                <ul>
-                    <li><strong>AWS Privilege Escalation:</strong> Developer user escalates to admin via role assumption</li>
-                    <li><strong>Cross-Cloud Attack Chain:</strong> Azure AD user compromises AWS resources via CI/CD</li>
-                    <li><strong>Kubernetes RBAC Escalation:</strong> Pod service account escalates to cluster admin</li>
-                    <li><strong>Supply Chain Container Escape:</strong> Compromised package leads to host compromise</li>
-                </ul>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+                    <div>
+                        <h4 style="color: #2c3e50; margin-bottom: 10px;">🔐 Core Attack Paths (1-8)</h4>
+                        <ul style="font-size: 0.9em; line-height: 1.4;">
+                            <li><strong>AWS Privilege Escalation:</strong> Developer → Admin via role assumption</li>
+                            <li><strong>Cross-Cloud Attack Chain:</strong> Azure AD → AWS via CI/CD</li>
+                            <li><strong>Kubernetes RBAC Escalation:</strong> Pod → cluster-admin privileges</li>
+                            <li><strong>Supply Chain Container Escape:</strong> NPM package → host compromise</li>
+                            <li><strong>Supply Chain Compromise:</strong> Malicious package → cloud secrets</li>
+                            <li><strong>Secrets Sprawl Attack:</strong> GitHub token → Terraform → AWS admin</li>
+                            <li><strong>Serverless Attack Chain:</strong> API Gateway → Lambda → data exfiltration</li>
+                            <li><strong>Multi-Cloud Identity Federation:</strong> Azure guest → AWS production</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: #2c3e50; margin-bottom: 10px;">🗺️ Asset Discovery Scenarios (9-10)</h4>
+                        <ul style="font-size: 0.9em; line-height: 1.4;">
+                            <li><strong>Real-World Asset Discovery:</strong> Cartography reveals overprivileged EC2 → S3 PII access</li>
+                            <li><strong>Cross-Cloud Infrastructure Discovery:</strong> Asset scanning reveals Azure → AWS federation paths</li>
+                        </ul>
+                        <div style="background: #e8f5e8; padding: 10px; border-radius: 6px; margin-top: 10px; border-left: 3px solid #28a745;">
+                            <small style="color: #155724;">
+                                <strong>💡 Asset Discovery:</strong> Click "🔍 Discover Infrastructure" to unlock scenarios 9 & 10. 
+                                These scenarios demonstrate how cloud asset discovery tools like Cartography reveal hidden attack paths.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="help-section">
+                <h3>🔍 Cartography Cloud Asset Discovery</h3>
+                <div style="background: #e8f5e8; padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #28a745;">
+                    <h4 style="color: #155724; margin: 0 0 15px 0;">What is Cartography?</h4>
+                    <p style="color: #155724; margin: 0 0 10px 0;">
+                        <strong>Cartography</strong> is Lyft's open-source tool that consolidates cloud infrastructure assets and their relationships 
+                        in a Neo4j graph database. It discovers and maps AWS, Azure, GCP resources, making it easier to understand security posture.
+                    </p>
+                    <ul style="color: #155724; margin: 10px 0; padding-left: 20px;">
+                        <li><strong>Asset Discovery:</strong> Automatically discovers EC2 instances, S3 buckets, IAM roles, VPCs, etc.</li>
+                        <li><strong>Relationship Mapping:</strong> Maps connections between resources (who can access what)</li>
+                        <li><strong>Security Analysis:</strong> Enables queries to find overprivileged access and attack paths</li>
+                        <li><strong>Multi-Cloud Support:</strong> Works across AWS, Azure, and Google Cloud Platform</li>
+                    </ul>
+                    <p style="color: #155724; margin: 10px 0 0 0;">
+                        <strong>📖 Learn More:</strong> 
+                        <a href="https://github.com/lyft/cartography" target="_blank" style="color: #155724; font-weight: bold; text-decoration: underline;">
+                            Cartography on GitHub
+                        </a> | 
+                        <a href="https://cartography.readthedocs.io/" target="_blank" style="color: #155724; font-weight: bold; text-decoration: underline;">
+                            Official Documentation
+                        </a>
+                    </p>
+                </div>
+                
+                <h4 style="color: #2c3e50; margin-top: 25px;">🎯 How This Lab Uses Cartography</h4>
+                <ol style="line-height: 1.6;">
+                    <li><strong>Simulated Discovery:</strong> Click "🔍 Discover Infrastructure" to simulate real Cartography scanning</li>
+                    <li><strong>Progressive Phases:</strong> Watch as the simulation discovers accounts → IAM → compute → storage → serverless</li>
+                    <li><strong>Discovery-Based Scenarios:</strong> Scenarios 9 & 10 use discovered assets to show new attack paths</li>
+                    <li><strong>Real-World Relevance:</strong> Demonstrates how asset discovery reveals hidden infrastructure risks</li>
+                </ol>
             </div>
 
             <div class="help-section">
@@ -877,10 +1214,12 @@ docker-compose logs neo4j</code></pre>
             <div class="help-section">
                 <h3>📊 Lab Statistics</h3>
                 <ul>
-                    <li><strong>Nodes:</strong> 68 (Users, Roles, Services, Pods, Images, Hosts)</li>
-                    <li><strong>Relationships:</strong> 30+ (Complete attack paths and privilege escalations)</li>
-                    <li><strong>MITRE Techniques:</strong> 12 (T1078, T1548, T1134, T1195, etc.)</li>
-                    <li><strong>Scenarios:</strong> 4 realistic attack chains with full connectivity</li>
+                    <li><strong>Attack Scenarios:</strong> 10 (8 original + 2 asset discovery)</li>
+                    <li><strong>Nodes:</strong> 300+ (Users, Roles, Services, K8s Resources, Containers, Discovered Assets)</li>
+                    <li><strong>Relationships:</strong> 100+ (Complete attack paths, role escalations, cross-cloud access)</li>
+                    <li><strong>MITRE Techniques:</strong> 31 (T1526, T1087, T1078, T1548, T1134, T1195, T1199, etc.)</li>
+                    <li><strong>Cloud Platforms:</strong> AWS, Azure, Kubernetes, Docker, GitHub Actions</li>
+                    <li><strong>Dynamic Discovery:</strong> Real-time asset scanning simulation with Cartography integration</li>
                 </ul>
             </div>
 
@@ -910,9 +1249,22 @@ docker-compose logs neo4j</code></pre>
             </div>
 
             <div class="help-section">
+                <h3>🗺️ Asset Discovery & Cartography</h3>
+                <p><strong>Phase 3 Features:</strong> Experience realistic cloud asset discovery workflows that reveal hidden infrastructure and attack paths.</p>
+                <ul>
+                    <li><strong>Dynamic Discovery:</strong> Click "🔍 Discover Infrastructure" to simulate Cartography scanning AWS environments</li>
+                    <li><strong>Real-time Progress:</strong> Watch as the system discovers accounts, IAM, compute, storage, and serverless resources</li>
+                    <li><strong>Attack Paths:</strong> Scenarios 9 & 10 become available after discovery, showing how found assets create new attack vectors</li>
+                    <li><strong>Security Analysis:</strong> Discovered assets include risk assessments and security findings</li>
+                </ul>
+                <p><strong>Learn More About Cartography:</strong> <a href="https://github.com/lyft/cartography" target="_blank" style="color: #007bff; text-decoration: none; font-weight: bold;">🔗 Cartography on GitHub</a></p>
+                <p style="font-size: 0.9em; color: #6c757d; margin-top: 10px;">Cartography is an open-source tool that consolidates infrastructure assets and their relationships in a graph database, making it easier to reason about security posture.</p>
+            </div>
+
+            <div class="help-section">
                 <h3>🔮 Future Phases</h3>
                 <p><strong>Enhanced Features:</strong> Comprehensive MITRE mapping, mock Cartography data</p>
-                <p><strong>Phase 3:</strong> Cartography integration with asset discovery simulation</p>
+                <p><strong>Phase 3:</strong> Cartography integration with asset discovery simulation ✅</p>
                 <p><strong>Phase 4:</strong> Interactive React dashboard, Jupyter notebooks</p>
                 <p><strong>Phase 5:</strong> Advanced analytics, metrics collection, export capabilities</p>
             </div>
@@ -927,7 +1279,17 @@ docker-compose logs neo4j</code></pre>
 
 // Initialize dashboard when page loads
 document.addEventListener('DOMContentLoaded', () => {
-    window.threatDashboard = new ThreatGraphDashboard();
+    try {
+        window.threatDashboard = new ThreatGraphDashboard();
+        console.log('Dashboard initialized successfully');
+    } catch (error) {
+        console.error('Failed to initialize dashboard:', error);
+        // Create a minimal fallback object so buttons don't fail
+        window.threatDashboard = {
+            startAssetDiscovery: () => console.log('Dashboard initialization failed, cannot start discovery'),
+            selectScenario: () => console.log('Dashboard initialization failed, cannot select scenario')
+        };
+    }
     
     // Close modal when clicking outside of it
     window.onclick = function(event) {

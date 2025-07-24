@@ -224,12 +224,13 @@ docker-compose up -d
 
 ## 📊 Lab Statistics
 
-- **Nodes**: 215+ (Users, Roles, Services, Pods, Images, Hosts, MITRE Techniques, etc.)
-- **Relationships**: 55+ (Complete attack paths and privilege escalations)
-- **MITRE Techniques**: 25 across 11 tactics (T1078, T1548, T1134, T1195, T1190, T1530, etc.)
-- **Scenarios**: 8 realistic attack chains with working analysis queries
-- **Mock Data**: AWS, Azure, and Kubernetes data ready for Cartography integration
-- **Attack Paths**: Verified working user→service relationships for all scenarios
+- **Nodes**: 300+ (Users, Roles, Services, Pods, Images, Hosts, MITRE Techniques, Discovered Assets, etc.)
+- **Relationships**: 80+ (Complete attack paths, privilege escalations, and discovered connections)
+- **MITRE Techniques**: 31 across 13 tactics (T1078, T1548, T1134, T1195, T1190, T1530, T1526, T1087, etc.)
+- **Scenarios**: 10 realistic attack chains including 2 new discovery-based scenarios
+- **Mock Data**: Comprehensive AWS, Azure, and Kubernetes datasets with realistic configurations
+- **Asset Discovery**: 7-phase progressive discovery simulation with 50+ mock cloud resources
+- **Attack Paths**: Verified working relationships including discovery-revealed hidden paths
 
 ### ✅ **Verified Analysis Coverage:**
 - AWS privilege escalation attack paths
@@ -253,12 +254,14 @@ docker-compose up -d
 
 ```
 cloud-threat-lab/
-├── docker-compose.yml              # Container orchestration
-├── README.md                       # This file
+├── docker-compose.yml              # Container orchestration with Cartography + LocalStack
+├── README.md                       # This file with Phase 3 documentation
 ├── .gitignore                      # Version control patterns
-├── scripts/                        # Utility scripts and data loaders
+├── scripts/                        # Utility scripts and discovery management
 │   ├── load-data.sh               # Manual data loading
 │   ├── load-phase2-data.sh        # Enhanced scenario loader
+│   ├── start-discovery-simulation.sh # Asset discovery trigger (NEW)
+│   ├── reset-environment.sh       # Environment reset to baseline (NEW)
 │   ├── quick-fix.sh               # Fix missing relationships
 │   └── reload-fresh-data.sh       # Complete data reload
 ├── docs/                          # Comprehensive documentation
@@ -266,49 +269,147 @@ cloud-threat-lab/
 │   ├── mitre-integration-guide.md   # MITRE ATT&CK integration guide
 │   ├── WORKING_QUERIES.md          # Verified query examples
 │   └── DEBUG_QUERIES.md            # Troubleshooting guide
-├── cartography/                   # Mock cloud data for future integration
-│   ├── mock-aws-data.json         # Realistic AWS infrastructure data
-│   ├── mock-azure-data.json       # Azure resource inventory
-│   └── mock-k8s-data.json         # Kubernetes cluster configuration
+├── cartography/                   # Cartography integration & mock data (ENHANCED)
+│   ├── Dockerfile                 # Cartography container configuration
+│   ├── run-discovery.sh           # Discovery simulation script
+│   ├── simulate-discovery.py      # Python discovery simulator
+│   ├── config/
+│   │   └── config.yaml           # Cartography configuration
+│   └── mock-data/                # Realistic cloud infrastructure datasets
+│       ├── aws-resources.json    # Comprehensive AWS infrastructure
+│       ├── mock-azure-data.json  # Azure resources and Entra ID
+│       └── mock-k8s-data.json    # Kubernetes cluster with RBAC
+├── localstack/                    # AWS service emulation (NEW)
+│   └── init/
+│       └── 01-setup-aws-resources.sh # LocalStack infrastructure setup
 ├── neo4j/                         # Graph database configuration and data
 │   ├── init-complete.cypher       # Core attack scenario data
 │   ├── phase2-scenarios.cypher    # Advanced attack scenarios
-│   └── mitre-integration.cypher   # MITRE ATT&CK technique mappings
-└── dashboard/                     # Interactive web interface
-    ├── index.html                 # Main dashboard with 8 scenarios
-    ├── app.js                     # Interactive analysis functionality
+│   ├── mitre-integration.cypher   # MITRE ATT&CK technique mappings
+│   └── cartography-scenarios.cypher # Discovery-based scenarios (NEW)
+└── dashboard/                     # Interactive web interface (ENHANCED)
+    ├── index.html                 # Main dashboard with asset discovery
+    ├── app.js                     # Interactive analysis with 10 scenarios
+    ├── cartography-service.js     # Asset discovery service integration (NEW)
     ├── style.css                  # Dashboard styling and UX
     └── Dockerfile
 ```
 
-## 🔮 Upcoming Features
+## 🗺️ Phase 3: Asset Discovery & Cartography Integration
 
-### 📊 Dynamic Asset Discovery
-- Cartography integration for live cloud asset mapping
-- Mock cloud API responses simulating real environments
-- Asset discovery workflow with realistic data ingestion
-- Real-time graph updates as "assets are discovered"
-- Multi-cloud inventory simulation (AWS, Azure, GCP)
+### 🚀 NEW: Dynamic Asset Discovery Simulation
 
-### 🎨 Advanced Visualization
-- Modern React/Vue dashboard with enhanced UX
-- Interactive graph visualization with D3.js or vis.js
-- Jupyter notebooks for threat research and analysis
-- Query builder interface for non-technical users
-- Attack simulation engine with automated progression
+**Experience realistic cloud asset discovery workflows that demonstrate how security teams map complex cloud environments and identify hidden attack paths.**
 
-### 🔧 Enterprise Integration
-- Export capabilities (JSON, CSV, GraphML, MITRE Navigator)
-- SIEM/SOAR integration for real-world threat hunting
-- Metrics collection and analytics dashboard
-- API endpoints for custom integrations
-- Automated red team scenario generation
+#### 🔍 Asset Discovery Features
 
-### 🌐 Community Features
-- Scenario marketplace for sharing custom attack paths
-- Community-contributed MITRE technique mappings
-- Collaborative threat research workspace
-- Import/export functionality for threat intelligence sharing
+**Progressive Discovery Simulation:**
+- **"Discover Infrastructure" Button:** Triggers realistic Cartography-style asset enumeration
+- **7-Phase Discovery Process:** Foundation → Identity → Compute → Storage → Serverless → Relationships → Security Analysis
+- **Real-time Progress Tracking:** Watch as assets and relationships are discovered over time
+- **Educational Workflow:** Experience how automated tools reveal hidden infrastructure
+
+**Multi-Cloud Mock Environment:**
+- **AWS Services:** 50+ resources (EC2, IAM, S3, Lambda, API Gateway, VPC, Security Groups)
+- **Azure Integration:** Virtual Machines, Storage Accounts, Key Vaults, Entra ID, Managed Identities
+- **Kubernetes Cluster:** Pods, Services, RBAC, Secrets, Namespaces with realistic configurations
+- **LocalStack Integration:** Full AWS service emulation for hands-on experience
+
+**Enhanced Attack Scenarios:**
+
+**🆕 Scenario 9: Real-World Asset Discovery Attack Path**
+- Demonstrates how attackers use cloud service discovery (T1526) to identify overprivileged resources
+- Shows automated account enumeration (T1087) and permission discovery (T1069)
+- **Risk Level:** HIGH | **MITRE Techniques:** T1526, T1087, T1069, T1548, T1134
+
+**🆕 Scenario 10: Cross-Cloud Infrastructure Attack via Asset Discovery**
+- Reveals hidden cross-cloud trust relationships through automated discovery
+- Demonstrates federated identity exploitation across cloud providers
+- **Risk Level:** CRITICAL | **MITRE Techniques:** T1538, T1526, T1550.001, T1199, T1078
+
+#### 🎯 How to Use Asset Discovery
+
+**Step 1: Start the Lab**
+```bash
+docker-compose up -d
+# Wait ~60 seconds for services to initialize
+```
+
+**Step 2: Access the Enhanced Dashboard**
+- Open http://localhost:3000
+- Navigate to the "🗺️ Asset Discovery" panel
+- Click **"🔍 Discover Infrastructure"** to start simulation
+
+**Step 3: Watch Progressive Discovery**
+- **Phase 1:** Foundation Discovery (AWS accounts, regions)
+- **Phase 2:** Identity Discovery (IAM users, roles, policies)
+- **Phase 3:** Compute Discovery (EC2, VPC, security groups)
+- **Phase 4:** Storage Discovery (S3 buckets, databases)
+- **Phase 5:** Serverless Discovery (Lambda, API Gateway)
+- **Phase 6:** Relationship Discovery (cross-service connections)
+- **Phase 7:** Security Analysis (risk assessment)
+
+**Step 4: Explore Discovery-Based Scenarios**
+- New scenarios become available after discovery
+- Run queries to see discovered assets and relationships
+- Analyze attack paths that were previously hidden
+
+#### 🔧 Discovery Simulation Scripts
+
+**Manual Discovery Trigger:**
+```bash
+./scripts/start-discovery-simulation.sh
+```
+
+**Environment Reset:**
+```bash
+./scripts/reset-environment.sh
+```
+
+#### 📊 Discovery Analytics Queries
+
+**View Discovered Assets:**
+```cypher
+MATCH (asset) 
+WHERE asset.discovered_via_cartography = true
+RETURN labels(asset)[0] as AssetType, 
+       count(asset) as Count,
+       min(asset.discovery_time) as FirstDiscovered
+ORDER BY Count DESC
+```
+
+**Find Attack Paths Revealed by Discovery:**
+```cypher
+MATCH path = (start)-[*3..6]->(sensitive:SensitiveData)
+WHERE start.discovered_via_cartography = true
+  AND all(node in nodes(path) WHERE exists(node.discovered_via_cartography))
+RETURN path, length(path) as AttackSteps
+ORDER BY AttackSteps ASC
+LIMIT 10
+```
+
+**Cross-Cloud Relationships:**
+```cypher
+MATCH (source)-[r*1..3]->(target)
+WHERE source.discovered_via_cartography = true 
+  AND target.discovered_via_cartography = true
+  AND source.cloud_provider <> target.cloud_provider
+RETURN source.cloud_provider as SourceCloud,
+       target.cloud_provider as TargetCloud,
+       [rel in r | type(rel)] as TrustMechanism
+```
+
+### 🎨 Advanced Visualization & Analytics
+- Interactive asset discovery dashboard with real-time progress
+- Before/after comparison of infrastructure visibility
+- Discovery timeline and relationship emergence visualization
+- Security risk analysis of discovered assets
+
+### 🔧 Enterprise-Ready Architecture
+- Cartography container integration with realistic mock data
+- LocalStack AWS service emulation for hands-on learning
+- Scalable architecture supporting 10-25 concurrent students
+- Comprehensive reset and simulation management scripts
 
 ## 🛡️ Security Notes
 

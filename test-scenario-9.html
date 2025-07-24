@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Scenario 9</title>
+</head>
+<body>
+    <h1>Test Scenario 9 Functionality</h1>
+    
+    <div id="overviewTitle">Title will appear here</div>
+    <div id="overviewContent">Content will appear here</div>
+    <div id="queryResults">Query results will appear here</div>
+    
+    <button onclick="testScenario9()">Test Real-World Asset Discovery</button>
+    <button onclick="testScenario10()">Test Cross-Cloud Infrastructure Attack</button>
+    
+    <script>
+        // Mock dashboard object
+        window.threatDashboard = {
+            updateOverviewPanel: function(scenarioName) {
+                console.log('Mock updateOverviewPanel called with:', scenarioName);
+                
+                const scenarioInfo = {
+                    'Real-World Asset Discovery Attack Path': {
+                        icon: '🗺️',
+                        analysis: 'This query demonstrates how attackers use cloud service discovery to identify overprivileged resources and exploit them for privilege escalation.',
+                        expectedResults: 'Shows how discovered AWS infrastructure reveals attack paths from EC2 instances through IAM roles to sensitive S3 buckets with PII data.',
+                        techniques: ['T1526 (Cloud Service Discovery)', 'T1087 (Account Discovery)', 'T1069 (Permission Groups Discovery)', 'T1548 (Abuse Elevation Control Mechanism)', 'T1134 (Access Token Manipulation)'],
+                        riskLevel: 'HIGH',
+                        steps: ['Asset discovery reveals overprivileged EC2 instance with admin IAM role', 'Instance metadata service provides access to IAM role credentials', 'Admin role grants access to sensitive S3 buckets containing customer PII']
+                    },
+                    'Cross-Cloud Infrastructure Attack via Asset Discovery': {
+                        icon: '☁️',
+                        analysis: 'This query shows how automated discovery reveals hidden cross-cloud trust relationships that enable multi-cloud attacks.',
+                        expectedResults: 'Shows how discovered Azure AD users can access AWS resources through federation relationships revealed by asset discovery scanning.',
+                        techniques: ['T1526 (Cloud Service Discovery)', 'T1538 (Cloud Service Dashboard)', 'T1550.001 (Use Alternate Authentication Material)', 'T1199 (Trusted Relationship)', 'T1078.004 (Valid Accounts: Cloud Accounts)'],
+                        riskLevel: 'HIGH',
+                        steps: ['Discovery reveals cross-cloud federation trust relationship', 'Azure AD guest user without MFA identified as external risk', 'Federation grants access to AWS resources through trusted relationship']
+                    }
+                };
+                
+                const info = scenarioInfo[scenarioName];
+                if (info) {
+                    document.getElementById('overviewTitle').innerHTML = `${info.icon} ${scenarioName}`;
+                    document.getElementById('overviewContent').innerHTML = `
+                        <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #28a745;">
+                            <h4 style="margin: 0 0 10px 0; color: #155724;">📊 Analysis</h4>
+                            <p style="margin: 0; color: #155724;">${info.analysis}</p>
+                        </div>
+                        
+                        <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #2196f3;">
+                            <h4 style="margin: 0 0 10px 0; color: #1976d2;">🎯 Expected Results</h4>
+                            <p style="margin: 0; color: #1976d2;">${info.expectedResults}</p>
+                        </div>
+                        
+                        <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 15px 0; border: 2px solid #dee2e6;">
+                            <h4 style="margin: 0 0 15px 0; color: #2c3e50;">🔍 Attack Analysis</h4>
+                            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                <button onclick="window.threatDashboard.runScenarioTableQuery('${scenarioName}')" 
+                                        style="background: #17a2b8; color: white; border: none; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9em;">
+                                    📊 Table Analysis
+                                </button>
+                                <button onclick="window.threatDashboard.runScenarioGraphQuery('${scenarioName}')" 
+                                        style="background: #28a745; color: white; border: none; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9em;">
+                                    🌐 Graph Visualization
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    document.getElementById('overviewContent').innerHTML = '<p>Scenario not found!</p>';
+                }
+            },
+            
+            runScenarioTableQuery: function(scenarioName) {
+                console.log('Mock runScenarioTableQuery called with:', scenarioName);
+                document.getElementById('queryResults').innerHTML = `<p>Table query would run for: ${scenarioName}</p>`;
+            },
+            
+            runScenarioGraphQuery: function(scenarioName) {
+                console.log('Mock runScenarioGraphQuery called with:', scenarioName);
+                document.getElementById('queryResults').innerHTML = `<p>Graph query would run for: ${scenarioName}</p>`;
+            }
+        };
+        
+        function testScenario9() {
+            window.threatDashboard.updateOverviewPanel('Real-World Asset Discovery Attack Path');
+        }
+        
+        function testScenario10() {
+            window.threatDashboard.updateOverviewPanel('Cross-Cloud Infrastructure Attack via Asset Discovery');
+        }
+    </script>
+</body>
+</html>

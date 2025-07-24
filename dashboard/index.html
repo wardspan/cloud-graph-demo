@@ -33,38 +33,84 @@
             </div>
         </div>
 
-        <div class="dashboard-grid">
-            <div class="card">
-                <h3>🎯 Attack Scenarios</h3>
-                <ul class="scenario-list" id="scenarioList">
-                    <!-- Scenarios will be populated by JavaScript -->
-                </ul>
+        <!-- Horizontal Scenario Selector -->
+        <div class="scenario-selector-container">
+            <h3>🎯 Attack Scenarios</h3>
+            <div class="scenario-tabs" id="scenarioTabs">
+                <!-- Scenario tabs will be populated by JavaScript -->
             </div>
+        </div>
 
-            <div class="card">
-                <h3 id="overviewTitle">📋 Scenario Information</h3>
-                <div id="overviewContent">
-                    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; text-align: center; margin: 20px 0;">
-                        <p style="margin: 0 0 15px 0; color: #6c757d; font-size: 1.1em;">
-                            Select an attack scenario from the left to see:
-                        </p>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px;">
-                            <div style="background: #e8f5e8; padding: 12px; border-radius: 6px; border-left: 3px solid #28a745;">
-                                <strong style="color: #155724;">📊 Analysis</strong>
-                                <p style="margin: 5px 0 0 0; color: #155724; font-size: 0.9em;">What the query does</p>
-                            </div>
-                            <div style="background: #e3f2fd; padding: 12px; border-radius: 6px; border-left: 3px solid #2196f3;">
-                                <strong style="color: #1976d2;">🎯 Expected Results</strong>
-                                <p style="margin: 5px 0 0 0; color: #1976d2; font-size: 0.9em;">What you'll see</p>
-                            </div>
-                            <div style="background: #fff3cd; padding: 12px; border-radius: 6px; border-left: 3px solid #ffc107;">
-                                <strong style="color: #856404;">⚔️ MITRE Techniques</strong>
-                                <p style="margin: 5px 0 0 0; color: #856404; font-size: 0.9em;">Attack methods</p>
-                            </div>
-                            <div style="background: #d1ecf1; padding: 12px; border-radius: 6px; border-left: 3px solid #17a2b8;">
-                                <strong style="color: #0c5460;">💡 Analysis Tips</strong>
-                                <p style="margin: 5px 0 0 0; color: #0c5460; font-size: 0.9em;">How to interpret</p>
-                            </div>
+        <!-- Scenario Information Panel -->
+        <div class="card scenario-info-panel">
+            <h3 id="overviewTitle">📋 Scenario Information</h3>
+            <div id="overviewContent">
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; text-align: center; margin: 20px 0;">
+                    <p style="margin: 0 0 15px 0; color: #6c757d; font-size: 1.1em;">
+                        Select an attack scenario above to see:
+                    </p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px;">
+                        <div style="background: #e8f5e8; padding: 12px; border-radius: 6px; border-left: 3px solid #28a745;">
+                            <strong style="color: #155724;">📊 Analysis</strong>
+                            <p style="margin: 5px 0 0 0; color: #155724; font-size: 0.9em;">What the query does</p>
+                        </div>
+                        <div style="background: #e3f2fd; padding: 12px; border-radius: 6px; border-left: 3px solid #2196f3;">
+                            <strong style="color: #1976d2;">🎯 Expected Results</strong>
+                            <p style="margin: 5px 0 0 0; color: #1976d2; font-size: 0.9em;">What you'll see</p>
+                        </div>
+                        <div style="background: #fff3cd; padding: 12px; border-radius: 6px; border-left: 3px solid #ffc107;">
+                            <strong style="color: #856404;">⚔️ MITRE Techniques</strong>
+                            <p style="margin: 5px 0 0 0; color: #856404; font-size: 0.9em;">Attack methods</p>
+                        </div>
+                        <div style="background: #d1ecf1; padding: 12px; border-radius: 6px; border-left: 3px solid #17a2b8;">
+                            <strong style="color: #0c5460;">💡 Analysis Tips</strong>
+                            <p style="margin: 5px 0 0 0; color: #0c5460; font-size: 0.9em;">How to interpret</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Asset Discovery Panel -->
+        <div class="card asset-discovery-panel">
+            <h3>🗺️ Asset Discovery</h3>
+            <div id="discoveryContent">
+                <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                    <p style="margin: 0 0 10px 0; font-weight: bold; color: #155724;">
+                        🔍 Cartography Integration
+                    </p>
+                    <p style="margin: 0; color: #155724; font-size: 0.9em;">
+                        Experience realistic cloud asset discovery workflows that reveal hidden infrastructure and attack paths.
+                    </p>
+                </div>
+                
+                <div id="discoveryStatus" style="margin-bottom: 15px;">
+                    <div style="background: #f8f9fa; padding: 12px; border-radius: 6px; text-align: center;">
+                        <p style="margin: 0; color: #6c757d;">Ready to discover cloud infrastructure</p>
+                        <div style="margin-top: 10px;">
+                            <span style="font-size: 0.8em; color: #6c757d;">
+                                📊 Discovered Assets: <span id="discoveredCount">0</span> | 
+                                🔗 New Relationships: <span id="relationshipCount">0</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-bottom: 15px;">
+                    <button id="discoverBtn" onclick="window.threatDashboard.startAssetDiscovery()" 
+                            style="background: linear-gradient(135deg, #28a745, #20c997); color: white; border: none; padding: 12px 24px; border-radius: 25px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3); transition: all 0.3s ease;">
+                        🔍 Discover Infrastructure
+                    </button>
+                </div>
+
+                <div id="discoveryProgress" style="display: none; margin-top: 15px;">
+                    <div style="background: #fff3cd; padding: 12px; border-radius: 6px; border-left: 3px solid #ffc107;">
+                        <div style="font-weight: bold; color: #856404; margin-bottom: 8px;">
+                            Discovery in Progress...
+                        </div>
+                        <div id="discoveryPhase" style="color: #856404; font-size: 0.9em;"></div>
+                        <div style="background: #e0e0e0; height: 6px; border-radius: 3px; margin-top: 8px; overflow: hidden;">
+                            <div id="discoveryBar" style="background: linear-gradient(90deg, #ffc107, #fd7e14); height: 100%; width: 0%; transition: width 0.5s ease;"></div>
                         </div>
                     </div>
                 </div>
@@ -73,10 +119,10 @@
 
 
         <div class="footer">
-            <p>🛡️ Cloud Threat Graph Lab - Enhanced Data & MITRE Integration</p>
-            <p>Built with Neo4j, Docker, and defensive security principles</p>
+            <p>🛡️ Cloud Threat Graph Lab - Phase 3: Cartography Integration & Asset Discovery</p>
+            <p>Built with Neo4j, Docker, Cartography, LocalStack & defensive security principles</p>
             <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">
-                8 attack scenarios • 215+ nodes • 22 MITRE ATT&CK techniques • Mock Cartography data ready
+                10 attack scenarios • 238+ nodes • 95+ relationships • 22 MITRE ATT&CK techniques • Real-time asset discovery with Cartography integration
             </p>
         </div>
     </div>
@@ -94,6 +140,7 @@
         </div>
     </div>
 
+    <script src="cartography-service.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

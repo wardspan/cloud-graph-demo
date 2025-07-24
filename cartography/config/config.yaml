@@ -1,0 +1,77 @@
+# Cartography Configuration for Cloud Threat Graph Lab
+# This configuration simulates realistic asset discovery
+
+# Neo4j Configuration
+neo4j:
+  uri: "bolt://neo4j:7687"
+  user: "neo4j"
+  password: "cloudsecurity"
+  
+# AWS Configuration (using LocalStack)
+aws:
+  # Use LocalStack endpoint for simulation
+  endpoint_url: "http://localstack:4566"
+  region: "us-east-1"
+  access_key_id: "test"
+  secret_access_key: "test"
+  
+  # Services to discover
+  services:
+    - ec2
+    - iam
+    - s3
+    - lambda
+    - apigateway
+    - rds
+    - secretsmanager
+    - ssm
+
+# Discovery Configuration
+discovery:
+  # Simulation mode for educational purposes
+  simulation_mode: true
+  
+  # Progressive discovery phases
+  phases:
+    - name: "foundation"
+      description: "Discover AWS accounts and regions"
+      duration_seconds: 2
+      
+    - name: "iam"
+      description: "Discover IAM users, roles, and policies"
+      duration_seconds: 3
+      
+    - name: "compute"
+      description: "Discover EC2 instances and networking"
+      duration_seconds: 2
+      
+    - name: "storage"
+      description: "Discover S3 buckets and databases"
+      duration_seconds: 2
+      
+    - name: "serverless"
+      description: "Discover Lambda functions and API Gateways"
+      duration_seconds: 2
+      
+    - name: "relationships"
+      description: "Discover cross-service relationships"
+      duration_seconds: 2
+      
+    - name: "security"
+      description: "Analyze security configurations"
+      duration_seconds: 1
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  
+# Asset labeling for educational purposes
+labeling:
+  # Mark all discovered assets
+  cartography_tag: "discovered_via_cartography"
+  discovery_timestamp: true
+  
+  # Risk analysis tags
+  security_analysis: true
+  risk_assessment: true
