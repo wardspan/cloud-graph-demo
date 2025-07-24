@@ -29,6 +29,7 @@
             </div>
             <div class="status-item">
                 <a href="http://localhost:7474" target="_blank" class="neo4j-link">Open Neo4j Browser</a>
+                <button onclick="window.threatDashboard.showHelp()" class="help-btn">📚 Help</button>
             </div>
         </div>
 
@@ -98,6 +99,19 @@
             <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">
                 Next: Phase 2 will add enhanced data, MITRE mapping, and mock Cartography integration
             </p>
+        </div>
+    </div>
+
+    <!-- Help Modal -->
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📚 Cloud Threat Graph Lab - Help & Documentation</h2>
+                <button class="close-btn" onclick="window.threatDashboard.closeHelp()">&times;</button>
+            </div>
+            <div class="modal-body" id="helpContent">
+                <div class="help-loading">Loading help content...</div>
+            </div>
         </div>
     </div>
 

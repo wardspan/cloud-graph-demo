@@ -137,7 +137,7 @@ LIMIT 3
 #### Quick Fix:
 ```bash
 # Run the manual data loader
-./load-data.sh
+./scripts/quick-fix.sh
 ```
 
 #### Debug Steps:
@@ -185,7 +185,7 @@ docker-compose exec neo4j cypher-shell -u neo4j -p cloudsecurity "RETURN 1;"
 # Clean restart with fresh data
 docker-compose down -v
 docker-compose up -d
-# Wait 2 minutes, then run: ./load-data.sh
+# Wait 2 minutes, then run: ./scripts/load-data.sh
 ```
 
 ## 📊 Lab Statistics
@@ -207,6 +207,31 @@ docker-compose up -d
 - **Clean Query Interface:** Simplified execution with direct Neo4j browser links
 - **MITRE ATT&CK Integration:** Each scenario mapped to specific techniques
 - **Risk Assessment:** Visual risk levels (HIGH/CRITICAL) with attack step breakdown
+- **Built-in Help System:** Comprehensive documentation accessible via the 📚 Help button
+
+## 📁 **Project Structure**
+
+```
+cloud-threat-lab/
+├── docker-compose.yml          # Main orchestration file
+├── README.md                   # This file
+├── scripts/                    # All executable scripts and utilities
+│   ├── load-data.sh           # Manual data loading
+│   ├── quick-fix.sh           # Fix missing relationships
+│   ├── reload-fresh-data.sh   # Complete data reload
+│   └── *.cypher              # Cypher scripts for data management
+├── docs/                      # Additional documentation
+│   ├── WORKING_QUERIES.md     # Query examples that work
+│   ├── DEBUG_QUERIES.md       # Debugging help
+│   └── *.md                  # Other reference documentation
+├── neo4j/                     # Neo4j configuration and data
+│   └── init-complete.cypher   # Main data loading script
+└── dashboard/                 # Web dashboard source code
+    ├── index.html
+    ├── app.js
+    ├── style.css
+    └── Dockerfile
+```
 
 ## 🔮 Future Phases
 

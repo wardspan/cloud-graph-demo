@@ -414,9 +414,132 @@ LIMIT 10`,
             resultsDiv.innerHTML = `<div class="error">Error loading scenario: ${error.message}</div>`;
         }
     }
+    
+    showHelp() {
+        const modal = document.getElementById('helpModal');
+        const helpContent = document.getElementById('helpContent');
+        
+        modal.style.display = 'block';
+        
+        // Load comprehensive help content
+        helpContent.innerHTML = `
+            <div class="help-section">
+                <h3>🚀 Quick Start</h3>
+                <p><strong>1. Select a scenario</strong> from the left panel to see detailed analysis information.</p>
+                <p><strong>2. Click "🚀 Run Analysis"</strong> to open Neo4j Browser with the query pre-loaded.</p>
+                <p><strong>3. Login to Neo4j</strong> with username: <code>neo4j</code> and password: <code>cloudsecurity</code></p>
+                <p><strong>4. Hit the play button (▶️)</strong> to execute the query and see results.</p>
+            </div>
+
+            <div class="help-section">
+                <h3>🎯 Attack Scenarios</h3>
+                <ul>
+                    <li><strong>AWS Privilege Escalation:</strong> Developer user escalates to admin via role assumption</li>
+                    <li><strong>Cross-Cloud Attack Chain:</strong> Azure AD user compromises AWS resources via CI/CD</li>
+                    <li><strong>Kubernetes RBAC Escalation:</strong> Pod service account escalates to cluster admin</li>
+                    <li><strong>Supply Chain Container Escape:</strong> Compromised package leads to host compromise</li>
+                </ul>
+            </div>
+
+            <div class="help-section">
+                <h3>🔍 Essential Queries</h3>
+                
+                <h4>Basic Node Overview</h4>
+                <pre><code>MATCH (n) RETURN labels(n)[0] as NodeType, count(n) as Count ORDER BY Count DESC</code></pre>
+                
+                <h4>User-Service Access Paths</h4>
+                <pre><code>MATCH (u:User)-[r:CAN_ACCESS]->(s:Service)
+RETURN u.name as User, s.name as Service, r.method as AccessMethod
+ORDER BY User</code></pre>
+
+                <h4>Attack Path Analysis</h4>
+                <pre><code>MATCH path = (u:User)-[*1..3]->(s:Service)
+WHERE u.access_level = 'developer' AND s.contains_pii = true
+RETURN u.name, s.name, length(path) as steps
+ORDER BY steps</code></pre>
+            </div>
+
+            <div class="help-section">
+                <h3>🛠️ Troubleshooting</h3>
+                
+                <h4>If queries return no results:</h4>
+                <ol>
+                    <li>Check if any data exists: <code>MATCH (n) RETURN count(n) as TotalNodes</code></li>
+                    <li>Check relationships: <code>MATCH ()-[r]->() RETURN type(r), count(r) ORDER BY count(r) DESC</code></li>
+                    <li>Run manual data fix: <code>./scripts/quick-fix.sh</code></li>
+                </ol>
+
+                <h4>If services aren't starting:</h4>
+                <pre><code># Check container status
+docker-compose ps
+
+# Restart services
+docker-compose down && docker-compose up -d
+
+# Check logs
+docker-compose logs neo4j</code></pre>
+            </div>
+
+            <div class="help-section">
+                <h3>📊 Lab Statistics</h3>
+                <ul>
+                    <li><strong>Nodes:</strong> 68 (Users, Roles, Services, Pods, Images, Hosts)</li>
+                    <li><strong>Relationships:</strong> 30+ (Complete attack paths and privilege escalations)</li>
+                    <li><strong>MITRE Techniques:</strong> 12 (T1078, T1548, T1134, T1195, etc.)</li>
+                    <li><strong>Scenarios:</strong> 4 realistic attack chains with full connectivity</li>
+                </ul>
+            </div>
+
+            <div class="help-section">
+                <h3>📁 Project Structure</h3>
+                <ul>
+                    <li><code>scripts/</code> - All shell scripts and cypher files for data management</li>
+                    <li><code>docs/</code> - Additional documentation and query references</li>
+                    <li><code>neo4j/</code> - Neo4j data and configuration files</li>
+                    <li><code>dashboard/</code> - Web dashboard source code</li>
+                </ul>
+            </div>
+
+            <div class="help-section">
+                <h3>⚔️ MITRE ATT&CK Integration</h3>
+                <p>Each scenario is mapped to specific MITRE ATT&CK techniques:</p>
+                <ul>
+                    <li><strong>T1078.004:</strong> Valid Accounts - Cloud Accounts</li>
+                    <li><strong>T1548.005:</strong> Abuse Elevation Control Mechanism</li>
+                    <li><strong>T1134.001:</strong> Access Token Manipulation</li>
+                    <li><strong>T1195.002:</strong> Supply Chain Compromise</li>
+                    <li><strong>T1552.004:</strong> Unsecured Credentials - Private Keys</li>
+                    <li><strong>T1610:</strong> Deploy Container</li>
+                    <li><strong>T1611:</strong> Escape to Host</li>
+                    <li><strong>T1613:</strong> Container and Resource Discovery</li>
+                </ul>
+            </div>
+
+            <div class="help-section">
+                <h3>🔮 Future Phases</h3>
+                <p><strong>Phase 2:</strong> Enhanced MITRE mapping, mock Cartography data</p>
+                <p><strong>Phase 3:</strong> Cartography integration with asset discovery simulation</p>
+                <p><strong>Phase 4:</strong> Interactive React dashboard, Jupyter notebooks</p>
+                <p><strong>Phase 5:</strong> Advanced analytics, metrics collection, export capabilities</p>
+            </div>
+        `;
+    }
+    
+    closeHelp() {
+        const modal = document.getElementById('helpModal');
+        modal.style.display = 'none';
+    }
 }
 
 // Initialize dashboard when page loads
 document.addEventListener('DOMContentLoaded', () => {
     window.threatDashboard = new ThreatGraphDashboard();
+    
+    // Close modal when clicking outside of it
+    window.onclick = function(event) {
+        const modal = document.getElementById('helpModal');
+        if (event.target === modal) {
+            window.threatDashboard.closeHelp();
+        }
+    }
 });
