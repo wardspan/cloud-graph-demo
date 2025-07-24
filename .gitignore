@@ -1,0 +1,21 @@
+# Neo4j data and logs
+neo4j/data/
+neo4j/logs/
+neo4j/plugins/
+
+# Docker volumes
+volumes/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.temp

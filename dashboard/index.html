@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Threat Graph Lab - Phase 1</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛡️ Cloud Threat Graph Lab</h1>
+            <div class="subtitle">Advanced Security Simulation & Attack Path Analysis</div>
+            <div class="subtitle">Phase 1: Foundation - Neo4j-Based Cloud Security Lab</div>
+        </header>
+
+        <div class="status-bar">
+            <div class="status-item">
+                📊 Nodes: <span class="status-value" id="nodeCount">-</span>
+            </div>
+            <div class="status-item">
+                🔗 Relationships: <span class="status-value" id="relationshipCount">-</span>
+            </div>
+            <div class="status-item">
+                🎯 Scenarios: <span class="status-value" id="scenarioCount">-</span>
+            </div>
+            <div class="status-item">
+                ⚔️ MITRE Techniques: <span class="status-value" id="techniqueCount">-</span>
+            </div>
+            <div class="status-item">
+                <a href="http://localhost:7474" target="_blank" class="neo4j-link">Open Neo4j Browser</a>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="card">
+                <h3>🎯 Attack Scenarios</h3>
+                <ul class="scenario-list" id="scenarioList">
+                    <!-- Scenarios will be populated by JavaScript -->
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3 id="overviewTitle">📋 Scenario Information</h3>
+                <div id="overviewContent">
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; text-align: center; margin: 20px 0;">
+                        <p style="margin: 0 0 15px 0; color: #6c757d; font-size: 1.1em;">
+                            Select an attack scenario from the left to see:
+                        </p>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px;">
+                            <div style="background: #e8f5e8; padding: 12px; border-radius: 6px; border-left: 3px solid #28a745;">
+                                <strong style="color: #155724;">📊 Analysis</strong>
+                                <p style="margin: 5px 0 0 0; color: #155724; font-size: 0.9em;">What the query does</p>
+                            </div>
+                            <div style="background: #e3f2fd; padding: 12px; border-radius: 6px; border-left: 3px solid #2196f3;">
+                                <strong style="color: #1976d2;">🎯 Expected Results</strong>
+                                <p style="margin: 5px 0 0 0; color: #1976d2; font-size: 0.9em;">What you'll see</p>
+                            </div>
+                            <div style="background: #fff3cd; padding: 12px; border-radius: 6px; border-left: 3px solid #ffc107;">
+                                <strong style="color: #856404;">⚔️ MITRE Techniques</strong>
+                                <p style="margin: 5px 0 0 0; color: #856404; font-size: 0.9em;">Attack methods</p>
+                            </div>
+                            <div style="background: #d1ecf1; padding: 12px; border-radius: 6px; border-left: 3px solid #17a2b8;">
+                                <strong style="color: #0c5460;">💡 Analysis Tips</strong>
+                                <p style="margin: 5px 0 0 0; color: #0c5460; font-size: 0.9em;">How to interpret</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="query-section">
+            <h3>🔍 Threat Analysis Queries</h3>
+            <p style="margin-bottom: 20px; color: #6c757d;">
+                Click the buttons below to generate Cypher queries for analyzing attack paths in the graph database.
+            </p>
+
+            <div class="query-buttons">
+                <button class="query-btn" id="queryAllNodes">📊 Node Overview</button>
+                <button class="query-btn" id="queryAttackPaths">🎯 Attack Paths</button>
+                <button class="query-btn" id="queryPrivEsc">⬆️ Privilege Escalation</button>
+                <button class="query-btn" id="queryK8sRBAC">☸️ Kubernetes RBAC</button>
+                <button class="query-btn" id="queryMitre">⚔️ MITRE Techniques</button>
+                <button class="query-btn" id="querySupplyChain">📦 Supply Chain</button>
+            </div>
+
+            <div id="queryResults">
+                <div style="text-align: center; color: #6c757d; font-style: italic;">
+                    Select a query above to analyze attack paths and security relationships
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🚀 Cloud Threat Graph Lab - Phase 1: Foundation</p>
+            <p>Built with Neo4j, Docker, and defensive security principles</p>
+            <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">
+                Next: Phase 2 will add enhanced data, MITRE mapping, and mock Cartography integration
+            </p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
