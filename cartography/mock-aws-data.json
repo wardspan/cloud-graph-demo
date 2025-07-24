@@ -1,0 +1,565 @@
+{
+  "aws_accounts": [
+    {
+      "id": "123456789012",
+      "name": "company-prod",
+      "email": "aws-admin@company.com",
+      "organization_id": "o-example123456",
+      "status": "ACTIVE",
+      "joined_method": "CREATED",
+      "tags": {
+        "Environment": "Production",
+        "CostCenter": "Engineering",
+        "Owner": "platform-team@company.com"
+      }
+    },
+    {
+      "id": "999888777666", 
+      "name": "company-staging",
+      "email": "aws-staging@company.com",
+      "organization_id": "o-example123456",
+      "status": "ACTIVE",
+      "joined_method": "INVITED",
+      "tags": {
+        "Environment": "Staging",
+        "CostCenter": "Engineering"
+      }
+    }
+  ],
+  "ec2_instances": [
+    {
+      "instance_id": "i-0123456789abcdef0",
+      "instance_type": "t3.medium",
+      "state": "running",
+      "public_ip": "203.0.113.25",
+      "private_ip": "10.0.1.42",
+      "vpc_id": "vpc-12345678",
+      "subnet_id": "subnet-12345678",
+      "security_groups": [
+        {
+          "group_id": "sg-12345678",
+          "group_name": "web-servers"
+        }
+      ],
+      "iam_instance_profile": {
+        "arn": "arn:aws:iam::123456789012:instance-profile/WebServerProfile",
+        "name": "WebServerProfile"
+      },
+      "tags": {
+        "Name": "web-server-prod-01",
+        "Environment": "production",
+        "Application": "webapp"
+      },
+      "key_name": "company-prod-key",
+      "launch_time": "2024-07-15T10:30:00Z",
+      "availability_zone": "us-east-1a"
+    },
+    {
+      "instance_id": "i-0987654321fedcba0", 
+      "instance_type": "t3.large",
+      "state": "running",
+      "public_ip": null,
+      "private_ip": "10.0.2.15",
+      "vpc_id": "vpc-12345678",
+      "subnet_id": "subnet-87654321",
+      "security_groups": [
+        {
+          "group_id": "sg-87654321",
+          "group_name": "database-servers"
+        }
+      ],
+      "iam_instance_profile": {
+        "arn": "arn:aws:iam::123456789012:instance-profile/DatabaseProfile",
+        "name": "DatabaseProfile"
+      },
+      "tags": {
+        "Name": "database-prod-01",
+        "Environment": "production",
+        "Application": "database"
+      },
+      "key_name": "company-prod-key",
+      "launch_time": "2024-07-10T08:15:00Z",
+      "availability_zone": "us-east-1b"
+    }
+  ],
+  "s3_buckets": [
+    {
+      "name": "customer-data-bucket",
+      "region": "us-east-1",
+      "creation_date": "2024-06-01T00:00:00Z",
+      "versioning": "Enabled",
+      "encryption": {
+        "algorithm": "AES256",
+        "kms_key_id": null
+      },
+      "public_access_blocked": true,
+      "logging": {
+        "enabled": true,
+        "target_bucket": "access-logs-bucket"
+      },
+      "tags": {
+        "Classification": "Confidential",
+        "DataType": "CustomerPII", 
+        "Environment": "Production"
+      },
+      "policy": {
+        "allows_public_read": false,
+        "allows_public_write": false,
+        "cross_account_access": true
+      }
+    },
+    {
+      "name": "company-terraform-state",
+      "region": "us-east-1", 
+      "creation_date": "2024-05-15T00:00:00Z",
+      "versioning": "Enabled",
+      "encryption": {
+        "algorithm": "aws:kms",
+        "kms_key_id": "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012"
+      },
+      "public_access_blocked": true,
+      "logging": {
+        "enabled": false
+      },
+      "tags": {
+        "Purpose": "TerraformState",
+        "Environment": "Production"
+      },
+      "policy": {
+        "allows_public_read": false,
+        "allows_public_write": false,
+        "cross_account_access": false
+      }
+    },
+    {
+      "name": "customer-analytics-lake",
+      "region": "us-east-1",
+      "creation_date": "2024-07-01T00:00:00Z", 
+      "versioning": "Suspended",
+      "encryption": {
+        "algorithm": "AES256",
+        "kms_key_id": null
+      },
+      "public_access_blocked": false,
+      "logging": {
+        "enabled": false
+      },
+      "tags": {
+        "Purpose": "DataLake",
+        "DataType": "Analytics"
+      },
+      "policy": {
+        "allows_public_read": true,
+        "allows_public_write": false,
+        "cross_account_access": true
+      }
+    }
+  ],
+  "iam_users": [
+    {
+      "username": "sarah.chen",
+      "user_id": "AIDACKCEVSQ6C2EXAMPLE",
+      "arn": "arn:aws:iam::123456789012:user/sarah.chen",
+      "path": "/",
+      "creation_date": "2024-06-01T00:00:00Z",
+      "password_last_used": "2024-07-23T14:30:00Z",
+      "mfa_devices": [],
+      "access_keys": [
+        {
+          "access_key_id": "AKIAIOSFODNN7EXAMPLE",
+          "status": "Active",
+          "created_date": "2024-06-01T00:00:00Z",
+          "last_used": {
+            "date": "2024-07-23T14:30:00Z",
+            "region": "us-east-1",
+            "service": "s3"
+          }
+        }
+      ],
+      "groups": ["Developers"],
+      "policies": [
+        {
+          "policy_name": "DeveloperAccess",
+          "policy_arn": "arn:aws:iam::123456789012:policy/DeveloperAccess"
+        }
+      ],
+      "tags": {
+        "Department": "Engineering",
+        "Role": "Developer"
+      }
+    },
+    {
+      "username": "terraform-provisioner",
+      "user_id": "AIDACKCEVSQ6C3EXAMPLE", 
+      "arn": "arn:aws:iam::123456789012:user/terraform-provisioner",
+      "path": "/service-accounts/",
+      "creation_date": "2024-01-15T00:00:00Z",
+      "password_last_used": null,
+      "mfa_devices": [],
+      "access_keys": [
+        {
+          "access_key_id": "AKIAIOSFODNN8EXAMPLE",
+          "status": "Active", 
+          "created_date": "2024-01-15T00:00:00Z",
+          "last_used": {
+            "date": "2024-07-23T16:45:00Z",
+            "region": "us-east-1",
+            "service": "iam"
+          }
+        }
+      ],
+      "groups": [],
+      "policies": [
+        {
+          "policy_name": "AdministratorAccess",
+          "policy_arn": "arn:aws:iam::aws:policy/AdministratorAccess"
+        }
+      ],
+      "tags": {
+        "Purpose": "Automation",
+        "Tool": "Terraform"
+      }
+    }
+  ],
+  "iam_roles": [
+    {
+      "role_name": "PowerUserRole",
+      "role_id": "AROADBQP57FF2AEXAMPLE",
+      "arn": "arn:aws:iam::123456789012:role/PowerUserRole",
+      "path": "/",
+      "creation_date": "2024-06-01T00:00:00Z",
+      "assume_role_policy": {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "AWS": "arn:aws:iam::123456789012:user/sarah.chen"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      },
+      "max_session_duration": 3600,
+      "policies": [
+        {
+          "policy_name": "PowerUserAccess",
+          "policy_arn": "arn:aws:iam::aws:policy/PowerUserAccess"
+        }
+      ],
+      "tags": {
+        "Purpose": "DeveloperEscalation"
+      }
+    },
+    {
+      "role_name": "AzureAD-DeveloperAccess",
+      "role_id": "AROADBQP57FF3AEXAMPLE",
+      "arn": "arn:aws:iam::123456789012:role/AzureAD-DeveloperAccess", 
+      "path": "/",
+      "creation_date": "2024-07-01T00:00:00Z",
+      "assume_role_policy": {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Federated": "arn:aws:iam::123456789012:oidc-provider/login.microsoftonline.com"
+            },
+            "Action": "sts:AssumeRoleWithWebIdentity",
+            "Condition": {
+              "StringEquals": {
+                "login.microsoftonline.com:aud": "87654321-4321-4321-4321-210987654321"
+              }
+            }
+          }
+        ]
+      },
+      "max_session_duration": 43200,
+      "policies": [
+        {
+          "policy_name": "EC2FullAccess",
+          "policy_arn": "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
+        }
+      ],
+      "tags": {
+        "Purpose": "FederatedAccess",
+        "Provider": "AzureAD"
+      }
+    },
+    {
+      "role_name": "lambda-overprivileged-role",
+      "role_id": "AROADBQP57FF4AEXAMPLE",
+      "arn": "arn:aws:iam::123456789012:role/lambda-overprivileged-role",
+      "path": "/service-role/",
+      "creation_date": "2024-07-10T00:00:00Z",
+      "assume_role_policy": {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "lambda.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      },
+      "max_session_duration": 3600,
+      "policies": [
+        {
+          "policy_name": "AmazonS3FullAccess",
+          "policy_arn": "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+        },
+        {
+          "policy_name": "AmazonDynamoDBFullAccess", 
+          "policy_arn": "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
+        }
+      ],
+      "tags": {
+        "Purpose": "LambdaExecution",
+        "Application": "CustomerAPI"
+      }
+    }
+  ],
+  "lambda_functions": [
+    {
+      "function_name": "customer-data-processor",
+      "function_arn": "arn:aws:lambda:us-east-1:123456789012:function:customer-data-processor",
+      "runtime": "nodejs18.x",
+      "handler": "index.handler",
+      "code_size": 1024576,
+      "description": "Processes customer data from API Gateway",
+      "timeout": 300,
+      "memory_size": 512,
+      "last_modified": "2024-07-20T00:00:00Z",
+      "role": "arn:aws:iam::123456789012:role/lambda-overprivileged-role",
+      "environment": {
+        "variables": {
+          "DB_CONNECTION_STRING": "postgresql://user:pass@db.company.com:5432/customers",
+          "S3_BUCKET_NAME": "customer-analytics-lake",
+          "LOG_LEVEL": "INFO"
+        }
+      },
+      "vpc_config": null,
+      "dead_letter_config": null,
+      "tags": {
+        "Application": "CustomerAPI",
+        "Environment": "Production"
+      }
+    }
+  ],
+  "api_gateways": [
+    {
+      "api_id": "abcdef123",
+      "name": "customer-api-gateway",
+      "description": "Customer data API",
+      "protocol_type": "REST",
+      "route_selection_expression": null,
+      "creation_date": "2024-07-15T00:00:00Z",
+      "tags": {
+        "Application": "CustomerAPI",
+        "Environment": "Production"
+      },
+      "stages": [
+        {
+          "stage_name": "prod",
+          "deployment_id": "deploy123",
+          "creation_date": "2024-07-15T00:00:00Z",
+          "throttling_burst_limit": null,
+          "throttling_rate_limit": null,
+          "caching_enabled": false,
+          "logging_enabled": false
+        }
+      ],
+      "resources": [
+        {
+          "resource_id": "resource123",
+          "path": "/customers",
+          "methods": [
+            {
+              "http_method": "GET",
+              "authorization_type": "NONE",
+              "api_key_required": false,
+              "integration": {
+                "type": "AWS_PROXY",
+                "integration_http_method": "POST",
+                "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:123456789012:function:customer-data-processor/invocations"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "dynamodb_tables": [
+    {
+      "table_name": "customer-profiles",
+      "table_arn": "arn:aws:dynamodb:us-east-1:123456789012:table/customer-profiles",
+      "table_status": "ACTIVE",
+      "creation_datetime": "2024-07-01T00:00:00Z",
+      "billing_mode": "PAY_PER_REQUEST",
+      "attribute_definitions": [
+        {
+          "attribute_name": "customer_id",
+          "attribute_type": "S"
+        }
+      ],
+      "key_schema": [
+        {
+          "attribute_name": "customer_id",
+          "key_type": "HASH"
+        }
+      ],
+      "sse_description": {
+        "status": "ENABLED",
+        "sse_type": "AES256"
+      },
+      "point_in_time_recovery": false,
+      "tags": {
+        "Application": "CustomerAPI",
+        "DataClassification": "PII"
+      }
+    }
+  ],
+  "ecs_clusters": [
+    {
+      "cluster_name": "prod-cluster",
+      "cluster_arn": "arn:aws:ecs:us-east-1:123456789012:cluster/prod-cluster",
+      "status": "ACTIVE",
+      "running_tasks_count": 3,
+      "pending_tasks_count": 0,
+      "registered_container_instances_count": 2,
+      "statistics": [
+        {
+          "name": "runningTasksCount",
+          "value": "3"
+        }
+      ],
+      "tags": {
+        "Environment": "Production",
+        "Application": "WebApp"
+      },
+      "capacity_providers": ["FARGATE", "FARGATE_SPOT"],
+      "default_capacity_provider_strategy": [
+        {
+          "capacity_provider": "FARGATE",
+          "weight": 1,
+          "base": 0
+        }
+      ]
+    }
+  ],
+  "ecs_services": [
+    {
+      "service_name": "webapp-production",
+      "service_arn": "arn:aws:ecs:us-east-1:123456789012:service/prod-cluster/webapp-production",
+      "cluster_arn": "arn:aws:ecs:us-east-1:123456789012:cluster/prod-cluster", 
+      "task_definition": "arn:aws:ecs:us-east-1:123456789012:task-definition/webapp-prod:5",
+      "desired_count": 2,
+      "running_count": 2,
+      "pending_count": 0,
+      "launch_type": "FARGATE",
+      "platform_version": "LATEST",
+      "health_check_grace_period_seconds": 60,
+      "tags": {
+        "Application": "WebApp",
+        "Environment": "Production"
+      },
+      "load_balancers": [
+        {
+          "target_group_arn": "arn:aws:elasticloadbalancing:us-east-1:123456789012:targetgroup/webapp/1234567890123456",
+          "container_name": "webapp",
+          "container_port": 3000
+        }
+      ],
+      "network_configuration": {
+        "awsvpc_configuration": {
+          "subnets": ["subnet-12345678", "subnet-87654321"],
+          "security_groups": ["sg-webapp123"],
+          "assign_public_ip": "DISABLED"
+        }
+      }
+    }
+  ],
+  "secrets_manager": [
+    {
+      "name": "prod-database-credentials",
+      "arn": "arn:aws:secretsmanager:us-east-1:123456789012:secret:prod-db-creds-AbCdEf",
+      "description": "Production database credentials",
+      "creation_date": "2024-06-01T00:00:00Z",
+      "last_changed_date": "2024-06-01T00:00:00Z",
+      "last_accessed_date": "2024-07-23T16:30:00Z",
+      "kms_key_id": "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012",
+      "rotation_enabled": false,
+      "version_stages": ["AWSCURRENT"],
+      "tags": {
+        "Application": "Database",
+        "Environment": "Production"
+      }
+    }
+  ],
+  "vpc_info": [
+    {
+      "vpc_id": "vpc-12345678",
+      "cidr_block": "10.0.0.0/16",
+      "state": "available",
+      "is_default": false,
+      "instance_tenancy": "default",
+      "tags": {
+        "Name": "production-vpc",
+        "Environment": "Production"
+      },
+      "subnets": [
+        {
+          "subnet_id": "subnet-12345678",
+          "cidr_block": "10.0.1.0/24",
+          "availability_zone": "us-east-1a",
+          "map_public_ip_on_launch": true,
+          "tags": {
+            "Name": "public-subnet-1a",
+            "Type": "Public"
+          }
+        },
+        {
+          "subnet_id": "subnet-87654321", 
+          "cidr_block": "10.0.2.0/24",
+          "availability_zone": "us-east-1b",
+          "map_public_ip_on_launch": false,
+          "tags": {
+            "Name": "private-subnet-1b",
+            "Type": "Private"
+          }
+        }
+      ],
+      "security_groups": [
+        {
+          "group_id": "sg-12345678",
+          "group_name": "web-servers",
+          "description": "Security group for web servers",
+          "ingress_rules": [
+            {
+              "from_port": 80,
+              "to_port": 80,
+              "protocol": "tcp",
+              "cidr_blocks": ["0.0.0.0/0"]
+            },
+            {
+              "from_port": 443,
+              "to_port": 443,
+              "protocol": "tcp", 
+              "cidr_blocks": ["0.0.0.0/0"]
+            }
+          ],
+          "egress_rules": [
+            {
+              "from_port": 0,
+              "to_port": 65535,
+              "protocol": "tcp",
+              "cidr_blocks": ["0.0.0.0/0"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

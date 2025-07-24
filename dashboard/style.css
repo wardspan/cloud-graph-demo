@@ -103,16 +103,52 @@ h1 {
     transform: translateX(5px);
 }
 
+.scenario-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
 .scenario-name {
     font-weight: bold;
     color: #2c3e50;
-    margin-bottom: 5px;
+    font-size: 1em;
+}
+
+.phase-badge {
+    font-size: 0.7em;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+
+.phase-badge.phase1 {
+    background: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+.phase-badge.phase2 {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
 }
 
 .scenario-description {
     color: #6c757d;
     font-size: 0.9em;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.scenario-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 .severity {
@@ -675,3 +711,42 @@ h1 {
         font-size: 2em;
     }
 }
+.graph-tip {
+    background: #e8f5e8;
+    border-left: 4px solid #28a745;
+    padding: 12px;
+    margin-top: 15px;
+    border-radius: 4px;
+    color: #155724;
+    font-size: 0.9em;
+}
+
+.query-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.neo4j-direct-link {
+    background: #007bff;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.copy-btn {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.copy-btn:hover, .neo4j-direct-link:hover {
+    opacity: 0.8;
+}
+

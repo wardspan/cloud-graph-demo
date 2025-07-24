@@ -1,0 +1,474 @@
+{
+  "azure_subscriptions": [
+    {
+      "subscription_id": "12345678-1234-1234-1234-123456789012",
+      "display_name": "Company Production Subscription",
+      "state": "Enabled",
+      "subscription_policies": {
+        "location_placement_id": "eastus",
+        "quota_id": "PayAsYouGo_2014-09-01",
+        "spending_limit": "Off"
+      },
+      "tenant_id": "87654321-4321-4321-4321-210987654321",
+      "tags": {
+        "Environment": "Production",
+        "CostCenter": "Engineering"
+      }
+    }
+  ],
+  "azure_ad_users": [
+    {
+      "object_id": "11111111-1111-1111-1111-111111111111",
+      "user_principal_name": "emma.watson@company.com",
+      "display_name": "Emma Watson",
+      "mail": "emma.watson@company.com",
+      "enabled": true,
+      "user_type": "Member",
+      "creation_type": null,
+      "external_user_state": null,
+      "tenant_id": "87654321-4321-4321-4321-210987654321",
+      "department": "Engineering",
+      "job_title": "Senior DevOps Engineer",
+      "office_location": "Seattle",
+      "assigned_roles": [
+        {
+          "role_definition_id": "b24988ac-6180-42a0-ab88-20f7382dd24c",
+          "role_name": "Contributor",
+          "scope": "/subscriptions/12345678-1234-1234-1234-123456789012"
+        }
+      ],
+      "group_memberships": ["DevOps-Team", "Azure-Admins"],
+      "mfa_enabled": true,
+      "sign_in_activity": {
+        "last_sign_in": "2024-07-23T09:15:00Z",
+        "last_non_interactive_sign_in": "2024-07-23T09:20:00Z"
+      }
+    },
+    {
+      "object_id": "22222222-2222-2222-2222-222222222222",
+      "user_principal_name": "contractor.external@partner.com",
+      "display_name": "External Contractor",
+      "mail": "contractor.external@partner.com", 
+      "enabled": true,
+      "user_type": "Guest",
+      "creation_type": "Invitation",
+      "external_user_state": "Accepted",
+      "tenant_id": "87654321-4321-4321-4321-210987654321",
+      "department": null,
+      "job_title": "Contractor",
+      "office_location": null,
+      "assigned_roles": [
+        {
+          "role_definition_id": "de139f84-1756-47ae-9be6-808fbbe84772",
+          "role_name": "Application Developer",
+          "scope": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/development"
+        }
+      ],
+      "group_memberships": ["External-Contractors"],
+      "mfa_enabled": false,
+      "sign_in_activity": {
+        "last_sign_in": "2024-07-22T16:45:00Z",
+        "last_non_interactive_sign_in": null
+      }
+    }
+  ],
+  "azure_ad_applications": [
+    {
+      "app_id": "33333333-3333-3333-3333-333333333333",
+      "object_id": "44444444-4444-4444-4444-444444444444",
+      "display_name": "GitHub Actions OIDC",
+      "identifier_uris": [],
+      "reply_urls": [],
+      "homepage": null,
+      "logout_url": null,
+      "available_to_other_tenants": false,
+      "oauth2_allow_implicit_flow": false,
+      "oauth2_allow_url_path_matching": false,
+      "public_client": false,
+      "tenant_id": "87654321-4321-4321-4321-210987654321",
+      "app_roles": [],
+      "oauth2_permissions": [
+        {
+          "admin_consent_description": "Allow the application to access GitHub Actions OIDC on behalf of the signed-in user.",
+          "admin_consent_display_name": "Access GitHub Actions OIDC",
+          "id": "55555555-5555-5555-5555-555555555555",
+          "is_enabled": true,
+          "type": "User",
+          "user_consent_description": "Allow the application to access GitHub Actions OIDC on your behalf.",
+          "user_consent_display_name": "Access GitHub Actions OIDC",
+          "value": "user_impersonation"
+        }
+      ],
+      "required_resource_access": [
+        {
+          "resource_app_id": "00000003-0000-0000-c000-000000000000",
+          "resource_access": [
+            {
+              "id": "e1fe6dd8-ba31-4d61-89e7-88639da4683d",
+              "type": "Scope"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "azure_ad_service_principals": [
+    {
+      "object_id": "66666666-6666-6666-6666-666666666666",
+      "app_id": "33333333-3333-3333-3333-333333333333",
+      "display_name": "GitHub Actions OIDC",
+      "enabled": true,
+      "account_enabled": true,
+      "service_principal_type": "Application",
+      "tenant_id": "87654321-4321-4321-4321-210987654321",
+      "app_roles": [],
+      "oauth2_permissions": [],
+      "tags": ["WindowsAzureActiveDirectoryIntegratedApp"],
+      "key_credentials": [],
+      "password_credentials": [],
+      "reply_urls": [],
+      "service_principal_names": [
+        "33333333-3333-3333-3333-333333333333",
+        "https://github.com/company-org/webapp"
+      ]
+    }
+  ],
+  "resource_groups": [
+    {
+      "name": "production-rg",
+      "location": "eastus",
+      "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/production-rg",
+      "managed_by": null,
+      "tags": {
+        "Environment": "Production",
+        "Application": "WebApp"
+      },
+      "properties": {
+        "provisioning_state": "Succeeded"
+      }
+    },
+    {
+      "name": "development-rg",
+      "location": "eastus",
+      "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/development-rg", 
+      "managed_by": null,
+      "tags": {
+        "Environment": "Development",
+        "Application": "WebApp"
+      },
+      "properties": {
+        "provisioning_state": "Succeeded"
+      }
+    }
+  ],
+  "virtual_machines": [
+    {
+      "name": "prod-vm-01",
+      "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/production-rg/providers/Microsoft.Compute/virtualMachines/prod-vm-01",
+      "location": "eastus",
+      "vm_size": "Standard_D2s_v3",
+      "provisioning_state": "Succeeded",
+      "power_state": "VM running",
+      "os_profile": {
+        "computer_name": "prod-vm-01",
+        "admin_username": "azureuser",
+        "linux_configuration": {
+          "disable_password_authentication": true,
+          "ssh": {
+            "public_keys": [
+              {
+                "path": "/home/azureuser/.ssh/authorized_keys",
+                "key_data": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQ..."
+              }
+            ]
+          }
+        }
+      },
+      "storage_profile": {
+        "image_reference": {
+          "publisher": "Canonical",
+          "offer": "0001-com-ubuntu-server-focal",
+          "sku": "20_04-lts-gen2",
+          "version": "latest"
+        },
+        "os_disk": {
+          "name": "prod-vm-01-osdisk",
+          "caching": "ReadWrite",
+          "create_option": "FromImage",
+          "managed_disk": {
+            "storage_account_type": "Premium_LRS"
+          }
+        }
+      },
+      "network_profile": {
+        "network_interfaces": [
+          {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/production-rg/providers/Microsoft.Network/networkInterfaces/prod-vm-01-nic"
+          }
+        ]
+      },
+      "identity": {
+        "type": "SystemAssigned",
+        "principal_id": "77777777-7777-7777-7777-777777777777",
+        "tenant_id": "87654321-4321-4321-4321-210987654321"
+      },
+      "tags": {
+        "Environment": "Production",
+        "Application": "WebApp"
+      }
+    }
+  ],
+  "storage_accounts": [
+    {
+      "name": "companyprodstg001",
+      "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/production-rg/providers/Microsoft.Storage/storageAccounts/companyprodstg001",
+      "location": "eastus",
+      "sku": {
+        "name": "Standard_LRS",
+        "tier": "Standard"
+      },
+      "kind": "StorageV2",
+      "access_tier": "Hot",
+      "creation_time": "2024-06-01T00:00:00Z",
+      "primary_endpoints": {
+        "blob": "https://companyprodstg001.blob.core.windows.net/",
+        "queue": "https://companyprodstg001.queue.core.windows.net/",
+        "table": "https://companyprodstg001.table.core.windows.net/",
+        "file": "https://companyprodstg001.file.core.windows.net/"
+      },
+      "encryption": {
+        "services": {
+          "blob": {
+            "enabled": true,
+            "last_enabled_time": "2024-06-01T00:00:00Z"
+          },
+          "file": {
+            "enabled": true,
+            "last_enabled_time": "2024-06-01T00:00:00Z"
+          }
+        },
+        "key_source": "Microsoft.Storage"
+      },
+      "https_traffic_only": true,
+      "allow_blob_public_access": false,
+      "minimum_tls_version": "TLS1_2",
+      "tags": {
+        "Environment": "Production",
+        "DataClassification": "Confidential"
+      }
+    }
+  ],
+  "azure_functions": [
+    {
+      "name": "customer-processor-func",
+      "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/production-rg/providers/Microsoft.Web/sites/customer-processor-func",
+      "location": "eastus",
+      "kind": "functionapp,linux",
+      "enabled": true,
+      "host_name_disabled": false,
+      "https_only": true,
+      "state": "Running",
+      "usage_state": "Normal",
+      "availability_state": "Normal",
+      "server_farm_id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/production-rg/providers/Microsoft.Web/serverfarms/ASP-productionrg-1234",
+      "reserved": true,
+      "is_xenon": false,
+      "hyper_v": false,
+      "site_config": {
+        "number_of_workers": 1,
+        "linux_fx_version": "Node|18",
+        "app_settings": [
+          {
+            "name": "FUNCTIONS_WORKER_RUNTIME",
+            "value": "node"
+          },
+          {
+            "name": "WEBSITE_NODE_DEFAULT_VERSION",
+            "value": "~18"
+          },
+          {
+            "name": "DATABASE_CONNECTION_STRING",
+            "value": "@Microsoft.KeyVault(SecretUri=https://prod-keyvault.vault.azure.net/secrets/db-connection/)"
+          }
+        ],
+        "connection_strings": [],
+        "always_on": false,
+        "use32_bit_worker_process": false,
+        "cors": {
+          "allowed_origins": ["*"],
+          "support_credentials": false
+        }
+      },
+      "identity": {
+        "type": "SystemAssigned", 
+        "principal_id": "88888888-8888-8888-8888-888888888888",
+        "tenant_id": "87654321-4321-4321-4321-210987654321"
+      },
+      "tags": {
+        "Environment": "Production",
+        "Application": "CustomerAPI"
+      }
+    }
+  ],
+  "key_vaults": [
+    {
+      "name": "prod-keyvault",
+      "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/production-rg/providers/Microsoft.KeyVault/vaults/prod-keyvault",
+      "location": "eastus",
+      "vault_uri": "https://prod-keyvault.vault.azure.net/",
+      "tenant_id": "87654321-4321-4321-4321-210987654321",
+      "sku": {
+        "family": "A",
+        "name": "standard"
+      },
+      "access_policies": [
+        {
+          "tenant_id": "87654321-4321-4321-4321-210987654321",
+          "object_id": "11111111-1111-1111-1111-111111111111",
+          "permissions": {
+            "keys": ["get", "list", "create", "update"],
+            "secrets": ["get", "list", "set", "delete"],
+            "certificates": ["get", "list", "create", "update"]
+          }
+        },
+        {
+          "tenant_id": "87654321-4321-4321-4321-210987654321", 
+          "object_id": "88888888-8888-8888-8888-888888888888",
+          "permissions": {
+            "secrets": ["get"]
+          }
+        }
+      ],
+      "enabled_for_deployment": false,
+      "enabled_for_disk_encryption": false,
+      "enabled_for_template_deployment": false,
+      "soft_delete_retention_in_days": 90,
+      "purge_protection_enabled": false,
+      "network_acls": {
+        "bypass": "AzureServices",
+        "default_action": "Allow",
+        "ip_rules": [],
+        "virtual_network_rules": []
+      },
+      "tags": {
+        "Environment": "Production",
+        "Purpose": "SecretsManagement"
+      }
+    }
+  ],
+  "virtual_networks": [
+    {
+      "name": "production-vnet",
+      "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/production-rg/providers/Microsoft.Network/virtualNetworks/production-vnet",
+      "location": "eastus",
+      "address_space": {
+        "address_prefixes": ["10.1.0.0/16"]
+      },
+      "subnets": [
+        {
+          "name": "web-subnet",
+          "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/production-rg/providers/Microsoft.Network/virtualNetworks/production-vnet/subnets/web-subnet",
+          "address_prefix": "10.1.1.0/24",
+          "network_security_group": {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/production-rg/providers/Microsoft.Network/networkSecurityGroups/web-nsg"
+          },
+          "route_table": null,
+          "service_endpoints": [
+            {
+              "service": "Microsoft.Storage",
+              "locations": ["eastus"]
+            }
+          ]
+        },
+        {
+          "name": "app-subnet", 
+          "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/production-rg/providers/Microsoft.Network/virtualNetworks/production-vnet/subnets/app-subnet",
+          "address_prefix": "10.1.2.0/24",
+          "network_security_group": {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/production-rg/providers/Microsoft.Network/networkSecurityGroups/app-nsg"
+          },
+          "route_table": null,
+          "service_endpoints": []
+        }
+      ],
+      "tags": {
+        "Environment": "Production",
+        "Application": "WebApp"
+      }
+    }
+  ],
+  "network_security_groups": [
+    {
+      "name": "web-nsg",
+      "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/production-rg/providers/Microsoft.Network/networkSecurityGroups/web-nsg",
+      "location": "eastus",
+      "security_rules": [
+        {
+          "name": "AllowHTTP",
+          "protocol": "Tcp",
+          "source_port_range": "*",
+          "destination_port_range": "80",
+          "source_address_prefix": "*",
+          "destination_address_prefix": "*",
+          "access": "Allow",
+          "priority": 1000,
+          "direction": "Inbound"
+        },
+        {
+          "name": "AllowHTTPS",
+          "protocol": "Tcp", 
+          "source_port_range": "*",
+          "destination_port_range": "443",
+          "source_address_prefix": "*",
+          "destination_address_prefix": "*",
+          "access": "Allow",
+          "priority": 1001,
+          "direction": "Inbound"
+        },
+        {
+          "name": "AllowSSH",
+          "protocol": "Tcp",
+          "source_port_range": "*", 
+          "destination_port_range": "22",
+          "source_address_prefix": "10.1.0.0/16",
+          "destination_address_prefix": "*",
+          "access": "Allow",
+          "priority": 1002,
+          "direction": "Inbound"
+        }
+      ],
+      "tags": {
+        "Environment": "Production",
+        "Purpose": "WebTier"
+      }
+    }
+  ],
+  "role_assignments": [
+    {
+      "id": "/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.Authorization/roleAssignments/99999999-9999-9999-9999-999999999999",
+      "name": "99999999-9999-9999-9999-999999999999",
+      "scope": "/subscriptions/12345678-1234-1234-1234-123456789012",
+      "role_definition_id": "/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c",
+      "role_definition_name": "Contributor",
+      "principal_id": "11111111-1111-1111-1111-111111111111",
+      "principal_type": "User",
+      "created_on": "2024-06-01T00:00:00Z",
+      "updated_on": "2024-06-01T00:00:00Z",
+      "created_by": "00000000-0000-0000-0000-000000000000",
+      "updated_by": "00000000-0000-0000-0000-000000000000"
+    },
+    {
+      "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/development-rg/providers/Microsoft.Authorization/roleAssignments/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+      "name": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+      "scope": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/development-rg",
+      "role_definition_id": "/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.Authorization/roleDefinitions/de139f84-1756-47ae-9be6-808fbbe84772",
+      "role_definition_name": "Application Developer",
+      "principal_id": "22222222-2222-2222-2222-222222222222",
+      "principal_type": "User",
+      "created_on": "2024-07-01T00:00:00Z",
+      "updated_on": "2024-07-01T00:00:00Z",
+      "created_by": "11111111-1111-1111-1111-111111111111",
+      "updated_by": "11111111-1111-1111-1111-111111111111"
+    }
+  ]
+}

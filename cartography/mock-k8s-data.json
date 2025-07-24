@@ -1,0 +1,904 @@
+{
+  "clusters": [
+    {
+      "name": "production-cluster",
+      "server": "https://prod-k8s-api.company.com:6443",
+      "version": "v1.27.3",
+      "region": "us-east-1",
+      "provider": "EKS",
+      "node_count": 5,
+      "created_at": "2024-06-01T00:00:00Z",
+      "cluster_arn": "arn:aws:eks:us-east-1:123456789012:cluster/production-cluster",
+      "endpoint_access": {
+        "private": true,
+        "public": true,
+        "public_access_cidrs": ["0.0.0.0/0"]
+      },
+      "logging": {
+        "api": true,
+        "audit": false,
+        "authenticator": false,
+        "controllerManager": false,
+        "scheduler": false
+      },
+      "encryption_config": {
+        "resources": ["secrets"],
+        "provider": {
+          "key_arn": "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012"
+        }
+      },
+      "tags": {
+        "Environment": "Production",
+        "Cluster": "Main"
+      }
+    }
+  ],
+  "namespaces": [
+    {
+      "name": "default",
+      "labels": {
+        "kubernetes.io/metadata.name": "default"
+      },
+      "annotations": {},
+      "creation_timestamp": "2024-06-01T00:00:00Z",
+      "status": "Active",
+      "resource_quota": null,
+      "network_policies": []
+    },
+    {
+      "name": "kube-system", 
+      "labels": {
+        "kubernetes.io/metadata.name": "kube-system"
+      },
+      "annotations": {},
+      "creation_timestamp": "2024-06-01T00:00:00Z",
+      "status": "Active",
+      "resource_quota": null,
+      "network_policies": []
+    },
+    {
+      "name": "production",
+      "labels": {
+        "kubernetes.io/metadata.name": "production",
+        "environment": "prod",
+        "team": "platform"
+      },
+      "annotations": {
+        "owner": "platform-team@company.com"
+      },
+      "creation_timestamp": "2024-06-15T00:00:00Z",
+      "status": "Active",
+      "resource_quota": {
+        "requests.cpu": "4",
+        "requests.memory": "8Gi",
+        "limits.cpu": "8", 
+        "limits.memory": "16Gi",
+        "pods": "10"
+      },
+      "network_policies": [
+        {
+          "name": "default-deny-all",
+          "spec": {
+            "podSelector": {},
+            "policyTypes": ["Ingress", "Egress"]
+          }
+        }
+      ]
+    },
+    {
+      "name": "development",
+      "labels": {
+        "kubernetes.io/metadata.name": "development",
+        "environment": "dev"
+      },
+      "annotations": {
+        "owner": "dev-team@company.com"
+      },
+      "creation_timestamp": "2024-06-20T00:00:00Z",
+      "status": "Active",
+      "resource_quota": {
+        "requests.cpu": "2",
+        "requests.memory": "4Gi",
+        "limits.cpu": "4",
+        "limits.memory": "8Gi",
+        "pods": "5"
+      },
+      "network_policies": []
+    }
+  ],
+  "pods": [
+    {
+      "name": "webapp-frontend-7d4b6c8f9-abc12",
+      "namespace": "production",
+      "labels": {
+        "app": "webapp-frontend",
+        "version": "v1.2.3",
+        "environment": "production"
+      },
+      "annotations": {
+        "deployment.kubernetes.io/revision": "3"
+      },
+      "creation_timestamp": "2024-07-20T10:30:00Z",
+      "status": {
+        "phase": "Running",
+        "start_time": "2024-07-20T10:30:15Z",
+        "pod_ip": "10.244.1.42",
+        "host_ip": "10.0.1.15"
+      },
+      "spec": {
+        "service_account_name": "webapp-frontend-sa",
+        "security_context": {
+          "run_as_non_root": true,
+          "run_as_user": 1000,
+          "fs_group": 2000
+        },
+        "containers": [
+          {
+            "name": "frontend",
+            "image": "company-registry/webapp-frontend:v1.2.3",
+            "ports": [
+              {
+                "container_port": 3000,
+                "protocol": "TCP"
+              }
+            ],
+            "env": [
+              {
+                "name": "NODE_ENV",
+                "value": "production"
+              },
+              {
+                "name": "API_BASE_URL", 
+                "value": "https://api.company.com"
+              }
+            ],
+            "resources": {
+              "requests": {
+                "cpu": "100m",
+                "memory": "128Mi"
+              },
+              "limits": {
+                "cpu": "500m",
+                "memory": "512Mi"
+              }
+            },
+            "security_context": {
+              "allow_privilege_escalation": false,
+              "read_only_root_filesystem": true,
+              "run_as_non_root": true,
+              "capabilities": {
+                "drop": ["ALL"]
+              }
+            }
+          }
+        ],
+        "node_name": "ip-10-0-1-15.ec2.internal",
+        "restart_policy": "Always"
+      }
+    },
+    {
+      "name": "api-backend-6b9d8c7f5-xyz89",
+      "namespace": "production", 
+      "labels": {
+        "app": "api-backend",
+        "version": "v2.1.0",
+        "environment": "production"
+      },
+      "annotations": {
+        "deployment.kubernetes.io/revision": "5"
+      },
+      "creation_timestamp": "2024-07-22T14:15:00Z",
+      "status": {
+        "phase": "Running",
+        "start_time": "2024-07-22T14:15:30Z",
+        "pod_ip": "10.244.2.18",
+        "host_ip": "10.0.1.23"
+      },
+      "spec": {
+        "service_account_name": "api-backend-sa",
+        "security_context": {
+          "run_as_non_root": false,
+          "run_as_user": 0
+        },
+        "containers": [
+          {
+            "name": "api",
+            "image": "company-registry/api-backend:v2.1.0",
+            "ports": [
+              {
+                "container_port": 8080,
+                "protocol": "TCP"
+              }
+            ],
+            "env": [
+              {
+                "name": "DATABASE_URL",
+                "value_from": {
+                  "secret_key_ref": {
+                    "name": "db-credentials",
+                    "key": "url"
+                  }
+                }
+              },
+              {
+                "name": "JWT_SECRET",
+                "value_from": {
+                  "secret_key_ref": {
+                    "name": "api-secrets",
+                    "key": "jwt-secret"
+                  }
+                }
+              }
+            ],
+            "resources": {
+              "requests": {
+                "cpu": "200m",
+                "memory": "256Mi"
+              },
+              "limits": {
+                "cpu": "1000m",
+                "memory": "1Gi"
+              }
+            },
+            "security_context": {
+              "allow_privilege_escalation": true,
+              "read_only_root_filesystem": false,
+              "run_as_non_root": false,
+              "privileged": true
+            }
+          }
+        ],
+        "node_name": "ip-10-0-1-23.ec2.internal",
+        "restart_policy": "Always"
+      }
+    },
+    {
+      "name": "debug-pod-privileged",
+      "namespace": "development",
+      "labels": {
+        "app": "debug-tools",
+        "purpose": "troubleshooting"
+      },
+      "annotations": {
+        "created-by": "admin@company.com"
+      },
+      "creation_timestamp": "2024-07-23T16:45:00Z",
+      "status": {
+        "phase": "Running",
+        "start_time": "2024-07-23T16:45:10Z",
+        "pod_ip": "10.244.3.5",
+        "host_ip": "10.0.1.31"
+      },
+      "spec": {
+        "service_account_name": "debug-sa",
+        "security_context": {
+          "run_as_non_root": false,
+          "run_as_user": 0,
+          "privileged": true
+        },
+        "containers": [
+          {
+            "name": "debug-tools",
+            "image": "ubuntu:latest",
+            "command": ["/bin/bash", "-c", "sleep 3600"],
+            "security_context": {
+              "privileged": true,
+              "allow_privilege_escalation": true,
+              "run_as_non_root": false,
+              "run_as_user": 0,
+              "capabilities": {
+                "add": ["SYS_ADMIN", "NET_ADMIN", "SYS_PTRACE"]
+              }
+            },
+            "volume_mounts": [
+              {
+                "name": "host-root",
+                "mount_path": "/host",
+                "read_only": false
+              },
+              {
+                "name": "docker-sock",
+                "mount_path": "/var/run/docker.sock"
+              }
+            ]
+          }
+        ],
+        "volumes": [
+          {
+            "name": "host-root",
+            "host_path": {
+              "path": "/",
+              "type": "Directory"
+            }
+          },
+          {
+            "name": "docker-sock",
+            "host_path": {
+              "path": "/var/run/docker.sock",
+              "type": "Socket"
+            }
+          }
+        ],
+        "node_name": "ip-10-0-1-31.ec2.internal",
+        "restart_policy": "Always"
+      }
+    }
+  ],
+  "services": [
+    {
+      "name": "webapp-frontend-service",
+      "namespace": "production",
+      "labels": {
+        "app": "webapp-frontend"
+      },
+      "annotations": {
+        "service.beta.kubernetes.io/aws-load-balancer-type": "nlb"
+      },
+      "creation_timestamp": "2024-06-15T00:00:00Z",
+      "spec": {
+        "type": "LoadBalancer",
+        "selector": {
+          "app": "webapp-frontend"
+        },
+        "ports": [
+          {
+            "name": "http",
+            "port": 80,
+            "target_port": 3000,
+            "protocol": "TCP"
+          },
+          {
+            "name": "https",
+            "port": 443,
+            "target_port": 3000,
+            "protocol": "TCP"
+          }
+        ],
+        "external_traffic_policy": "Cluster"
+      },
+      "status": {
+        "load_balancer": {
+          "ingress": [
+            {
+              "hostname": "a1b2c3d4e5f6-123456789.us-east-1.elb.amazonaws.com"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "api-backend-service",
+      "namespace": "production",
+      "labels": {
+        "app": "api-backend"
+      },
+      "annotations": {},
+      "creation_timestamp": "2024-06-15T00:00:00Z",
+      "spec": {
+        "type": "ClusterIP",
+        "selector": {
+          "app": "api-backend"
+        },
+        "ports": [
+          {
+            "name": "api",
+            "port": 8080,
+            "target_port": 8080,
+            "protocol": "TCP"
+          }
+        ]
+      },
+      "status": {}
+    }
+  ],
+  "service_accounts": [
+    {
+      "name": "webapp-frontend-sa",
+      "namespace": "production",
+      "labels": {
+        "app": "webapp-frontend"
+      },
+      "annotations": {
+        "eks.amazonaws.com/role-arn": "arn:aws:iam::123456789012:role/WebappFrontendRole"
+      },
+      "creation_timestamp": "2024-06-15T00:00:00Z",
+      "secrets": [
+        {
+          "name": "webapp-frontend-sa-token-12345"
+        }
+      ],
+      "image_pull_secrets": [],
+      "automount_service_account_token": true
+    },
+    {
+      "name": "api-backend-sa",
+      "namespace": "production",
+      "labels": {
+        "app": "api-backend"
+      },
+      "annotations": {
+        "eks.amazonaws.com/role-arn": "arn:aws:iam::123456789012:role/ApiBackendRole"
+      },
+      "creation_timestamp": "2024-06-15T00:00:00Z",
+      "secrets": [
+        {
+          "name": "api-backend-sa-token-67890"
+        }
+      ],
+      "image_pull_secrets": [],
+      "automount_service_account_token": true
+    },
+    {
+      "name": "debug-sa",
+      "namespace": "development",
+      "labels": {
+        "purpose": "debugging"
+      },
+      "annotations": {},
+      "creation_timestamp": "2024-07-01T00:00:00Z",
+      "secrets": [
+        {
+          "name": "debug-sa-token-11111"
+        }
+      ],
+      "image_pull_secrets": [],
+      "automount_service_account_token": true
+    },
+    {
+      "name": "cluster-admin-sa",
+      "namespace": "kube-system",
+      "labels": {
+        "purpose": "administration"
+      },
+      "annotations": {
+        "created-by": "platform-team"
+      },
+      "creation_timestamp": "2024-06-01T00:00:00Z",
+      "secrets": [
+        {
+          "name": "cluster-admin-sa-token-99999"
+        }
+      ],
+      "image_pull_secrets": [],
+      "automount_service_account_token": true
+    }
+  ],
+  "roles": [
+    {
+      "name": "pod-reader",
+      "namespace": "production",
+      "labels": {
+        "rbac.authorization.k8s.io/aggregate-to-view": "true"
+      },
+      "annotations": {},
+      "creation_timestamp": "2024-06-15T00:00:00Z",
+      "rules": [
+        {
+          "api_groups": [""],
+          "resources": ["pods"],
+          "verbs": ["get", "list", "watch"]
+        },
+        {
+          "api_groups": [""],
+          "resources": ["pods/log"],
+          "verbs": ["get", "list"]
+        }
+      ]
+    },
+    {
+      "name": "secret-manager",
+      "namespace": "production",
+      "labels": {},
+      "annotations": {},
+      "creation_timestamp": "2024-06-15T00:00:00Z",
+      "rules": [
+        {
+          "api_groups": [""],
+          "resources": ["secrets"],
+          "verbs": ["get", "list", "create", "update", "patch", "delete"]
+        },
+        {
+          "api_groups": [""],
+          "resources": ["configmaps"],
+          "verbs": ["get", "list"]
+        }
+      ]
+    },
+    {
+      "name": "debug-role",
+      "namespace": "development", 
+      "labels": {},
+      "annotations": {},
+      "creation_timestamp": "2024-07-01T00:00:00Z",
+      "rules": [
+        {
+          "api_groups": ["*"],
+          "resources": ["*"],
+          "verbs": ["*"]
+        }
+      ]
+    }
+  ],
+  "cluster_roles": [
+    {
+      "name": "system:node-reader",
+      "labels": {},
+      "annotations": {},
+      "creation_timestamp": "2024-06-01T00:00:00Z",
+      "rules": [
+        {
+          "api_groups": [""],
+          "resources": ["nodes"],
+          "verbs": ["get", "list", "watch"]
+        },
+        {
+          "api_groups": [""],
+          "resources": ["nodes/status"],
+          "verbs": ["get"]
+        }
+      ]
+    },
+    {
+      "name": "privileged-pod-admin",
+      "labels": {
+        "created-by": "security-team"
+      },
+      "annotations": {
+        "rbac.authorization.kubernetes.io/description": "Allows creation of privileged pods"
+      },
+      "creation_timestamp": "2024-07-01T00:00:00Z",
+      "rules": [
+        {
+          "api_groups": [""],
+          "resources": ["pods"],
+          "verbs": ["create", "delete", "get", "list", "patch", "update", "watch"]
+        },
+        {
+          "api_groups": [""],
+          "resources": ["pods/exec"],
+          "verbs": ["create"]
+        },
+        {
+          "api_groups": ["security.openshift.io"],
+          "resources": ["securitycontextconstraints"],
+          "verbs": ["use"],
+          "resource_names": ["privileged"]
+        }
+      ]
+    }
+  ],
+  "role_bindings": [
+    {
+      "name": "webapp-frontend-pod-reader",
+      "namespace": "production",
+      "labels": {},
+      "annotations": {},
+      "creation_timestamp": "2024-06-15T00:00:00Z",
+      "subjects": [
+        {
+          "kind": "ServiceAccount",
+          "name": "webapp-frontend-sa",
+          "namespace": "production" 
+        }
+      ],
+      "role_ref": {
+        "api_group": "rbac.authorization.k8s.io",
+        "kind": "Role",
+        "name": "pod-reader"
+      }
+    },
+    {
+      "name": "api-backend-secret-access",
+      "namespace": "production",
+      "labels": {},
+      "annotations": {},
+      "creation_timestamp": "2024-06-15T00:00:00Z",
+      "subjects": [
+        {
+          "kind": "ServiceAccount",
+          "name": "api-backend-sa",
+          "namespace": "production"
+        }
+      ],
+      "role_ref": {
+        "api_group": "rbac.authorization.k8s.io",
+        "kind": "Role",
+        "name": "secret-manager"
+      }
+    },
+    {
+      "name": "debug-admin-binding",
+      "namespace": "development",
+      "labels": {},
+      "annotations": {},
+      "creation_timestamp": "2024-07-01T00:00:00Z",
+      "subjects": [
+        {
+          "kind": "ServiceAccount",
+          "name": "debug-sa",
+          "namespace": "development"
+        }
+      ],
+      "role_ref": {
+        "api_group": "rbac.authorization.k8s.io",
+        "kind": "Role",
+        "name": "debug-role"
+      }
+    }
+  ],
+  "cluster_role_bindings": [
+    {
+      "name": "cluster-admin-binding",
+      "labels": {},
+      "annotations": {
+        "rbac.authorization.kubernetes.io/description": "Cluster admin access for system service account"
+      },
+      "creation_timestamp": "2024-06-01T00:00:00Z",
+      "subjects": [
+        {
+          "kind": "ServiceAccount",
+          "name": "cluster-admin-sa",
+          "namespace": "kube-system"
+        }
+      ],
+      "role_ref": {
+        "api_group": "rbac.authorization.k8s.io",
+        "kind": "ClusterRole",
+        "name": "cluster-admin"
+      }
+    },
+    {
+      "name": "node-reader-binding",
+      "labels": {},
+      "annotations": {},
+      "creation_timestamp": "2024-06-15T00:00:00Z",
+      "subjects": [
+        {
+          "kind": "ServiceAccount",
+          "name": "webapp-frontend-sa",
+          "namespace": "production"
+        }
+      ],
+      "role_ref": {
+        "api_group": "rbac.authorization.k8s.io",
+        "kind": "ClusterRole",
+        "name": "system:node-reader"
+      }
+    },
+    {
+      "name": "privileged-pod-admin-binding",
+      "labels": {},
+      "annotations": {},
+      "creation_timestamp": "2024-07-01T00:00:00Z",
+      "subjects": [
+        {
+          "kind": "ServiceAccount",
+          "name": "debug-sa",
+          "namespace": "development"
+        }
+      ],
+      "role_ref": {
+        "api_group": "rbac.authorization.k8s.io", 
+        "kind": "ClusterRole",
+        "name": "privileged-pod-admin"
+      }
+    }
+  ],
+  "secrets": [
+    {
+      "name": "db-credentials",
+      "namespace": "production",
+      "type": "Opaque",
+      "labels": {
+        "app": "database"
+      },
+      "annotations": {},
+      "creation_timestamp": "2024-06-15T00:00:00Z",
+      "data_keys": ["username", "password", "url"],
+      "immutable": false
+    },
+    {
+      "name": "api-secrets",
+      "namespace": "production",
+      "type": "Opaque",
+      "labels": {
+        "app": "api-backend"
+      },
+      "annotations": {},
+      "creation_timestamp": "2024-06-15T00:00:00Z",
+      "data_keys": ["jwt-secret", "api-key", "encryption-key"],
+      "immutable": false
+    },
+    {
+      "name": "tls-certificate",
+      "namespace": "production",
+      "type": "kubernetes.io/tls",
+      "labels": {
+        "app": "webapp-frontend"
+      },
+      "annotations": {
+        "cert-manager.io/issuer": "letsencrypt-prod"
+      },
+      "creation_timestamp": "2024-07-01T00:00:00Z",
+      "data_keys": ["tls.crt", "tls.key"],
+      "immutable": false
+    },
+    {
+      "name": "webapp-frontend-sa-token-12345",
+      "namespace": "production",
+      "type": "kubernetes.io/service-account-token",
+      "labels": {},
+      "annotations": {
+        "kubernetes.io/service-account.name": "webapp-frontend-sa",
+        "kubernetes.io/service-account.uid": "12345678-1234-1234-1234-123456789012"
+      },
+      "creation_timestamp": "2024-06-15T00:00:00Z",
+      "data_keys": ["ca.crt", "namespace", "token"],
+      "immutable": false
+    }
+  ],
+  "nodes": [
+    {
+      "name": "ip-10-0-1-15.ec2.internal",
+      "labels": {
+        "kubernetes.io/arch": "amd64",
+        "kubernetes.io/hostname": "ip-10-0-1-15.ec2.internal",
+        "kubernetes.io/os": "linux",
+        "node.kubernetes.io/instance-type": "t3.medium",
+        "topology.kubernetes.io/region": "us-east-1",
+        "topology.kubernetes.io/zone": "us-east-1a",
+        "eks.amazonaws.com/nodegroup": "production-workers"
+      },
+      "annotations": {
+        "node.alpha.kubernetes.io/ttl": "0",
+        "volumes.kubernetes.io/controller-managed-attach-detach": "true"
+      },
+      "creation_timestamp": "2024-06-01T00:00:00Z",
+      "status": {
+        "phase": "Ready",
+        "capacity": {
+          "cpu": "2",
+          "memory": "4Gi",
+          "pods": "17"
+        },
+        "allocatable": {
+          "cpu": "1930m",
+          "memory": "3.5Gi",
+          "pods": "17"
+        },
+        "node_info": {
+          "machine_id": "ec2a1b2c3d4e5f6g7h8i9j0k1l2m3n4o",
+          "system_uuid": "EC2A1B2C-3D4E-5F6G-7H8I-9J0K1L2M3N4O",
+          "boot_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "kernel_version": "5.4.0-1045-aws",
+          "os_image": "Amazon Linux 2",
+          "container_runtime_version": "containerd://1.6.6",
+          "kubelet_version": "v1.27.3-eks-a5565ad",
+          "kube_proxy_version": "v1.27.3-eks-a5565ad",
+          "operating_system": "linux",
+          "architecture": "amd64"
+        }
+      },
+      "spec": {
+        "pod_cidr": "10.244.1.0/24",
+        "provider_id": "aws:///us-east-1a/i-0123456789abcdef0"
+      }
+    },
+    {
+      "name": "ip-10-0-1-23.ec2.internal",
+      "labels": {
+        "kubernetes.io/arch": "amd64",
+        "kubernetes.io/hostname": "ip-10-0-1-23.ec2.internal", 
+        "kubernetes.io/os": "linux",
+        "node.kubernetes.io/instance-type": "t3.large",
+        "topology.kubernetes.io/region": "us-east-1",
+        "topology.kubernetes.io/zone": "us-east-1b",
+        "eks.amazonaws.com/nodegroup": "production-workers"
+      },
+      "annotations": {
+        "node.alpha.kubernetes.io/ttl": "0",
+        "volumes.kubernetes.io/controller-managed-attach-detach": "true"
+      },
+      "creation_timestamp": "2024-06-10T00:00:00Z",
+      "status": {
+        "phase": "Ready",
+        "capacity": {
+          "cpu": "2",
+          "memory": "8Gi",
+          "pods": "35"
+        },
+        "allocatable": {
+          "cpu": "1930m",
+          "memory": "7.5Gi",
+          "pods": "35"
+        },
+        "node_info": {
+          "machine_id": "ec2b2c3d4e5f6g7h8i9j0k1l2m3n4o5p",
+          "system_uuid": "EC2B2C3D-4E5F-6G7H-8I9J-0K1L2M3N4O5P",
+          "boot_id": "b2c3d4e5-f6g7-8901-bcde-f23456789012",
+          "kernel_version": "5.4.0-1045-aws",
+          "os_image": "Amazon Linux 2",
+          "container_runtime_version": "containerd://1.6.6",
+          "kubelet_version": "v1.27.3-eks-a5565ad",
+          "kube_proxy_version": "v1.27.3-eks-a5565ad",
+          "operating_system": "linux",
+          "architecture": "amd64"
+        }
+      },
+      "spec": {
+        "pod_cidr": "10.244.2.0/24",
+        "provider_id": "aws:///us-east-1b/i-0987654321fedcba0"
+      }
+    }
+  ],
+  "container_images": [
+    {
+      "name": "company-registry/webapp-frontend:v1.2.3",
+      "size_bytes": 150994944,
+      "tags": ["v1.2.3", "latest"],
+      "registry": "company-registry.dkr.ecr.us-east-1.amazonaws.com",
+      "created": "2024-07-20T08:00:00Z",
+      "vulnerabilities": {
+        "total": 3,
+        "critical": 0,
+        "high": 1,
+        "medium": 2,
+        "low": 0
+      },
+      "layers": [
+        {
+          "digest": "sha256:abc123def456...",
+          "size": 27097384
+        },
+        {
+          "digest": "sha256:def456ghi789...",
+          "size": 123897560
+        }
+      ]
+    },
+    {
+      "name": "company-registry/api-backend:v2.1.0",
+      "size_bytes": 245678912,
+      "tags": ["v2.1.0", "latest"],
+      "registry": "company-registry.dkr.ecr.us-east-1.amazonaws.com", 
+      "created": "2024-07-22T12:00:00Z",
+      "vulnerabilities": {
+        "total": 8,
+        "critical": 2,
+        "high": 3,
+        "medium": 3,
+        "low": 0
+      },
+      "layers": [
+        {
+          "digest": "sha256:ghi789jkl012...",
+          "size": 45123456
+        },
+        {
+          "digest": "sha256:jkl012mno345...",
+          "size": 200555456
+        }
+      ]
+    },
+    {
+      "name": "ubuntu:latest",
+      "size_bytes": 72800000,
+      "tags": ["latest", "22.04"],
+      "registry": "docker.io",
+      "created": "2024-07-15T00:00:00Z",
+      "vulnerabilities": {
+        "total": 12,
+        "critical": 1,
+        "high": 4,
+        "medium": 7,
+        "low": 0
+      },
+      "layers": [
+        {
+          "digest": "sha256:mno345pqr678...",
+          "size": 72800000
+        }
+      ]
+    }
+  ]
+}

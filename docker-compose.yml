@@ -49,21 +49,42 @@ services:
       neo4j:
         condition: service_healthy
     volumes:
-      - ./neo4j/init-fixed.cypher:/var/lib/neo4j/import/init.cypher
+      - ./neo4j/init-complete.cypher:/var/lib/neo4j/import/phase1.cypher
+      - ./neo4j/phase2-scenarios.cypher:/var/lib/neo4j/import/phase2.cypher
+      - ./neo4j/mitre-integration.cypher:/var/lib/neo4j/import/mitre.cypher
     networks:
       - cloud-threat-net
     command: >
       sh -c "
+        echo '🚀 Cloud Threat Graph Lab - Phase 2 Data Loader' &&
         echo 'Waiting for Neo4j to be ready...' &&
         sleep 15 &&
         echo 'Testing Neo4j connection...' &&
         cypher-shell -a bolt://neo4j:7687 -u neo4j -p cloudsecurity 'RETURN 1 as test;' &&
-        echo 'Neo4j connection successful. Loading initial data...' &&
-        cypher-shell -a bolt://neo4j:7687 -u neo4j -p cloudsecurity -f /var/lib/neo4j/import/init.cypher &&
-        echo 'Data loading completed successfully!' &&
-        echo 'Verifying data load...' &&
-        cypher-shell -a bolt://neo4j:7687 -u neo4j -p cloudsecurity 'MATCH (n) RETURN count(n) as NodeCount;' &&
-        echo 'Data loader finished.'
+        echo '✅ Neo4j connection successful!' &&
+        echo '' &&
+        echo '📊 Loading Phase 1 foundation data...' &&
+        cypher-shell -a bolt://neo4j:7687 -u neo4j -p cloudsecurity -f /var/lib/neo4j/import/phase1.cypher &&
+        echo '✅ Phase 1 data loaded successfully!' &&
+        echo '' &&
+        echo '🏭 Loading Phase 2 enhanced scenarios...' &&
+        cypher-shell -a bolt://neo4j:7687 -u neo4j -p cloudsecurity -f /var/lib/neo4j/import/phase2.cypher &&
+        echo '✅ Phase 2 scenarios loaded successfully!' &&
+        echo '' &&
+        echo '⚔️ Loading MITRE ATT&CK integration...' &&
+        cypher-shell -a bolt://neo4j:7687 -u neo4j -p cloudsecurity -f /var/lib/neo4j/import/mitre.cypher &&
+        echo '✅ MITRE integration completed!' &&
+        echo '' &&
+        echo '🔍 Verifying complete data load...' &&
+        cypher-shell -a bolt://neo4j:7687 -u neo4j -p cloudsecurity \"MATCH (n) RETURN labels(n)[0] as NodeType, count(n) as Count ORDER BY Count DESC;\" &&
+        echo '' &&
+        echo '🎯 Final statistics:' &&
+        cypher-shell -a bolt://neo4j:7687 -u neo4j -p cloudsecurity \"MATCH (n) RETURN count(n) as TotalNodes;\" &&
+        cypher-shell -a bolt://neo4j:7687 -u neo4j -p cloudsecurity \"MATCH ()-[r]->() RETURN count(r) as TotalRelationships;\" &&
+        cypher-shell -a bolt://neo4j:7687 -u neo4j -p cloudsecurity \"MATCH (t:MITRETechnique) RETURN count(t) as MITRETechniques;\" &&
+        echo '🛡️ Cloud Threat Graph Lab Phase 2 ready!' &&
+        echo 'Dashboard: http://localhost:3000' &&
+        echo 'Neo4j Browser: http://localhost:7474 (neo4j/cloudsecurity)'
       "
     restart: "no"
 
