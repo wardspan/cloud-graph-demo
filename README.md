@@ -1,4 +1,4 @@
-# 🛡️ Cloud Threat Graph Lab - Phase 2: Enhanced Data & MITRE Integration
+# 🛡️ Cloud Threat Graph Lab
 
 > **Advanced Security Simulation & Attack Path Analysis**  
 > A comprehensive Dockerized lab that simulates realistic cloud attack paths using Neo4j with full MITRE ATT&CK integration.
@@ -17,28 +17,31 @@ docker-compose up -d
 # - Neo4j Browser: http://localhost:7474 (neo4j/cloudsecurity)
 ```
 
-## 📋 What's New in Phase 2 ✨
+## 📋 Current Features
 
-### 🎯 8 Attack Scenarios (Doubled from Phase 1)
+### 🎯 8 Attack Scenarios
 
-#### Phase 1 Foundation
 1. **AWS Privilege Escalation** - Developer user → role assumption → admin access
 2. **Cross-Cloud Attack Chain** - Azure AD → CI/CD → AWS role → S3 access  
 3. **Kubernetes RBAC Escalation** - Pod → ServiceAccount → ClusterRole escalation
 4. **Supply Chain Container Escape** - Compromised package → host compromise
-
-#### Phase 2 Enhanced Scenarios
 5. **Supply Chain Compromise** - NPM package → CI/CD injection → cloud deployment → secrets access
 6. **Secrets Sprawl Attack** - Hardcoded GitHub token → Terraform state → cloud admin credentials
 7. **Serverless Attack Chain** - API Gateway → overprivileged Lambda → data exfiltration
 8. **Multi-Cloud Identity Federation** - Azure AD guest → OIDC federation → AWS production access
 
-### 🎨 Enhanced Dashboard UX
-- **Integrated Analysis**: Query buttons built directly into each scenario panel
-- **Auto-Open Neo4j**: Clicking analysis buttons automatically opens Neo4j Browser
-- **Inline Query Display**: See queries in bash-style windows within scenario information
-- **Table & Graph Views**: Separate analysis options for tabular data and graph visualization
-- **No More Disconnected UI**: Analysis is seamlessly connected to each attack scenario
+### 🎨 Integrated Dashboard Experience
+- **Scenario-Driven Analysis**: Query buttons built directly into each attack scenario panel
+- **Auto-Open Neo4j Browser**: Clicking analysis buttons automatically launches Neo4j with pre-loaded queries
+- **Inline Query Display**: View and copy queries in bash-style windows within scenario information
+- **Dual Analysis Modes**: Choose between table analysis for data overview or graph visualization for attack paths
+- **Seamless Workflow**: Attack scenarios directly connected to their analysis without UI confusion
+
+### ⚔️ MITRE ATT&CK Integration
+- **25 Techniques** across 11 tactics with comprehensive mappings
+- **Detection Guidance** for each technique with specific indicators
+- **Mitigation Strategies** with actionable defense recommendations
+- **Threat Intelligence** integration for real-world attack context
 
 ### 🏗️ Architecture
 - **Neo4j Database** (port 7474/7687) - Graph database with attack scenarios
@@ -119,21 +122,21 @@ ORDER BY NodesUsingTechnique DESC
 - Run the queries above to explore the graph
 - Use the graph visualization to see relationships
 
-### 3. New Dashboard Experience
+### 3. Dashboard Workflow
 
-The Phase 2 dashboard provides an integrated user experience:
+The dashboard provides an integrated analysis experience:
 
-1. **Click Attack Scenarios**: Select any of the 8 attack scenarios from the left panel
-2. **Scenario Information**: View detailed analysis including:
-   - What the query analyzes
-   - Expected results and risk assessment  
-   - MITRE ATT&CK techniques used
-   - Analysis tips for interpretation
-3. **Integrated Analysis**: Click **Table Analysis** or **Graph Visualization** buttons:
-   - Query automatically runs in Neo4j Browser
-   - Query appears in bash-style window within scenario information
-   - Copy query directly from the scenario panel
-4. **No More UI Confusion**: Analysis is directly connected to each attack scenario
+1. **Select Attack Scenarios**: Choose from 8 realistic attack scenarios in the left panel
+2. **View Scenario Details**: Each scenario includes:
+   - Analysis explanation and risk assessment
+   - Expected results and key indicators
+   - MITRE ATT&CK techniques and tactics
+   - Interpretation tips for findings
+3. **Run Analysis**: Click **Table Analysis** or **Graph Visualization**:
+   - Neo4j Browser opens automatically with the query pre-loaded
+   - Query displays in bash-style window within the scenario panel
+   - Copy queries directly for custom analysis
+4. **Seamless Experience**: Analysis flows naturally from attack understanding to data exploration
 
 ### 4. Explore Attack Scenarios
 
@@ -219,7 +222,7 @@ docker-compose up -d
 # Wait 2 minutes, then run: ./scripts/load-data.sh
 ```
 
-## 📊 Lab Statistics (Phase 2)
+## 📊 Lab Statistics
 
 - **Nodes**: 215+ (Users, Roles, Services, Pods, Images, Hosts, MITRE Techniques, etc.)
 - **Relationships**: 55+ (Complete attack paths and privilege escalations)
@@ -228,86 +231,84 @@ docker-compose up -d
 - **Mock Data**: AWS, Azure, and Kubernetes data ready for Cartography integration
 - **Attack Paths**: Verified working user→service relationships for all scenarios
 
-### ✅ **Verified Working Analysis (All 8 Scenarios):**
-- AWS Privilege Escalation paths ✅ (Table & Graph views)
-- Cross-Cloud Azure→AWS paths ✅ (Table & Graph views)
-- Kubernetes RBAC escalations ✅ (Table & Graph views)
-- Supply Chain container escapes ✅ (Table & Graph views)
-- Supply Chain CI/CD compromise ✅ (Table & Graph views)
-- Secrets sprawl and exposure ✅ (Table & Graph views)
-- Serverless attack chains ✅ (Table & Graph views)
-- Multi-cloud federation attacks ✅ (Table & Graph views)
+### ✅ **Verified Analysis Coverage:**
+- AWS privilege escalation attack paths
+- Cross-cloud Azure→AWS compromise chains
+- Kubernetes RBAC privilege escalations
+- Supply chain container escape scenarios
+- CI/CD pipeline compromise attacks
+- Secrets sprawl and credential exposure
+- Serverless function attack chains
+- Multi-cloud identity federation attacks
 
-### 🎨 **Phase 2 Dashboard Revolution:**
-- **Integrated UX**: Analysis buttons built into each scenario panel
-- **Auto-Open Neo4j**: Queries automatically run in Neo4j Browser
-- **Bash-Style Query Display**: Copy queries directly from scenario information
-- **Table & Graph Analysis**: Separate options for different visualization needs
-- **No UI Confusion**: Attack scenarios seamlessly connected to analysis
-- **8 Working Scenarios**: All scenarios return actual data, not empty results
-- **MITRE Integration**: 25 techniques with detection and mitigation guidance
+### 🔍 **Analysis Capabilities:**
+- **Dual View Modes**: Table analysis for data overview, graph visualization for attack path tracing
+- **Interactive Queries**: Pre-built Cypher queries for each attack scenario
+- **Auto-Launch Integration**: Seamless Neo4j Browser integration with one-click analysis
+- **Query Customization**: Copy and modify queries for deeper investigation
+- **Real Data Results**: All scenarios return actual graph data for meaningful analysis
+- **MITRE Context**: Comprehensive ATT&CK technique mapping with defensive guidance
 
 ## 📁 **Project Structure**
 
 ```
 cloud-threat-lab/
-├── docker-compose.yml              # Enhanced orchestration for Phase 2
+├── docker-compose.yml              # Container orchestration
 ├── README.md                       # This file
-├── .gitignore                      # Comprehensive ignore patterns
-├── scripts/                        # All executable scripts and utilities
+├── .gitignore                      # Version control patterns
+├── scripts/                        # Utility scripts and data loaders
 │   ├── load-data.sh               # Manual data loading
-│   ├── load-phase2-data.sh        # Phase 2 data loader
+│   ├── load-phase2-data.sh        # Enhanced scenario loader
 │   ├── quick-fix.sh               # Fix missing relationships
 │   └── reload-fresh-data.sh       # Complete data reload
-├── docs/                          # Enhanced documentation
-│   ├── attack-scenarios-enhanced.md # Complete scenario documentation
+├── docs/                          # Comprehensive documentation
+│   ├── attack-scenarios-enhanced.md # Detailed scenario documentation
 │   ├── mitre-integration-guide.md   # MITRE ATT&CK integration guide
-│   ├── WORKING_QUERIES.md          # Query examples that work
-│   └── DEBUG_QUERIES.md            # Debugging help
-├── cartography/                   # Mock data for Phase 3 preparation
-│   ├── mock-aws-data.json         # Realistic AWS asset data
-│   ├── mock-azure-data.json       # Azure resource data
-│   └── mock-k8s-data.json         # Kubernetes cluster data
-├── neo4j/                         # Neo4j configuration and data
-│   ├── init-complete.cypher       # Phase 1 foundation data
-│   ├── phase2-scenarios.cypher    # Phase 2 enhanced scenarios
-│   └── mitre-integration.cypher   # MITRE ATT&CK techniques
-└── dashboard/                     # Enhanced web dashboard
-    ├── index.html                 # Phase 2 dashboard with 8 scenarios
-    ├── app.js                     # Enhanced JavaScript with MITRE integration
-    ├── style.css                  # Updated styling with phase badges
+│   ├── WORKING_QUERIES.md          # Verified query examples
+│   └── DEBUG_QUERIES.md            # Troubleshooting guide
+├── cartography/                   # Mock cloud data for future integration
+│   ├── mock-aws-data.json         # Realistic AWS infrastructure data
+│   ├── mock-azure-data.json       # Azure resource inventory
+│   └── mock-k8s-data.json         # Kubernetes cluster configuration
+├── neo4j/                         # Graph database configuration and data
+│   ├── init-complete.cypher       # Core attack scenario data
+│   ├── phase2-scenarios.cypher    # Advanced attack scenarios
+│   └── mitre-integration.cypher   # MITRE ATT&CK technique mappings
+└── dashboard/                     # Interactive web interface
+    ├── index.html                 # Main dashboard with 8 scenarios
+    ├── app.js                     # Interactive analysis functionality
+    ├── style.css                  # Dashboard styling and UX
     └── Dockerfile
 ```
 
-## 🔮 Future Phases
+## 🔮 Upcoming Features
 
-### ✅ Phase 2: Enhanced Data & MITRE (COMPLETED)
-- ✅ 8 attack scenarios (expanded from 4)
-- ✅ 25 MITRE ATT&CK techniques with full integration
-- ✅ Mock Cartography data preparation (AWS, Azure, Kubernetes)
-- ✅ Enhanced dashboard with phase indicators and MITRE overlay
-- ✅ Comprehensive documentation and integration guides
-
-### Phase 3: Cartography Integration  
-- Add Cartography container for dynamic asset discovery
-- Mock cloud API responses for realistic data ingestion
-- Asset discovery simulation workflow  
-- Dynamic graph population from "live" cloud environments
+### 📊 Dynamic Asset Discovery
+- Cartography integration for live cloud asset mapping
+- Mock cloud API responses simulating real environments
+- Asset discovery workflow with realistic data ingestion
 - Real-time graph updates as "assets are discovered"
+- Multi-cloud inventory simulation (AWS, Azure, GCP)
 
-### Phase 4: Interactive Components
-- Modern React/Vue dashboard with advanced visualization
+### 🎨 Advanced Visualization
+- Modern React/Vue dashboard with enhanced UX
+- Interactive graph visualization with D3.js or vis.js
 - Jupyter notebooks for threat research and analysis
+- Query builder interface for non-technical users
 - Attack simulation engine with automated progression
-- Advanced graph visualization with D3.js or vis.js
-- Query builder interface for non-Cypher users
 
-### Phase 5: Advanced Features
-- Metrics collection and analytics dashboard
+### 🔧 Enterprise Integration
 - Export capabilities (JSON, CSV, GraphML, MITRE Navigator)
-- Community sharing features and scenario marketplace  
-- Integration with security tools (SIEM, SOAR, EDR)
+- SIEM/SOAR integration for real-world threat hunting
+- Metrics collection and analytics dashboard
+- API endpoints for custom integrations
 - Automated red team scenario generation
+
+### 🌐 Community Features
+- Scenario marketplace for sharing custom attack paths
+- Community-contributed MITRE technique mappings
+- Collaborative threat research workspace
+- Import/export functionality for threat intelligence sharing
 
 ## 🛡️ Security Notes
 
@@ -318,11 +319,12 @@ cloud-threat-lab/
 
 ## 🤝 Contributing
 
-Phase 1 provides the foundation. Future contributions welcome for:
-- Additional attack scenarios
-- Enhanced MITRE mappings  
-- New visualization features
-- Documentation improvements
+Contributions welcome for:
+- Additional realistic attack scenarios
+- Enhanced MITRE ATT&CK technique mappings
+- New visualization and analysis features
+- Documentation and educational content improvements
+- Integration with security tools and frameworks
 
 ## 📄 License
 
@@ -330,19 +332,21 @@ MIT License - See LICENSE file for details.
 
 ---
 
-## 🆚 Phase 1 vs Phase 2 Comparison
+## 📊 Evolution & Impact
 
-| Feature | Phase 1 (Foundation) | Phase 2 (Enhanced) |
-|---------|---------------------|-------------------|
-| **Attack Scenarios** | 4 scenarios | 8 scenarios |
-| **Graph Nodes** | 68 nodes | 118+ nodes |
-| **Relationships** | 30+ relationships | 55+ relationships |
-| **MITRE Techniques** | 12 techniques | 25 techniques across 11 tactics |
-| **Dashboard Queries** | 6 query buttons | 9 query buttons |
-| **Phase Indicators** | ❌ | ✅ Phase badges on scenarios |
-| **MITRE Integration** | Basic technique lists | Full detection & mitigation guidance |
-| **Mock Data** | ❌ | ✅ AWS, Azure, K8s data for Phase 3 |
-| **Documentation** | Basic README | Comprehensive scenario & MITRE guides |
-| **Data Loading** | Single script | Multi-phase loader with verification |
+### 🎯 Current Capabilities
+- **8 Realistic Attack Scenarios** covering major cloud security threats
+- **215+ Graph Nodes** representing comprehensive cloud infrastructure
+- **25 MITRE ATT&CK Techniques** with detection and mitigation guidance
+- **Integrated Analysis Workflow** connecting attack understanding to data exploration
+- **Dual Visualization Modes** for both tabular analysis and graph path tracing
+- **Mock Cloud Data** foundation ready for dynamic asset discovery integration
+- **100% Working Queries** - all scenarios return meaningful analysis results
 
-**🎯 Phase 2 Success**: Users can explore 8 sophisticated attack scenarios with full MITRE ATT&CK integration, enhanced dashboard with phase indicators, comprehensive documentation, and mock data foundation ready for Cartography integration in Phase 3!
+### 🔍 Value for Security Teams
+- **Threat Modeling**: Visualize realistic attack paths in cloud environments
+- **Red Team Planning**: Understand multi-stage attack progressions
+- **Blue Team Training**: Practice threat hunting with realistic data
+- **Risk Assessment**: Identify critical privilege escalation paths
+- **MITRE Mapping**: Connect attack techniques to defensive strategies
+- **Educational Tool**: Learn cloud security concepts through hands-on analysis
