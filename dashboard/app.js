@@ -1275,6 +1275,143 @@ docker-compose logs neo4j</code></pre>
         const modal = document.getElementById('helpModal');
         modal.style.display = 'none';
     }
+
+    showJupyterIntro() {
+        // Create and show a modal explaining Jupyter notebooks before navigation
+        const existingModal = document.getElementById('jupyterIntroModal');
+        if (existingModal) {
+            existingModal.remove();
+        }
+
+        const modal = document.createElement('div');
+        modal.id = 'jupyterIntroModal';
+        modal.className = 'modal';
+        modal.style.display = 'block';
+        modal.innerHTML = `
+            <div class="modal-content" style="max-width: 700px;">
+                <div class="modal-header">
+                    <h2>🎓 Welcome to Interactive Learning with Jupyter Notebooks</h2>
+                    <button class="close-btn" onclick="document.getElementById('jupyterIntroModal').remove()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div style="background: #e8f5e8; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #28a745;">
+                        <h3 style="margin: 0 0 15px 0; color: #155724;">🤖 What are Jupyter Notebooks?</h3>
+                        <p style="margin: 0 0 10px 0; color: #155724;">
+                            Jupyter notebooks are <strong>interactive documents</strong> that combine code, explanations, visualizations, and exercises in a single environment. 
+                            Perfect for learning cybersecurity concepts through hands-on practice!
+                        </p>
+                        <ul style="margin: 10px 0; padding-left: 20px; color: #155724;">
+                            <li><strong>Step-by-step learning:</strong> Each concept builds on the previous one</li>
+                            <li><strong>Interactive code:</strong> Run real security analysis queries</li>
+                            <li><strong>Immediate feedback:</strong> See results instantly</li>
+                            <li><strong>Visual learning:</strong> Charts, graphs, and network diagrams</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: #e3f2fd; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #2196f3;">
+                        <h3 style="margin: 0 0 15px 0; color: #1976d2;">📚 Your Educational Journey</h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div>
+                                <h4 style="color: #1976d2; margin-bottom: 8px;">🎯 Beginner Path (3-4 hours)</h4>
+                                <ul style="font-size: 0.9em; color: #1976d2; margin: 0; padding-left: 20px;">
+                                    <li>Graph Fundamentals</li>
+                                    <li>Basic Cypher Queries</li>
+                                    <li>Reading Attack Paths</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 style="color: #1976d2; margin-bottom: 8px;">🔍 Intermediate Path (4-5 hours)</h4>
+                                <ul style="font-size: 0.9em; color: #1976d2; margin: 0; padding-left: 20px;">
+                                    <li>Advanced Attack Analysis</li>
+                                    <li>MITRE ATT&CK Framework</li>
+                                    <li>Cross-Cloud Scenarios</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 style="color: #1976d2; margin-bottom: 8px;">🤖 Advanced Path (6-8 hours)</h4>
+                                <ul style="font-size: 0.9em; color: #1976d2; margin: 0; padding-left: 20px;">
+                                    <li>Machine Learning Security</li>
+                                    <li>Explainable AI</li>
+                                    <li>Risk Assessment Models</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 style="color: #1976d2; margin-bottom: 8px;">🔬 Expert Path (8-10 hours)</h4>
+                                <ul style="font-size: 0.9em; color: #1976d2; margin: 0; padding-left: 20px;">
+                                    <li>Security Research</li>
+                                    <li>Custom Scenarios</li>
+                                    <li>Advanced Analytics</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: #fff3cd; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #ffc107;">
+                        <h3 style="margin: 0 0 15px 0; color: #856404;">🚀 What You'll Learn</h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div>
+                                <h4 style="color: #856404; margin-bottom: 8px;">📊 Technical Skills</h4>
+                                <ul style="font-size: 0.9em; color: #856404; margin: 0; padding-left: 20px;">
+                                    <li>Neo4j graph database queries</li>
+                                    <li>Cypher query language</li>
+                                    <li>Graph visualization techniques</li>
+                                    <li>Machine learning for security</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 style="color: #856404; margin-bottom: 8px;">🛡️ Security Concepts</h4>
+                                <ul style="font-size: 0.9em; color: #856404; margin: 0; padding-left: 20px;">
+                                    <li>Attack path analysis</li>
+                                    <li>Privilege escalation detection</li>
+                                    <li>Cross-cloud security risks</li>
+                                    <li>Threat hunting methodologies</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 2px solid #dee2e6;">
+                        <h3 style="margin: 0 0 15px 0; color: #2c3e50;">🔧 Getting Started</h3>
+                        <ol style="color: #2c3e50; margin: 0; padding-left: 20px; line-height: 1.6;">
+                            <li><strong>Access Jupyter Lab:</strong> Click "Continue to Jupyter" below (opens in new tab)</li>
+                            <li><strong>Start with Notebook 1:</strong> Open <code>01-Graph-Fundamentals.ipynb</code></li>
+                            <li><strong>Run cells step-by-step:</strong> Use Shift+Enter to execute each code cell</li>
+                            <li><strong>Complete exercises:</strong> Interactive quizzes and coding challenges</li>
+                            <li><strong>Track progress:</strong> Your learning progress is automatically saved</li>
+                        </ol>
+                        <div style="background: #d4edda; padding: 15px; border-radius: 6px; margin-top: 15px; border-left: 3px solid #28a745;">
+                            <p style="margin: 0; color: #155724; font-size: 0.9em;">
+                                <strong>💡 Pro Tip:</strong> Keep this dashboard open alongside Jupyter to reference attack scenarios 
+                                and run Neo4j queries while learning!
+                            </p>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 25px;">
+                        <button onclick="window.open('http://localhost:8888', '_blank'); document.getElementById('jupyterIntroModal').remove();" 
+                                style="background: linear-gradient(135deg, #28a745, #20c997); color: white; border: none; padding: 15px 30px; border-radius: 25px; font-size: 1.1em; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3); transition: all 0.3s ease;">
+                            🚀 Continue to Jupyter Lab
+                        </button>
+                        <div style="margin-top: 10px; font-size: 0.9em; color: #6c757d;">
+                            Access token: <code>cloudsecurity</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        
+        // Close modal when clicking outside
+        modal.onclick = function(event) {
+            if (event.target === modal) {
+                modal.remove();
+            }
+        }
+        
+        // Prevent default link behavior
+        return false;
+    }
 }
 
 // Initialize dashboard when page loads

@@ -1,0 +1,139 @@
+{
+  "path_id": "beginner-security-graphs",
+  "title": "Security Graph Fundamentals",
+  "description": "Learn the basics of security graphs, attack path analysis, and threat detection",
+  "difficulty": "beginner",
+  "estimated_duration": "3-4 hours",
+  "prerequisites": [],
+  "learning_objectives": [
+    "Understand security graph concepts and terminology",
+    "Read and interpret basic attack paths",
+    "Write simple Cypher queries for security analysis",
+    "Identify common security risks in cloud environments"
+  ],
+  "modules": [
+    {
+      "module_id": "intro-to-graphs",
+      "title": "Introduction to Security Graphs",
+      "type": "tutorial",
+      "content_path": "tutorials/beginner/01-security-graphs-intro.md",
+      "estimated_time": 30,
+      "required": true,
+      "objectives": [
+        "Define security graphs and their advantages",
+        "Identify nodes, edges, and properties",
+        "Understand attack path visualization"
+      ]
+    },
+    {
+      "module_id": "basic-queries",
+      "title": "Writing Your First Security Queries",
+      "type": "tutorial", 
+      "content_path": "tutorials/beginner/02-basic-queries.md",
+      "estimated_time": 45,
+      "required": true,
+      "prerequisites": ["intro-to-graphs"],
+      "objectives": [
+        "Learn basic Cypher query syntax",
+        "Find users and their access patterns",
+        "Filter results for security analysis"
+      ]
+    },
+    {
+      "module_id": "attack-paths",
+      "title": "Reading Attack Paths", 
+      "type": "tutorial",
+      "content_path": "tutorials/beginner/03-attack-paths.md",
+      "estimated_time": 45,
+      "required": true,
+      "prerequisites": ["basic-queries"],
+      "objectives": [
+        "Identify simple attack paths",
+        "Understand privilege escalation",
+        "Assess attack path risk levels"
+      ]
+    },
+    {
+      "module_id": "hands-on-lab",
+      "title": "Hands-On Security Analysis",
+      "type": "interactive_lab",
+      "content_path": "notebooks/01-Graph-Fundamentals.ipynb",
+      "estimated_time": 60,
+      "required": true,
+      "prerequisites": ["attack-paths"],
+      "objectives": [
+        "Apply graph concepts to real scenarios",
+        "Practice with interactive exercises",
+        "Build confidence with graph analysis"
+      ]
+    },
+    {
+      "module_id": "knowledge-check",
+      "title": "Beginner Knowledge Assessment",
+      "type": "assessment",
+      "content_path": "assessments/beginner-assessment.json",
+      "estimated_time": 20,
+      "required": true,
+      "prerequisites": ["hands-on-lab"],
+      "passing_score": 70,
+      "objectives": [
+        "Demonstrate understanding of graph concepts",
+        "Apply security analysis techniques",
+        "Identify areas for continued learning"
+      ]
+    }
+  ],
+  "completion_criteria": {
+    "required_modules": ["intro-to-graphs", "basic-queries", "attack-paths", "hands-on-lab", "knowledge-check"],
+    "minimum_score": 70,
+    "time_limit": null
+  },
+  "next_recommended_paths": [
+    "intermediate-attack-analysis",
+    "mitre-framework-integration"
+  ],
+  "certification": {
+    "available": true,
+    "title": "Security Graph Fundamentals Certificate",
+    "requirements": {
+      "pass_all_assessments": true,
+      "complete_hands_on_lab": true,
+      "minimum_overall_score": 80
+    }
+  },
+  "resources": [
+    {
+      "title": "Neo4j Cypher Quick Reference", 
+      "type": "reference",
+      "url": "https://neo4j.com/docs/cypher-refcard/"
+    },
+    {
+      "title": "Cloud Security Best Practices",
+      "type": "reading",
+      "url": "internal://docs/cloud-security-guide.md"
+    },
+    {
+      "title": "Interactive Graph Browser",
+      "type": "tool",
+      "url": "http://localhost:7474"
+    }
+  ],
+  "instructor_notes": {
+    "teaching_tips": [
+      "Emphasize visualization - use lots of diagrams",
+      "Start with simple examples before complex scenarios", 
+      "Encourage experimentation in Neo4j browser",
+      "Connect concepts to real-world security incidents"
+    ],
+    "common_mistakes": [
+      "Confusing nodes and relationships",
+      "Forgetting to filter sensitive data queries",
+      "Not understanding multi-hop attack paths"
+    ],
+    "extension_activities": [
+      "Build custom attack scenarios",
+      "Research real-world attack path examples",
+      "Create visualizations of local infrastructure"
+    ]
+  }
+}

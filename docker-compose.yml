@@ -159,6 +159,37 @@ services:
       retries: 3
       start_period: 60s
 
+  # Phase 4: Jupyter Lab Educational Platform
+  jupyter-lab:
+    image: jupyter/scipy-notebook:latest
+    container_name: cloud-threat-jupyter
+    ports:
+      - "8888:8888"  # Jupyter Lab interface
+    depends_on:
+      neo4j:
+        condition: service_healthy
+    volumes:
+      - ./notebooks:/home/jovyan/work/notebooks
+      - ./analytics:/home/jovyan/work/analytics
+      - ./learning-platform:/home/jovyan/work/learning-platform
+    networks:
+      - cloud-threat-net
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - JUPYTER_TOKEN=cloudsecurity
+      - NEO4J_URI=bolt://neo4j:7687
+      - NEO4J_USER=neo4j
+      - NEO4J_PASSWORD=cloudsecurity
+    command: >
+      bash -c "
+        pip install neo4j networkx plotly scikit-learn seaborn &&
+        echo '🤖 Phase 4: Educational Analytics Platform' &&
+        echo '📚 Jupyter Lab with 10 interactive security notebooks' &&
+        echo '🔗 Access: http://localhost:8888 (token: cloudsecurity)' &&
+        start-notebook.sh --NotebookApp.token='cloudsecurity'
+      "
+    restart: unless-stopped
+
 networks:
   cloud-threat-net:
     driver: bridge
