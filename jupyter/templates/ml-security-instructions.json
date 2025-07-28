@@ -1,0 +1,108 @@
+{
+  "notebook_name": "05-Anomaly-Detection-ML.ipynb",
+  "title": "ML-Based Security Anomaly Detection - Interactive Guide",
+  "description": "Master machine learning techniques for detecting security anomalies in cloud infrastructure",
+  "learning_objectives": [
+    "Apply ML algorithms to security data",
+    "Detect unusual patterns in access logs",
+    "Build anomaly detection models",
+    "Interpret ML security insights"
+  ],
+  "estimated_time": "75 minutes",
+  "instructions": [
+    {
+      "title": "🤖 Welcome to ML Security Analysis",
+      "content": "<div><p><strong>🎯 Advanced Security Analytics with Machine Learning!</strong></p><p>You've mastered graph analysis - now let's add AI-powered anomaly detection to your security toolkit.</p><p><strong>🧠 ML Techniques You'll Master:</strong></p><ul><li>🔍 <strong>Unsupervised Learning:</strong> Find patterns without labeled data</li><li>📊 <strong>Clustering Analysis:</strong> Group similar behaviors</li><li>⚡ <strong>Outlier Detection:</strong> Identify suspicious activities</li><li>📈 <strong>Time Series Analysis:</strong> Spot behavioral changes</li></ul><div style=\"background: #e8f5e8; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #28a745;\"><strong>🎮 Real-World Impact:</strong> These are enterprise-grade techniques used by security teams at major companies!</div></div>",
+      "type": "overview",
+      "target_cell": null
+    },
+    {
+      "title": "📚 ML Security Environment Setup",
+      "content": "<div><p>Let's set up the machine learning environment for security analytics.</p><p><strong>🛠️ ML Libraries We're Adding:</strong></p><ul><li><code>scikit-learn</code> - Core ML algorithms</li><li><code>pandas</code> - Data manipulation</li><li><code>numpy</code> - Numerical computations</li><li><code>matplotlib/seaborn</code> - Visualizations</li><li><code>scipy</code> - Statistical analysis</li></ul><p><strong>🎯 Security Data Sources:</strong></p><ul><li>User access logs from Neo4j</li><li>Network traffic patterns</li><li>Permission usage statistics</li><li>Resource access frequency</li></ul><div style=\"background: #fff3cd; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #ffc107;\"><strong>⚠️ Important:</strong> This setup enables advanced analytics - let it complete fully!</div></div>",
+      "type": "execute",
+      "target_cell": 1,
+      "auto_execute": false
+    },
+    {
+      "title": "📊 Extract Security Features from Graph Data",
+      "content": "<div><p>Let's extract meaningful features from our security graph for ML analysis!</p><p><strong>🔍 Feature Engineering Process:</strong></p><ol><li>Query user behavior patterns from Neo4j</li><li>Calculate access frequency metrics</li><li>Measure privilege usage patterns</li><li>Create time-based activity profiles</li></ol><p><strong>📈 Security Metrics We'll Calculate:</strong></p><ul><li><strong>Access Frequency:</strong> How often users access resources</li><li><strong>Permission Scope:</strong> Breadth of permissions used</li><li><strong>Time Patterns:</strong> When users are active</li><li><strong>Resource Types:</strong> What kinds of data they access</li></ul><div style=\"background: #d1ecf1; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #17a2b8;\"><strong>💡 Pro Insight:</strong> Good features are the foundation of effective ML - spend time understanding them!</div></div>",
+      "type": "execute",
+      "target_cell": 3,
+      "auto_execute": false
+    },
+    {
+      "title": "🧮 Behavioral Clustering Analysis",
+      "content": "<div><p>Let's group users based on their security behavior patterns using unsupervised learning!</p><p><strong>🎯 Clustering Goals:</strong></p><ul><li>Identify normal user behavior groups</li><li>Find outliers who don't fit patterns</li><li>Understand different usage profiles</li><li>Establish behavioral baselines</li></ul><p><strong>🧪 K-Means Clustering Process:</strong></p><ol><li>Normalize feature data for fair comparison</li><li>Determine optimal number of clusters</li><li>Apply clustering algorithm</li><li>Analyze and interpret cluster characteristics</li></ol><div style=\"background: #f3e5f5; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #9c27b0;\"><strong>🔬 Science Behind It:</strong> Clustering reveals hidden patterns in user behavior that are invisible to human analysis!</div></div>",
+      "type": "execute",
+      "target_cell": 5,
+      "auto_execute": false
+    },
+    {
+      "title": "⚠️ Anomaly Detection with Isolation Forest",
+      "content": "<div><p>Now let's detect security anomalies using advanced ML algorithms!</p><p><strong>🌲 Isolation Forest Concept:</strong></p><ul><li>Isolates anomalies by randomly partitioning data</li><li>Anomalies are easier to isolate (need fewer splits)</li><li>Works well with high-dimensional security data</li><li>No need for labeled attack examples</li></ul><p><strong>🎯 What We're Detecting:</strong></p><ul><li>Users with unusual access patterns</li><li>Abnormal permission usage</li><li>Suspicious timing behaviors</li><li>Outlier resource access</li></ul><div style=\"background: #f8d7da; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #dc3545;\"><strong>🚨 Security Value:</strong> Unsupervised anomaly detection catches unknown attack patterns that signature-based systems miss!</div></div>",
+      "type": "execute",
+      "target_cell": 7,
+      "auto_execute": false
+    },
+    {
+      "title": "📈 Time Series Security Analysis",
+      "content": "<div><p>Let's analyze security patterns over time to detect behavioral changes!</p><p><strong>⏰ Time-Based Security Patterns:</strong></p><ul><li>Daily/weekly access rhythms</li><li>Sudden spikes in activity</li><li>Changes in resource usage</li><li>Evolution of permission needs</li></ul><p><strong>🔍 Temporal Anomaly Detection:</strong></p><ul><li>Statistical process control for security metrics</li><li>Moving averages to track trends</li><li>Standard deviation thresholds for alerts</li><li>Seasonal pattern recognition</li></ul><div style=\"background: #e3f2fd; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #2196f3;\"><strong>⏰ Timing Matters:</strong> Many attacks show temporal patterns - late night access, unusual timing, etc!</div></div>",
+      "type": "execute",
+      "target_cell": 9,
+      "auto_execute": false
+    },
+    {
+      "title": "🧪 Advanced Challenge: Custom Anomaly Scoring",
+      "content": "<div><p><strong>🏆 Advanced Challenge:</strong> Build a custom anomaly scoring system!</p><p><strong>📋 Your Mission:</strong></p><ul><li>Combine multiple anomaly detection methods</li><li>Weight different types of suspicious behavior</li><li>Create a composite risk score</li><li>Rank users by anomaly likelihood</li></ul><p><strong>💡 Scoring Components to Consider:</strong></p><ul><li>Clustering distance (how far from normal groups)</li><li>Isolation forest anomaly score</li><li>Time-based pattern deviations</li><li>Privilege escalation indicators</li></ul><div style=\"background: #fff3cd; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #ffc107;\"><strong>🎯 Learning Goal:</strong> Understand how to combine multiple ML techniques for robust security analysis!</div></div>",
+      "type": "challenge",
+      "target_cell": 11,
+      "solution": "<div><p><strong>💡 Custom Scoring Solution:</strong></p><pre style=\"background: #f8f9fa; padding: 10px; border-radius: 4px; overflow-x: auto;\"><code># Composite anomaly scoring\ndef calculate_security_score(user_data):\n    # Normalize scores to 0-1 range\n    cluster_score = normalize_cluster_distance(user_data)\n    isolation_score = isolation_forest.decision_function(user_data)\n    temporal_score = calculate_temporal_anomaly(user_data)\n    privilege_score = assess_privilege_anomaly(user_data)\n    \n    # Weighted combination\n    weights = {'cluster': 0.3, 'isolation': 0.4, \n               'temporal': 0.2, 'privilege': 0.1}\n    \n    final_score = (cluster_score * weights['cluster'] + \n                   isolation_score * weights['isolation'] +\n                   temporal_score * weights['temporal'] + \n                   privilege_score * weights['privilege'])\n    \n    return final_score</code></pre><p><strong>🔍 Key Insights:</strong></p><ul><li>Combines multiple detection methods</li><li>Uses weighted scores based on security importance</li><li>Provides interpretable risk ranking</li><li>Can be tuned based on organizational needs</li></ul></div>"
+    },
+    {
+      "title": "🎯 Model Validation and Performance Metrics",
+      "content": "<div><p>Let's validate our ML security models and understand their performance!</p><p><strong>📊 Validation Approaches:</strong></p><ul><li>Cross-validation for model stability</li><li>Precision/recall for anomaly detection</li><li>ROC curves for threshold selection</li><li>Business impact metrics</li></ul><p><strong>🔍 Security-Specific Metrics:</strong></p><ul><li><strong>False Positive Rate:</strong> How many benign users flagged</li><li><strong>True Positive Rate:</strong> How many real threats caught</li><li><strong>Investigation Efficiency:</strong> Quality of alerts generated</li><li><strong>Time to Detection:</strong> How quickly threats are identified</li></ul><div style=\"background: #e8f5e8; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #28a745;\"><strong>💼 Business Value:</strong> Model validation ensures your ML system provides real security value, not just noise!</div></div>",
+      "type": "execute",
+      "target_cell": 13,
+      "auto_execute": false
+    },
+    {
+      "title": "🌐 Interactive ML Security Dashboard",
+      "content": "<div><p>Create an interactive dashboard to visualize ML security insights!</p><p><strong>🎨 Dashboard Components:</strong></p><ul><li>Real-time anomaly score visualization</li><li>User behavior cluster plots</li><li>Time series security trends</li><li>Top anomalous users ranking</li></ul><p><strong>🔍 Interactive Features:</strong></p><ul><li>Hover details for user information</li><li>Click-through to detailed analysis</li><li>Time range filtering</li><li>Anomaly threshold adjustment</li></ul><div style=\"background: #d1ecf1; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #17a2b8;\"><strong>🎯 Analysis Power:</strong> Interactive visualizations help security teams understand ML insights and take action!</div></div>",
+      "type": "execute",
+      "target_cell": 15,
+      "auto_execute": false
+    },
+    {
+      "title": "🏆 ML Security Mastery Assessment",
+      "content": "<div><p><strong>🎓 Final Challenge:</strong> Demonstrate your ML security expertise!</p><p><strong>📋 Comprehensive Analysis Task:</strong></p><ol><li>Identify the highest-risk user using ML techniques</li><li>Explain which algorithms flagged them as anomalous</li><li>Describe the specific behaviors that are suspicious</li><li>Recommend investigation priorities and actions</li></ol><p><strong>🧠 Analysis Framework:</strong></p><ul><li><strong>Detection:</strong> Multiple ML algorithms</li><li><strong>Validation:</strong> Cross-reference different methods</li><li><strong>Interpretation:</strong> Explain the security implications</li><li><strong>Action:</strong> Recommend specific next steps</li></ul><div style=\"background: #fff3cd; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #ffc107;\"><strong>🎯 Success Criteria:</strong> Your analysis should be comprehensive enough to brief a CISO!</div></div>",
+      "type": "challenge",
+      "target_cell": 17,
+      "solution": "<div><p><strong>💡 Comprehensive ML Security Analysis:</strong></p><h5>1. Highest-Risk User Identification:</h5><p><strong>User:</strong> developer_user_007<br><strong>Composite Anomaly Score:</strong> 0.89/1.0 (CRITICAL)</p><h5>2. ML Algorithm Consensus:</h5><ul><li><strong>Isolation Forest:</strong> Score -0.15 (anomalous)</li><li><strong>Clustering:</strong> 3.2 std deviations from nearest cluster</li><li><strong>Time Series:</strong> 400% increase in off-hours activity</li></ul><h5>3. Suspicious Behaviors:</h5><ul><li>Accessing 15x more sensitive resources than peers</li><li>87% of access outside normal business hours</li><li>Unusual geographic access patterns</li><li>Privilege escalation attempts (3 in past week)</li></ul><h5>4. Recommended Actions:</h5><ol><li><strong>IMMEDIATE:</strong> Review current access sessions</li><li><strong>HIGH:</strong> Audit recent resource access logs</li><li><strong>MEDIUM:</strong> Interview user about unusual patterns</li><li><strong>ONGOING:</strong> Enhanced monitoring for 30 days</li></ol></div>"
+    },
+    {
+      "title": "🎉 ML Security Expert Achievement Unlocked!",
+      "content": "<div><p><strong>🏆 Outstanding work!</strong> You've mastered ML-based security analysis!</p><div style=\"background: #d4edda; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #28a745;\"><h4 style=\"color: #155724; margin-top: 0;\">✅ Advanced ML Skills You've Mastered:</h4><ul style=\"color: #155724;\"><li>🧮 Unsupervised learning for security analytics</li><li>📊 Behavioral clustering and pattern recognition</li><li>⚠️ Anomaly detection with multiple algorithms</li><li>📈 Time series analysis for security trends</li><li>🎯 Custom scoring and model validation</li><li>🌐 Interactive security visualization</li></ul></div><div style=\"background: #d1ecf1; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #17a2b8;\"><h4 style=\"color: #0c5460; margin-top: 0;\">🚀 You're Now Ready For:</h4><ol style=\"color: #0c5460;\"><li><strong>Advanced Analytics:</strong> All enterprise ML security techniques</li><li><strong>Research Application:</strong> Novel security ML approaches</li><li><strong>Professional Practice:</strong> Senior security analyst roles</li><li><strong>Teaching Others:</strong> ML security concepts and implementation</li></ol></div><div style=\"background: #f8d7da; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #dc3545;\"><h4 style=\"color: #721c24; margin-top: 0;\">🎯 Key Takeaways:</h4><ul style=\"color: #721c24;\"><li>ML amplifies human security analysis capabilities</li><li>Unsupervised learning catches unknown attack patterns</li><li>Multiple algorithms provide robust anomaly detection</li><li>Time-based analysis reveals behavioral changes</li><li>Validation ensures real-world security value</li></ul></div><p style=\"text-align: center; margin-top: 20px;\"><strong>🤖 You're now equipped with AI-powered security superpowers! 🛡️</strong></p></div>",
+      "type": "overview",
+      "target_cell": null
+    }
+  ],
+  "mitre_techniques": [
+    "T1078 - Valid Accounts",
+    "T1087 - Account Discovery", 
+    "T1069 - Permission Groups Discovery",
+    "T1482 - Domain Trust Discovery",
+    "T1201 - Password Policy Discovery"
+  ],
+  "prerequisites": [
+    "Completion of 02-Attack-Path-Discovery.ipynb",
+    "Basic understanding of machine learning concepts",
+    "Familiarity with Python data analysis",
+    "Statistical analysis fundamentals"
+  ],
+  "related_scenarios": [
+    "Behavioral Analysis Dashboard",
+    "User Risk Scoring",
+    "Anomaly Detection Pipeline", 
+    "Security ML Operations"
+  ]
+}

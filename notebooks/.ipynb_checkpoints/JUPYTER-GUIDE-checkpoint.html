@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Threat Graph Lab - Jupyter Guide</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            background: #f8f9fa;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h1 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; }
+        h2 { color: #34495e; margin-top: 30px; }
+        .highlight {
+            background: #e8f5e8;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+        .steps {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        code {
+            background: #f1f3f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', monospace;
+        }
+        .btn {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin: 5px;
+            font-weight: bold;
+        }
+        .btn:hover { background: #0056b3; }
+        .btn-success { background: #28a745; }
+        .btn-success:hover { background: #1e7e34; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th { background-color: #f8f9fa; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Cloud Threat Graph Lab - Jupyter Guide</h1>
+        
+        <div class="highlight">
+            <h3>👋 Welcome to Interactive Security Learning!</h3>
+            <p><strong>If this is your first time using Jupyter notebooks, this guide will get you started in minutes.</strong></p>
+        </div>
+
+        <h2>🎯 Quick Start</h2>
+        <div class="steps">
+            <h3>Choose Your Starting Point:</h3>
+            <p><strong>🆕 New to Jupyter?</strong><br>
+            Open <code>00-Getting-Started-TUTORIAL.ipynb</code> - Learn Jupyter basics in 5-10 minutes</p>
+            
+            <p><strong>🎓 Ready for Security Learning?</strong><br>
+            Open <code>01-Graph-Fundamentals.ipynb</code> - Start with security graph concepts</p>
+            
+            <p><strong>🚀 Experienced User?</strong><br>
+            Jump to <code>02-Attack-Path-Discovery.ipynb</code> or <code>05-Anomaly-Detection-ML.ipynb</code></p>
+        </div>
+
+        <h2>📖 How to Use Jupyter Notebooks</h2>
+        
+        <div class="warning">
+            <h4>🔑 Most Important Skill: Running Code Cells</h4>
+            <ol>
+                <li><strong>Click on a code cell</strong> (gray background) - it gets a blue border</li>
+                <li><strong>Press Shift + Enter</strong> - this runs the code</li>
+                <li><strong>Wait for results</strong> - output appears below the cell</li>
+                <li><strong>Move to next cell</strong> - repeat the process</li>
+            </ol>
+        </div>
+
+        <h3>📋 Essential Rules</h3>
+        <ul>
+            <li><strong>Always go top to bottom</strong> - Cells depend on previous cells</li>
+            <li><strong>Read text cells first</strong> - They explain what's coming next</li>
+            <li><strong>Run code cells in order</strong> - Skipping causes errors</li>
+            <li><strong>When stuck, restart</strong> - Kernel → Restart Kernel</li>
+        </ul>
+
+        <h2>📚 Learning Path</h2>
+        <table>
+            <tr>
+                <th>Notebook</th>
+                <th>Level</th>
+                <th>Time</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><code>00-Getting-Started-TUTORIAL.ipynb</code></td>
+                <td>Beginner</td>
+                <td>10 min</td>
+                <td>Jupyter tutorial (start here if new!)</td>
+            </tr>
+            <tr>
+                <td><code>01-Graph-Fundamentals.ipynb</code></td>
+                <td>Beginner</td>
+                <td>45 min</td>
+                <td>Security graphs and attack paths</td>
+            </tr>
+            <tr>
+                <td><code>02-Attack-Path-Discovery.ipynb</code></td>
+                <td>Intermediate</td>
+                <td>60 min</td>
+                <td>Advanced attack analysis</td>
+            </tr>
+            <tr>
+                <td><code>05-Anomaly-Detection-ML.ipynb</code></td>
+                <td>Advanced</td>
+                <td>90 min</td>
+                <td>Machine learning for security</td>
+            </tr>
+        </table>
+
+        <h2>🔗 Connected Learning</h2>
+        <div class="highlight">
+            <h4>🎮 Keep These Open While Learning:</h4>
+            <ul>
+                <li><strong>Dashboard:</strong> <a href="http://localhost:3000" target="_blank">http://localhost:3000</a> - Interactive scenarios</li>
+                <li><strong>Neo4j Browser:</strong> <a href="http://localhost:7474" target="_blank">http://localhost:7474</a> - Database queries</li>
+                <li><strong>This Jupyter Lab</strong> - Educational notebooks</li>
+            </ul>
+        </div>
+
+        <h2>🆘 Troubleshooting</h2>
+        <div class="steps">
+            <h4>Common Issues & Solutions:</h4>
+            <p><strong>❓ "Code won't run"</strong><br>
+            → Click on the cell first (blue border), then Shift + Enter</p>
+            
+            <p><strong>❓ "Variable undefined error"</strong><br>
+            → Run cells from top to bottom in order</p>
+            
+            <p><strong>❓ "Notebook seems frozen"</strong><br>
+            → Go to Kernel menu → Restart Kernel</p>
+            
+            <p><strong>❓ "Can't connect to database"</strong><br>
+            → Make sure Docker is running: <code>docker-compose up -d</code></p>
+        </div>
+
+        <h2>🚀 Ready to Start?</h2>
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="./00-Getting-Started-TUTORIAL.ipynb" class="btn btn-success">
+                🆕 New to Jupyter? Start Here!
+            </a>
+            <a href="./01-Graph-Fundamentals.ipynb" class="btn">
+                🎓 Ready for Security Learning
+            </a>
+        </div>
+
+        <div class="highlight" style="text-align: center;">
+            <p><strong>💡 Remember:</strong> The goal is to understand cloud security deeply enough to protect real systems!</p>
+            <p><strong>🎯 These notebooks connect directly to real-world security scenarios.</strong></p>
+        </div>
+    </div>
+</body>
+</html>

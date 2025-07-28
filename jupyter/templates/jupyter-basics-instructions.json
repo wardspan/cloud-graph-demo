@@ -1,0 +1,88 @@
+{
+  "notebook_name": "00-Getting-Started-TUTORIAL.ipynb",
+  "title": "Jupyter Notebook Tutorial - Interactive Guide",
+  "description": "Learn how to use Jupyter notebooks for cybersecurity education",
+  "learning_objectives": [
+    "Master running code cells",
+    "Understand notebook navigation",
+    "Learn troubleshooting techniques",
+    "Practice with security examples"
+  ],
+  "estimated_time": "10 minutes",
+  "instructions": [
+    {
+      "title": "🚀 Welcome to Interactive Learning!",
+      "content": "<div><p><strong>Welcome to the Cloud Threat Graph Lab Jupyter Tutorial!</strong></p><p>This guide will teach you everything you need to know to use Jupyter notebooks for cybersecurity learning.</p><p><strong>🎯 What You'll Learn:</strong></p><ul><li>🔧 How to run code cells (most important skill!)</li><li>🗺️ Navigate the Jupyter interface</li><li>🛠️ Troubleshoot common issues</li><li>🔗 Connect to security learning</li></ul><div style=\"background: #e8f5e8; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #28a745;\"><strong>💡 Good News:</strong> Jupyter is easier than it looks! You'll be comfortable in just a few minutes.</div></div>",
+      "type": "overview",
+      "target_cell": null
+    },
+    {
+      "title": "🔧 Most Important Skill: Running Code Cells",
+      "content": "<div><p>The #1 skill you need: <strong>running code cells</strong>. Let's master this right now!</p><p><strong>📋 Steps to Run a Cell:</strong></p><ol><li><strong>Click on the code cell</strong> (it gets a blue border)</li><li><strong>Press Shift + Enter</strong> (or click ▶️ play button)</li><li><strong>Wait for results</strong> (they appear below)</li><li><strong>Move to next cell</strong> (automatic or manual)</li></ol><p><strong>🎯 Try It Now:</strong> The cell below is your practice cell. Click on it and press <kbd>Shift + Enter</kbd>!</p><div style=\"background: #fff3cd; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #ffc107;\"><strong>⚠️ Important:</strong> If nothing happens, make sure you clicked ON the gray cell (not just near it)!</div></div>",
+      "type": "execute",
+      "target_cell": 1,
+      "auto_execute": false
+    },
+    {
+      "title": "✅ Success Check: Did It Work?",
+      "content": "<div><p>If you see a congratulations message above, <strong>you're doing great!</strong> 🎉</p><p><strong>🔧 If it didn't work:</strong></p><ul><li>Make sure you clicked ON the gray code cell</li><li>The cell should have a <strong>blue border</strong> when selected</li><li>Try pressing <kbd>Shift + Enter</kbd> again</li><li>Or click the ▶️ play button in the toolbar</li></ul><p><strong>🧪 Let's Try Something Interactive:</strong> The next cell shows different results each time you run it. This demonstrates how notebooks can be dynamic and interactive!</p><div style=\"background: #e3f2fd; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #2196f3;\"><strong>💡 Pro Tip:</strong> You can run the same cell multiple times to see different results!</div></div>",
+      "type": "execute",
+      "target_cell": 2,
+      "auto_execute": false
+    },
+    {
+      "title": "🗺️ Understanding the Jupyter Interface",
+      "content": "<div><p>Now that you can run cells, let's understand the Jupyter Lab interface!</p><p><strong>🔍 Key Areas:</strong></p><ul><li><strong>Left Sidebar:</strong> File browser (see all notebooks)</li><li><strong>Main Area:</strong> Your notebook workspace</li><li><strong>Top Toolbar:</strong> Run, stop, save buttons</li><li><strong>Cell Types:</strong> Text (like this) and Code (gray background)</li></ul><p><strong>📱 Essential Buttons:</strong></p><ul><li><strong>▶️ Run:</strong> Execute the selected cell</li><li><strong>⏹️ Stop:</strong> Stop running code</li><li><strong>💾 Save:</strong> Save your progress</li><li><strong>➕ Add:</strong> Insert new cells</li></ul><div style=\"background: #f3e5f5; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #9c27b0;\"><strong>🎯 Navigation Tip:</strong> Use the left sidebar to switch between different learning notebooks!</div></div>",
+      "type": "overview",
+      "target_cell": null
+    },
+    {
+      "title": "📖 The Golden Rule: Top to Bottom",
+      "content": "<div><p><strong>🥇 Golden Rule:</strong> Always run notebook cells from <strong>top to bottom</strong>!</p><p><strong>🤔 Why Order Matters:</strong></p><ul><li>Later cells depend on earlier cells</li><li>Variables are defined in previous cells</li><li>Libraries are imported at the top</li><li>Skipping around causes errors</li></ul><p><strong>📚 Think of it like reading a book:</strong></p><ol><li>Read the explanation (text cells)</li><li>Run the code (code cells)</li><li>See the results (output)</li><li>Move to the next concept</li></ol><div style=\"background: #d4edda; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #28a745;\"><strong>✅ Best Practice:</strong> When in doubt, restart from the top and run all cells in order!</div></div>",
+      "type": "overview",
+      "target_cell": null
+    },
+    {
+      "title": "🧪 Practice Time: Security Example",
+      "content": "<div><p>Let's practice with a mini cybersecurity example! This simulates the kind of learning you'll do in the real notebooks.</p><p><strong>🎯 Learning Goals:</strong></p><ul><li>Practice running cells in order</li><li>See how cells build on each other</li><li>Experience security-focused content</li><li>Understand the complete workflow</li></ul><p><strong>📋 Instructions:</strong></p><ol><li>Run the \"Setup\" cell first</li><li>Then run the \"Analysis\" cell</li><li>Notice how the second cell uses data from the first</li></ol><div style=\"background: #e8f5e8; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #28a745;\"><strong>🎮 Real Learning Preview:</strong> This is exactly how the security notebooks work!</div></div>",
+      "type": "execute",
+      "target_cell": 3,
+      "auto_execute": false
+    },
+    {
+      "title": "📊 Continue the Security Analysis",
+      "content": "<div><p>Now run the analysis cell to see how notebooks build on previous results!</p><p><strong>🔍 What You Should Notice:</strong></p><ul><li>This cell uses data from the previous cell</li><li>It shows user information and attack paths</li><li>Results are formatted nicely for learning</li><li>This is <strong>exactly</strong> how real security analysis works</li></ul><p><strong>💡 Key Insight:</strong> If you tried to run this cell BEFORE the setup cell, you'd get an error because <code>security_data</code> wouldn't be defined!</p><div style=\"background: #fff3cd; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #ffc107;\"><strong>🔧 Troubleshooting:</strong> If you get an error, go back and run the setup cell first!</div></div>",
+      "type": "execute",
+      "target_cell": 4,
+      "auto_execute": false
+    },
+    {
+      "title": "🛠️ Essential Troubleshooting Skills",
+      "content": "<div><p>Every Jupyter user needs to know these troubleshooting techniques!</p><p><strong>🚨 Common Problems & Solutions:</strong></p><table style=\"width: 100%; margin: 15px 0; border-collapse: collapse;\"><tr style=\"background: #f8f9fa;\"><th style=\"padding: 8px; border: 1px solid #dee2e6; text-align: left;\">Problem</th><th style=\"padding: 8px; border: 1px solid #dee2e6; text-align: left;\">Solution</th></tr><tr><td style=\"padding: 8px; border: 1px solid #dee2e6;\">\"Code won't run\"</td><td style=\"padding: 8px; border: 1px solid #dee2e6;\">Click on cell first, then Shift+Enter</td></tr><tr><td style=\"padding: 8px; border: 1px solid #dee2e6;\">\"Variable not defined\"</td><td style=\"padding: 8px; border: 1px solid #dee2e6;\">Run cells from top to bottom</td></tr><tr><td style=\"padding: 8px; border: 1px solid #dee2e6;\">\"Notebook seems frozen\"</td><td style=\"padding: 8px; border: 1px solid #dee2e6;\">Kernel → Restart Kernel</td></tr><tr><td style=\"padding: 8px; border: 1px solid #dee2e6;\">\"Lost track of where I am\"</td><td style=\"padding: 8px; border: 1px solid #dee2e6;\">Use left sidebar Table of Contents</td></tr></table><p><strong>🔄 Nuclear Option:</strong> When all else fails, go to <strong>Kernel</strong> menu → <strong>Restart and Run All Cells</strong></p><div style=\"background: #d1ecf1; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #17a2b8;\"><strong>💡 Remember:</strong> These problems happen to everyone! Don't worry - just restart and try again.</div></div>",
+      "type": "overview",
+      "target_cell": null
+    },
+    {
+      "title": "🎓 Your Learning Path to Security Expertise",
+      "content": "<div><p><strong>🏆 Congratulations!</strong> You now know how to use Jupyter notebooks!</p><div style=\"background: #d4edda; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #28a745;\"><h4 style=\"color: #155724; margin-top: 0;\">✅ Skills You've Mastered:</h4><ul style=\"color: #155724;\"><li>🔧 Running code cells with Shift+Enter</li><li>🗺️ Navigating the Jupyter interface</li><li>📖 Understanding top-to-bottom execution</li><li>🛠️ Troubleshooting common issues</li></ul></div><div style=\"background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #2196f3;\"><h4 style=\"color: #1976d2; margin-top: 0;\">🚀 Ready for Security Learning:</h4><ol style=\"color: #1976d2;\"><li><strong>Start with:</strong> <code>01-Graph-Fundamentals.ipynb</code></li><li><strong>Practice with:</strong> <a href=\"http://localhost:3000\" target=\"_blank\">Dashboard scenarios</a></li><li><strong>Advance to:</strong> <code>02-Attack-Path-Discovery.ipynb</code></li><li><strong>Master:</strong> All 10 attack scenarios</li></ol></div><div style=\"background: #f3e5f5; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #9c27b0;\"><h4 style=\"color: #4a148c; margin-top: 0;\">💡 Success Tips:</h4><ul style=\"color: #4a148c;\"><li>🕒 Take your time - security concepts require practice</li><li>🔄 Run cells multiple times to understand them</li><li>🔗 Keep dashboard open to see connections</li><li>❓ Use this tutorial as reference anytime</li></ul></div></div>",
+      "type": "overview",
+      "target_cell": null
+    },
+    {
+      "title": "✨ Ready to Become a Security Expert!",
+      "content": "<div><p><strong>🎉 You're ready to start your cybersecurity journey!</strong></p><p><strong>🔗 Next Steps:</strong></p><ol><li><strong>Close this tutorial</strong> (you can always come back)</li><li><strong>Open the file browser</strong> (left sidebar)</li><li><strong>Double-click:</strong> <code>01-Graph-Fundamentals.ipynb</code></li><li><strong>Start learning:</strong> Real security concepts!</li></ol><p><strong>🎮 Pro Learning Strategy:</strong></p><ul><li>📱 Keep multiple browser tabs open:</li><li>📚 <strong>This Jupyter Lab</strong> - for learning concepts</li><li>🎮 <strong><a href=\"http://localhost:3000\" target=\"_blank\">Dashboard</a></strong> - for practicing scenarios</li><li>🗃️ <strong><a href=\"http://localhost:7474\" target=\"_blank\">Neo4j Browser</a></strong> - for advanced queries</li></ul><div style=\"background: #fff3cd; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #ffc107;\"><h4 style=\"color: #856404; margin-top: 0;\">🎯 Remember the Goal:</h4><p style=\"color: #856404; margin-bottom: 0;\">You're not just learning Jupyter - you're building skills to protect real cloud systems from cyber attacks. Every concept connects to real-world security!</p></div><p style=\"text-align: center; margin-top: 20px;\"><strong>🚀 Let's go secure the cloud! 🛡️</strong></p></div>",
+      "type": "overview",
+      "target_cell": null
+    }
+  ],
+  "prerequisites": [
+    "Basic computer literacy",
+    "No prior programming experience required",
+    "Chrome or Firefox browser recommended"
+  ],
+  "related_notebooks": [
+    "01-Graph-Fundamentals.ipynb",
+    "02-Attack-Path-Discovery.ipynb",
+    "05-Anomaly-Detection-ML.ipynb"
+  ]
+}

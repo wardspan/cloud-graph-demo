@@ -1,0 +1,22 @@
+Metadata-Version: 2.1
+Name: cloud-threat-instructor
+Version: 1.0.0
+Summary: Interactive instruction widget for Cloud Threat Graph Lab
+Author: Cloud Security Lab
+Author-email: security@example.com
+Project-URL: Documentation, https://github.com/cloud-threat-lab/docs
+Project-URL: Source, https://github.com/cloud-threat-lab/jupyter-overlay
+Project-URL: Tracker, https://github.com/cloud-threat-lab/jupyter-overlay/issues
+Keywords: jupyter cybersecurity education security-training graph-analysis
+Classifier: Development Status :: 4 - Beta
+Classifier: Framework :: Jupyter
+Classifier: Intended Audience :: Education
+Classifier: Topic :: Security
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Requires-Python: >=3.7
+Requires-Dist: ipywidgets>=7.6.0
+Requires-Dist: IPython>=7.0.0

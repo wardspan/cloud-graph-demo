@@ -264,9 +264,9 @@ class AssetDiscoverySimulator:
                     'id': 'i-0fedcba987654321f',
                     'instance_type': 't3.large',
                     'state': 'running',
-                    'public_ip': None,
+                    'public_ip': '',
                     'private_ip': '10.0.2.200',
-                    'iam_instance_profile': None,
+                    'iam_instance_profile': '',
                     'security_groups': 'sg-0fedcba987654321f'
                 }
             ]
@@ -529,7 +529,7 @@ class AssetDiscoverySimulator:
             # Security risks
             risk_result = session.run("""
                 MATCH (n)
-                WHERE exists(n.security_risk)
+                WHERE n.security_risk IS NOT NULL
                 RETURN n.security_risk as RiskLevel, count(n) as Count
                 ORDER BY Count DESC
             """)

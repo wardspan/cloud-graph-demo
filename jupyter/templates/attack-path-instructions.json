@@ -1,0 +1,101 @@
+{
+  "notebook_name": "02-Attack-Path-Discovery.ipynb",
+  "title": "Advanced Attack Path Discovery - Interactive Guide",
+  "description": "Master advanced techniques for discovering and analyzing complex attack paths in cloud environments",
+  "learning_objectives": [
+    "Analyze multi-hop attack sequences",
+    "Understand MITRE ATT&CK technique mapping",
+    "Master complex Cypher queries",
+    "Identify cross-cloud attack vectors"
+  ],
+  "estimated_time": "60 minutes",
+  "instructions": [
+    {
+      "title": "🚀 Advanced Attack Path Analysis",
+      "content": "<div><p><strong>Welcome to Advanced Attack Path Discovery!</strong></p><p>You've mastered the basics - now let's dive deep into complex attack analysis techniques used by real security teams.</p><p><strong>🎯 Advanced Topics You'll Master:</strong></p><ul><li>🔗 <strong>Multi-hop Attacks:</strong> Complex chains spanning multiple systems</li><li>⚔️ <strong>MITRE ATT&CK:</strong> Industry-standard technique classification</li><li>☁️ <strong>Cross-Cloud Attacks:</strong> Azure → AWS → Kubernetes chains</li><li>🧠 <strong>Advanced Queries:</strong> Complex Cypher for real-world analysis</li></ul><div style=\"background: #e3f2fd; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #2196f3;\"><strong>🎮 Dashboard Integration:</strong> These techniques power scenarios 2-8 in your dashboard. You'll understand how they really work!</div></div>",
+      "type": "overview",
+      "target_cell": null
+    },
+    {
+      "title": "🔧 Advanced Analysis Setup",
+      "content": "<div><p>Let's set up advanced tools for complex attack path analysis.</p><p><strong>🛠️ What We're Adding:</strong></p><ul><li>Advanced graph algorithms (PageRank, Centrality)</li><li>MITRE ATT&CK technique mapping</li><li>Cross-cloud relationship analysis</li><li>Risk scoring calculations</li></ul><p><strong>📚 New Libraries:</strong></p><ul><li><code>networkx</code> - Graph algorithms</li><li><code>plotly</code> - Interactive visualizations</li><li><code>pandas</code> - Data analysis</li><li><code>json</code> - MITRE technique data</li></ul><div style=\"background: #fff3cd; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #ffc107;\"><strong>⚠️ Important:</strong> This setup enables all advanced features - make sure it completes successfully!</div></div>",
+      "type": "execute",
+      "target_cell": 1,
+      "auto_execute": false
+    },
+    {
+      "title": "☁️ Cross-Cloud Attack Discovery",
+      "content": "<div><p>Let's discover how attackers move between different cloud providers!</p><p><strong>🎯 Cross-Cloud Attack Pattern:</strong></p><ol><li>Compromise Azure AD user account</li><li>Leverage CI/CD pipeline integration</li><li>Assume federated AWS role</li><li>Access sensitive AWS resources</li></ol><p><strong>🔍 Query Analysis:</strong></p><ul><li>Traces paths from Azure users to AWS services</li><li>Shows federation relationships</li><li>Identifies trust boundaries</li><li>Measures attack complexity</li></ul><div style=\"background: #f8d7da; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #dc3545;\"><strong>🚨 Security Insight:</strong> Cross-cloud attacks are CRITICAL risk because they're hard to detect and span multiple security teams!</div></div>",
+      "type": "execute",
+      "target_cell": 3,
+      "auto_execute": false
+    },
+    {
+      "title": "⚔️ MITRE ATT&CK Technique Mapping",
+      "content": "<div><p>Now let's map our attack paths to MITRE ATT&CK techniques - the industry standard for attack classification!</p><p><strong>🎯 MITRE ATT&CK Benefits:</strong></p><ul><li>Standardized attack vocabulary</li><li>Enables communication between security teams</li><li>Links to detection and mitigation strategies</li><li>Supports threat intelligence correlation</li></ul><p><strong>🔍 What This Analysis Shows:</strong></p><ul><li>Which techniques are used in each attack</li><li>How many assets use each technique</li><li>Technique frequency across the environment</li><li>Risk prioritization based on technique prevalence</li></ul><div style=\"background: #e8f5e8; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #28a745;\"><strong>🎮 Professional Tip:</strong> This is exactly how enterprise security teams categorize and prioritize threats!</div></div>",
+      "type": "execute",
+      "target_cell": 5,
+      "auto_execute": false
+    },
+    {
+      "title": "🧪 Advanced Challenge: Supply Chain Analysis",
+      "content": "<div><p><strong>🏆 Advanced Challenge:</strong> Trace a complete supply chain attack!</p><p><strong>📋 Your Mission:</strong></p><ul><li>Find paths from compromised NPM packages</li><li>Trace through CI/CD pipelines</li><li>Follow to cloud deployment</li><li>Identify secrets access</li></ul><p><strong>💡 Query Building Hints:</strong></p><ul><li>Start with <code>NPMPackage</code> nodes where <code>compromised = true</code></li><li>Look for paths to <code>SecretsManager</code> or sensitive services</li><li>Use path length 1-5 to capture the full chain</li><li>Order by path length to see the shortest attacks</li></ul><div style=\"background: #fff3cd; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #ffc107;\"><strong>🎯 Learning Goal:</strong> Understand how modern supply chain attacks work end-to-end!</div></div>",
+      "type": "challenge",
+      "target_cell": 7,
+      "solution": "<div><p><strong>💡 Solution:</strong></p><pre style=\"background: #f8f9fa; padding: 10px; border-radius: 4px; overflow-x: auto;\"><code>MATCH path = (pkg:NPMPackage)-[*1..5]->(secret:SecretsManager)\nWHERE pkg.compromised = true\nRETURN \n    pkg.name as CompromisedPackage,\n    secret.name as TargetSecret,\n    length(path) as AttackSteps,\n    [node in nodes(path) | labels(node)[0] + ': ' + node.name] as AttackChain\nORDER BY AttackSteps\nLIMIT 5</code></pre><p><strong>🔍 Explanation:</strong></p><ul><li>Traces from compromised packages to secrets</li><li>Shows the complete attack chain</li><li>Shorter chains = easier attacks = higher priority</li><li>This maps to MITRE technique T1195.002 (Supply Chain Compromise)</li></ul></div>"
+    },
+    {
+      "title": "📊 Risk Scoring and Prioritization",
+      "content": "<div><p>Let's calculate risk scores for discovered attack paths to prioritize remediation efforts!</p><p><strong>🧮 Risk Scoring Factors:</strong></p><ul><li><strong>Path Length:</strong> Shorter = higher risk</li><li><strong>Privilege Level:</strong> Admin access = higher risk</li><li><strong>Data Sensitivity:</strong> PII access = higher risk</li><li><strong>Technique Severity:</strong> MITRE impact ratings</li></ul><p><strong>📈 Scoring Algorithm:</strong></p><ul><li>Base score: 100 points</li><li>Subtract 10 points per hop (longer = lower risk)</li><li>Add 50 points for admin privileges</li><li>Add 30 points for PII access</li><li>Add technique-specific risk weights</li></ul><div style=\"background: #d1ecf1; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #17a2b8;\"><strong>💼 Enterprise Usage:</strong> Real security teams use similar scoring to prioritize which vulnerabilities to fix first!</div></div>",
+      "type": "execute",
+      "target_cell": 9,
+      "auto_execute": false
+    },
+    {
+      "title": "🌐 Interactive Attack Path Visualization",
+      "content": "<div><p>Create an interactive visualization to explore complex attack relationships!</p><p><strong>🎨 Visualization Features:</strong></p><ul><li>Interactive nodes you can click and drag</li><li>Color-coded by risk level and node type</li><li>Hover tooltips with detailed information</li><li>Zoom and pan for large attack graphs</li></ul><p><strong>🔍 Visual Analysis Tips:</strong></p><ul><li><strong>Red nodes:</strong> High-risk attack targets</li><li><strong>Orange edges:</strong> Privilege escalation paths</li><li><strong>Clustered nodes:</strong> Related attack components</li><li><strong>Central nodes:</strong> Critical infrastructure points</li></ul><div style=\"background: #f3e5f5; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #9c27b0;\"><strong>🎯 Analysis Power:</strong> Interactive visuals help you spot patterns that are invisible in tables!</div></div>",
+      "type": "execute",
+      "target_cell": 11,
+      "auto_execute": false
+    },
+    {
+      "title": "🔍 Advanced Query Techniques",
+      "content": "<div><p>Master advanced Cypher techniques for complex security analysis!</p><p><strong>🛠️ Advanced Patterns You'll Learn:</strong></p><ul><li><strong>Variable-length paths:</strong> <code>[*1..5]</code> for complex chains</li><li><strong>Path filtering:</strong> <code>WHERE ALL(node in nodes(path)...)</code></li><li><strong>Relationship aggregation:</strong> <code>collect(DISTINCT type(r))</code></li><li><strong>Conditional logic:</strong> <code>CASE WHEN... THEN... END</code></li></ul><p><strong>📚 Professional Query Structure:</strong></p><ol><li>MATCH complex patterns</li><li>WHERE with multiple conditions</li><li>WITH for intermediate processing</li><li>RETURN formatted results</li><li>ORDER BY risk/priority</li></ol><div style=\"background: #e8f5e8; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #28a745;\"><strong>💡 Skill Building:</strong> These are the same techniques used by enterprise security analysts!</div></div>",
+      "type": "execute",
+      "target_cell": 13,
+      "auto_execute": false
+    },
+    {
+      "title": "🏆 Mastery Assessment: Complex Attack Analysis",
+      "content": "<div><p><strong>🎓 Final Challenge:</strong> Demonstrate your mastery with a comprehensive attack analysis!</p><p><strong>📋 Your Task:</strong></p><ol><li>Identify the highest-risk attack path in the environment</li><li>Map it to MITRE ATT&CK techniques</li><li>Calculate its risk score</li><li>Recommend specific mitigations</li></ol><p><strong>🧠 Analysis Framework:</strong></p><ul><li><strong>Discovery:</strong> Use complex queries to find paths</li><li><strong>Classification:</strong> Map to MITRE techniques</li><li><strong>Prioritization:</strong> Calculate risk scores</li><li><strong>Recommendation:</strong> Suggest countermeasures</li></ul><div style=\"background: #fff3cd; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #ffc107;\"><strong>🎯 Success Criteria:</strong> Your analysis should be thorough enough to present to a security team!</div></div>",
+      "type": "challenge",
+      "target_cell": 15,
+      "solution": "<div><p><strong>💡 Comprehensive Analysis Example:</strong></p><h5>1. High-Risk Path Discovery:</h5><pre style=\"background: #f8f9fa; padding: 10px; border-radius: 4px;\"><code>MATCH path = (start)-[*1..4]->(target)\nWHERE start.access_level = 'developer'\n  AND target.contains_pii = true\nRETURN path, length(path) as risk_factor\nORDER BY risk_factor ASC\nLIMIT 1</code></pre><h5>2. MITRE Mapping:</h5><ul><li>T1078.004 - Valid Accounts: Cloud Accounts</li><li>T1548.005 - Abuse Elevation Control Mechanism</li><li>T1530 - Data from Cloud Storage Object</li></ul><h5>3. Risk Score: 85/100 (HIGH)</h5><h5>4. Mitigation: Implement least-privilege IAM, require MFA for role assumption</h5></div>"
+    },
+    {
+      "title": "🎉 Advanced Attack Path Mastery Achieved!",
+      "content": "<div><p><strong>🏆 Outstanding work!</strong> You've mastered advanced attack path discovery techniques!</p><div style=\"background: #d4edda; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #28a745;\"><h4 style=\"color: #155724; margin-top: 0;\">✅ Advanced Skills You've Mastered:</h4><ul style=\"color: #155724;\"><li>🔗 Multi-hop attack chain analysis</li><li>⚔️ MITRE ATT&CK technique mapping</li><li>☁️ Cross-cloud attack vector identification</li><li>📊 Risk scoring and prioritization</li><li>🌐 Interactive attack visualization</li><li>🧠 Complex Cypher query construction</li></ul></div><div style=\"background: #d1ecf1; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #17a2b8;\"><h4 style=\"color: #0c5460; margin-top: 0;\">🚀 You're Now Ready For:</h4><ol style=\"color: #0c5460;\"><li><strong>Enterprise Analysis:</strong> All 10 dashboard scenarios</li><li><strong>Advanced Learning:</strong> <code>05-Anomaly-Detection-ML.ipynb</code></li><li><strong>Professional Practice:</strong> <a href=\"http://localhost:7474\" target=\"_blank\">Neo4j Browser</a> custom queries</li><li><strong>Real-World Application:</strong> Actual security team work</li></ol></div><div style=\"background: #f8d7da; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #dc3545;\"><h4 style=\"color: #721c24; margin-top: 0;\">🎯 Key Takeaways:</h4><ul style=\"color: #721c24;\"><li>Modern attacks are multi-stage and cross-platform</li><li>MITRE ATT&CK provides standardized threat language</li><li>Risk scoring helps prioritize limited security resources</li><li>Visual analysis reveals patterns hidden in data</li><li>Advanced queries enable deep threat hunting</li></ul></div><p style=\"text-align: center; margin-top: 20px;\"><strong>🛡️ You're now equipped to defend against advanced persistent threats! 🎓</strong></p></div>",
+      "type": "overview",
+      "target_cell": null
+    }
+  ],
+  "mitre_techniques": [
+    "T1078.004 - Valid Accounts: Cloud Accounts",
+    "T1195.002 - Supply Chain Compromise: Compromise Software Supply Chain",
+    "T1552.004 - Unsecured Credentials: Private Keys",
+    "T1548.005 - Abuse Elevation Control Mechanism: Temporary Elevated Cloud Access",
+    "T1134.001 - Access Token Manipulation: Token Impersonation/Theft",
+    "T1530 - Data from Cloud Storage Object"
+  ],
+  "prerequisites": [
+    "Completion of 01-Graph-Fundamentals.ipynb",
+    "Understanding of basic Cypher queries",
+    "Familiarity with cloud security concepts"
+  ],
+  "related_scenarios": [
+    "Cross-Cloud Attack Chain",
+    "Supply Chain Compromise", 
+    "Multi-Cloud Identity Federation Attack",
+    "Serverless Attack Chain"
+  ]
+}

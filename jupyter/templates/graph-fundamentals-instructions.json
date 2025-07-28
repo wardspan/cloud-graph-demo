@@ -1,0 +1,90 @@
+{
+  "notebook_name": "01-Graph-Fundamentals.ipynb",
+  "title": "Security Graph Fundamentals - Interactive Guide",
+  "description": "Learn cybersecurity through graph database analysis with step-by-step guidance",
+  "learning_objectives": [
+    "Understand security graph concepts",
+    "Master basic Cypher queries",
+    "Analyze attack paths",
+    "Connect concepts to dashboard scenarios"
+  ],
+  "estimated_time": "45 minutes",
+  "instructions": [
+    {
+      "title": "🎓 Welcome to Security Graph Learning",
+      "content": "<div><p><strong>Welcome to the Cloud Threat Graph Lab!</strong></p><p>This interactive guide will teach you how to analyze cybersecurity threats using graph databases. You'll learn:</p><ul><li>📊 <strong>Graph Theory:</strong> Nodes, relationships, and security context</li><li>🔍 <strong>Attack Path Analysis:</strong> How attackers move through systems</li><li>💻 <strong>Cypher Queries:</strong> Database language for security analysis</li><li>🎮 <strong>Dashboard Integration:</strong> Connect learning to real scenarios</li></ul><div style=\"background: #e8f5e8; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #28a745;\"><strong>💡 Pro Tip:</strong> This same data powers the dashboard at <a href=\"http://localhost:3000\" target=\"_blank\">localhost:3000</a>. Keep it open to see connections!</div></div>",
+      "type": "overview",
+      "target_cell": null
+    },
+    {
+      "title": "📚 Setting Up Your Learning Environment",
+      "content": "<div><p>Let's connect to the Cloud Threat Graph Lab database and import the tools you'll need.</p><p><strong>🔧 What this cell does:</strong></p><ul><li>Imports Python libraries for graph analysis</li><li>Sets up connection to Neo4j database</li><li>Prepares visualization tools</li><li>Creates educational helper functions</li></ul><div style=\"background: #fff3cd; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #ffc107;\"><strong>⚠️ Important:</strong> Make sure to run this cell first - everything else depends on it!</div></div>",
+      "type": "execute",
+      "target_cell": 1,
+      "auto_execute": false
+    },
+    {
+      "title": "🔗 Connect to Security Database",
+      "content": "<div><p>Now let's establish a connection to the Neo4j database that contains our security data.</p><p><strong>🎯 Learning Focus:</strong></p><ul><li>How to connect to graph databases</li><li>Understanding connection parameters</li><li>Error handling for database connections</li><li>Educational vs. production authentication</li></ul><p>The connection uses:</p><ul><li><strong>Host:</strong> <code>neo4j:7687</code> (Docker internal network)</li><li><strong>Username:</strong> <code>neo4j</code></li><li><strong>Password:</strong> <code>cloudsecurity</code></li></ul><div style=\"background: #e3f2fd; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #2196f3;\"><strong>🎮 Dashboard Connection:</strong> This is the same database that powers your dashboard scenarios!</div></div>",
+      "type": "execute",
+      "target_cell": 3,
+      "auto_execute": false
+    },
+    {
+      "title": "📊 Your First Security Analysis",
+      "content": "<div><p>Let's discover what's in our security graph! This is like taking inventory of all security assets.</p><p><strong>🔍 What this query does:</strong></p><ul><li><code>MATCH (n)</code> - Find all nodes in the graph</li><li><code>labels(n)[0]</code> - Get the type of each node</li><li><code>count(n)</code> - Count how many of each type</li><li><code>ORDER BY Count DESC</code> - Show most common first</li></ul><p><strong>🛡️ Security Insight:</strong> Asset inventory is the foundation of cybersecurity. You can't protect what you don't know exists!</p><div style=\"background: #d4edda; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #28a745;\"><strong>✨ Try It:</strong> After running this, compare the results with your dashboard's statistics bar!</div></div>",
+      "type": "execute",
+      "target_cell": 5,
+      "auto_execute": false
+    },
+    {
+      "title": "🎯 Understanding Attack Paths",
+      "content": "<div><p>Now for the core concept: <strong>Attack Paths</strong>! These show how attackers move through systems.</p><p><strong>📖 Attack Path Concept:</strong></p><ul><li>A sequence of connected resources</li><li>Shows how attackers reach targets</li><li>Like a route on a map, but for cybersecurity</li><li>Shorter paths = easier attacks = higher risk</li></ul><p><strong>🔍 This Query Analysis:</strong></p><ul><li>Starts with developer users</li><li>Follows 1-3 relationship hops</li><li>Ends at services containing sensitive data</li><li>Shows the complete attack route</li></ul><div style=\"background: #e8f5e8; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #28a745;\"><strong>🎮 Dashboard Match:</strong> This is the SAME query as \"AWS Privilege Escalation\" scenario!</div></div>",
+      "type": "execute",
+      "target_cell": 7,
+      "auto_execute": false
+    },
+    {
+      "title": "📈 Visual Graph Analysis",
+      "content": "<div><p>Let's create your first visual security graph! This helps you see relationships that are hard to spot in tables.</p><p><strong>🎨 Visualization Benefits:</strong></p><ul><li>See attack flows visually</li><li>Identify security bottlenecks</li><li>Understand complex relationships</li><li>Communicate security risks clearly</li></ul><p><strong>🔍 Color Coding:</strong></p><ul><li><span style=\"color: #87CEEB;\">Light Blue</span> - Users (attack starting points)</li><li><span style=\"color: #FFA500;\">Orange</span> - Roles/Permissions (escalation points)</li><li><span style=\"color: #FF0000;\">Red</span> - Sensitive Data (attack targets)</li><li><span style=\"color: #90EE90;\">Light Green</span> - Other Resources</li></ul><div style=\"background: #f3e5f5; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #9c27b0;\"><strong>🎯 Analysis Tip:</strong> Look for short paths from blue (users) to red (sensitive data)!</div></div>",
+      "type": "execute",
+      "target_cell": 9,
+      "auto_execute": false
+    },
+    {
+      "title": "🧪 Hands-On Challenge: Build Your Query",
+      "content": "<div><p><strong>🏆 Your Challenge:</strong> Write a query to find administrative access paths!</p><p><strong>📋 Requirements:</strong></p><ul><li>Find users with <code>access_level = 'administrator'</code></li><li>Show what roles they can assume</li><li>Display the access method (relationship type)</li></ul><p><strong>💡 Query Structure Hints:</strong></p><ul><li>Start with <code>MATCH (user:User)-[relationship]->(role:Role)</code></li><li>Add <code>WHERE user.access_level = ?</code></li><li>Return user name, role name, and relationship type</li></ul><div style=\"background: #fff3cd; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #ffc107;\"><strong>🎯 Learning Goal:</strong> Practice writing your own security queries!</div></div>",
+      "type": "challenge",
+      "target_cell": 11,
+      "solution": "<div><p><strong>💡 Solution:</strong></p><pre style=\"background: #f8f9fa; padding: 10px; border-radius: 4px; overflow-x: auto;\"><code>MATCH (user:User)-[r]->(role:Role)\nWHERE user.access_level = 'administrator'\nRETURN \n    user.name as AdminUser,\n    role.name as AdminRole,\n    type(r) as AccessMethod</code></pre><p><strong>🔍 Explanation:</strong></p><ul><li><code>[r]</code> captures the relationship</li><li><code>type(r)</code> gets the relationship type</li><li>This shows how admins access different roles</li></ul></div>"
+    },
+    {
+      "title": "🧠 Knowledge Check: Test Your Understanding",
+      "content": "<div><p>Time to test what you've learned! This interactive quiz will check your understanding of graph security concepts.</p><p><strong>📚 Topics Covered:</strong></p><ul><li>Attack path length significance</li><li>Cypher query syntax understanding</li><li>Graph database advantages for security</li></ul><p><strong>🎯 Why This Matters:</strong></p><ul><li>Reinforces key concepts</li><li>Identifies areas for review</li><li>Builds confidence for advanced topics</li><li>Prepares you for real-world analysis</li></ul><div style=\"background: #e3f2fd; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #2196f3;\"><strong>💡 Learning Tip:</strong> Take your time and think about each answer. Understanding is more important than speed!</div></div>",
+      "type": "execute",
+      "target_cell": 13,
+      "auto_execute": false
+    },
+    {
+      "title": "🎉 Congratulations! You're Ready for More",
+      "content": "<div><p><strong>🏆 Amazing work!</strong> You've completed the Security Graph Fundamentals!</p><div style=\"background: #d4edda; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #28a745;\"><h4 style=\"color: #155724; margin-top: 0;\">✅ What You've Mastered:</h4><ul style=\"color: #155724;\"><li>🔍 Graph security concepts and terminology</li><li>💻 Basic Cypher queries for threat analysis</li><li>📊 Visual interpretation of attack paths</li><li>🎮 Connection between notebooks and dashboard</li></ul></div><div style=\"background: #d1ecf1; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #17a2b8;\"><h4 style=\"color: #0c5460; margin-top: 0;\">🚀 Your Next Steps:</h4><ol style=\"color: #0c5460;\"><li><strong>Practice:</strong> Go to <a href=\"http://localhost:3000\" target=\"_blank\">dashboard</a> and try \"AWS Privilege Escalation\"</li><li><strong>Advance:</strong> Open <code>02-Attack-Path-Discovery.ipynb</code> for advanced techniques</li><li><strong>Explore:</strong> Use <a href=\"http://localhost:7474\" target=\"_blank\">Neo4j Browser</a> for custom queries</li><li><strong>Connect:</strong> See how concepts apply to all 10 dashboard scenarios</li></ol></div><div style=\"background: #f3e5f5; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #9c27b0;\"><h4 style=\"color: #4a148c; margin-top: 0;\">💡 Remember:</h4><p style=\"color: #4a148c; margin-bottom: 0;\">Security is about relationships. Every connection in the graph represents a potential attack path that security teams need to understand and protect.</p></div></div>",
+      "type": "overview",
+      "target_cell": null
+    }
+  ],
+  "mitre_techniques": [
+    "T1078.004 - Valid Accounts: Cloud Accounts",
+    "T1548.005 - Abuse Elevation Control Mechanism",
+    "T1134.001 - Access Token Manipulation"
+  ],
+  "prerequisites": [
+    "Basic understanding of cloud computing",
+    "Familiarity with security concepts",
+    "No prior graph database experience required"
+  ],
+  "related_scenarios": [
+    "AWS Privilege Escalation",
+    "Cross-Cloud Attack Chain",
+    "Kubernetes RBAC Escalation"
+  ]
+}

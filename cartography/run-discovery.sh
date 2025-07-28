@@ -25,7 +25,7 @@ done
 
 # Wait for LocalStack to be ready
 echo "⏳ Waiting for LocalStack AWS services..."
-while ! curl -s http://localstack:4566/_localstack/health | jq -e '.services.ec2 == "available"' > /dev/null; do
+while ! curl -s http://localstack:4566/_localstack/health | jq -e '.services.ec2 == "running"' > /dev/null; do
     echo "⏳ Waiting for LocalStack services..."
     sleep 5
 done

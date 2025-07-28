@@ -563,13 +563,30 @@ LIMIT 10`,
                 </div>
                 
                 <div style="background: #d1ecf1; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #17a2b8;">
-                    <h4 style="margin: 0 0 10px 0; color: #0c5460;">💡 Analysis Tips</h4>
-                    <ul style="margin: 0; padding-left: 20px; color: #0c5460;">
-                        <li>Use the Graph view to visually trace attack paths</li>
-                        <li>Click on nodes to see their properties and relationships</li>
-                        <li>Look for patterns in MITRE technique mappings</li>
-                        <li>Notice how privileges escalate through different cloud services</li>
-                    </ul>
+                    <h4 style="margin: 0 0 10px 0; color: #0c5460;">👀 What You're Looking At</h4>
+                    <p style="margin: 0 0 10px 0; color: #0c5460; font-size: 0.9em;">
+                        <strong>Graph View:</strong> Each node represents a cloud resource (user, role, service). 
+                        Lines show relationships like "can assume", "has access to", or "trusts". 
+                        Follow the path from left to right to see the attack progression.
+                    </p>
+                    <p style="margin: 0 0 10px 0; color: #0c5460; font-size: 0.9em;">
+                        <strong>Table View:</strong> Each row shows a complete attack path. 
+                        "StartUser" is where the attack begins, "TargetService" is the goal, 
+                        and "AttackPath" shows each step in between.
+                    </p>
+                    <p style="margin: 0; color: #0c5460; font-size: 0.9em;">
+                        <strong>Key columns:</strong> EscalationSteps = path length (fewer = easier attack), 
+                        Relations = permission types used, ContainsPII = sensitive data indicator.
+                    </p>
+                </div>
+                
+                <div style="background: #f3e5f5; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #9c27b0;">
+                    <h4 style="margin: 0 0 10px 0; color: #4a148c;">🔍 How This Connects to Cloud Security</h4>
+                    <p style="margin: 0; color: #4a148c; font-size: 0.9em;">
+                        This scenario demonstrates real attack patterns found in cloud environments. 
+                        The graph database reveals relationships that are hard to see in traditional security tools. 
+                        Each connection represents a potential attack step that security teams need to monitor and prevent.
+                    </p>
                 </div>
                 
                 <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 15px 0; border: 2px solid #dee2e6;">
@@ -1371,10 +1388,16 @@ docker-compose logs neo4j</code></pre>
                     </div>
 
                     <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 2px solid #dee2e6;">
-                        <h3 style="margin: 0 0 15px 0; color: #2c3e50;">🔧 Getting Started</h3>
+                        <h3 style="margin: 0 0 15px 0; color: #2c3e50;">🚀 Getting Started (First Time? Start Here!)</h3>
+                        <div style="background: #e8f5e8; padding: 15px; border-radius: 6px; margin-bottom: 15px; border-left: 3px solid #28a745;">
+                            <h4 style="margin: 0 0 10px 0; color: #155724;">👋 New to Jupyter Notebooks?</h4>
+                            <p style="margin: 0; color: #155724; font-size: 0.9em;">
+                                <strong>Start with our 5-minute tutorial first!</strong> It teaches you how to use Jupyter before diving into security concepts.
+                            </p>
+                        </div>
                         <ol style="color: #2c3e50; margin: 0; padding-left: 20px; line-height: 1.6;">
-                            <li><strong>Access Jupyter Lab:</strong> Click "Continue to Jupyter" below (opens in new tab)</li>
-                            <li><strong>Start with Notebook 1:</strong> Open <code>01-Graph-Fundamentals.ipynb</code></li>
+                            <li><strong>First Time:</strong> Open <code>00-Getting-Started-TUTORIAL.ipynb</code> (Learn Jupyter basics in 5 minutes)</li>
+                            <li><strong>Then Start Learning:</strong> Open <code>01-Graph-Fundamentals.ipynb</code></li>
                             <li><strong>Run cells step-by-step:</strong> Use Shift+Enter to execute each code cell</li>
                             <li><strong>Complete exercises:</strong> Interactive quizzes and coding challenges</li>
                             <li><strong>Track progress:</strong> Your learning progress is automatically saved</li>

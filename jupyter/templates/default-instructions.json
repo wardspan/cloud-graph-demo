@@ -1,0 +1,68 @@
+{
+  "notebook_name": "default",
+  "title": "Cloud Threat Graph Lab - Interactive Learning Guide",
+  "description": "General guidance for cybersecurity education using Jupyter notebooks",
+  "learning_objectives": [
+    "Navigate Jupyter notebook interface",
+    "Understand security analysis concepts",
+    "Practice with interactive examples",
+    "Connect learning to real scenarios"
+  ],
+  "estimated_time": "15 minutes",
+  "instructions": [
+    {
+      "title": "🎓 Welcome to Security Learning!",
+      "content": "<div><p><strong>Welcome to the Cloud Threat Graph Lab!</strong></p><p>This interactive learning platform teaches cybersecurity through hands-on analysis of real-world scenarios.</p><p><strong>🎯 What You'll Learn:</strong></p><ul><li>🔍 <strong>Graph-Based Analysis:</strong> Understand security relationships</li><li>⚔️ <strong>Attack Path Discovery:</strong> See how threats spread</li><li>🛡️ <strong>MITRE ATT&CK:</strong> Industry-standard threat classification</li><li>🤖 <strong>ML Security:</strong> AI-powered anomaly detection</li></ul><div style=\"background: #e8f5e8; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #28a745;\"><strong>💡 Learning Approach:</strong> Interactive, hands-on, and connected to real security work!</div></div>",
+      "type": "overview",
+      "target_cell": null
+    },
+    {
+      "title": "🗺️ Your Learning Journey",
+      "content": "<div><p>Here's your recommended path through the Cloud Threat Graph Lab:</p><p><strong>📚 Suggested Learning Sequence:</strong></p><ol><li><strong>Start Here:</strong> <code>00-Getting-Started-TUTORIAL.ipynb</code><br><em>Learn Jupyter basics (10 min)</em></li><li><strong>Foundations:</strong> <code>01-Graph-Fundamentals.ipynb</code><br><em>Master security graph concepts (45 min)</em></li><li><strong>Advanced Analysis:</strong> <code>02-Attack-Path-Discovery.ipynb</code><br><em>Complex attack analysis techniques (60 min)</em></li><li><strong>AI Security:</strong> <code>05-Anomaly-Detection-ML.ipynb</code><br><em>Machine learning for security (75 min)</em></li></ol><div style=\"background: #d1ecf1; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #17a2b8;\"><strong>🎮 Practice Platform:</strong> Use the <a href=\"http://localhost:3000\" target=\"_blank\">dashboard</a> to practice what you learn!</div></div>",
+      "type": "overview", 
+      "target_cell": null
+    },
+    {
+      "title": "🔧 Essential Jupyter Skills",
+      "content": "<div><p>Master these core Jupyter skills for effective learning:</p><p><strong>⌨️ Key Shortcuts:</strong></p><ul><li><kbd>Shift + Enter</kbd> - Run current cell and move to next</li><li><kbd>Ctrl + Enter</kbd> - Run current cell and stay</li><li><kbd>A</kbd> - Insert cell above (command mode)</li><li><kbd>B</kbd> - Insert cell below (command mode)</li><li><kbd>M</kbd> - Change to markdown cell</li><li><kbd>Y</kbd> - Change to code cell</li></ul><p><strong>🛠️ Essential Operations:</strong></p><ul><li><strong>Run All:</strong> Cell → Run All Cells</li><li><strong>Restart Kernel:</strong> Kernel → Restart Kernel</li><li><strong>Clear Output:</strong> Cell → All Output → Clear</li></ul><div style=\"background: #fff3cd; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #ffc107;\"><strong>🚨 Golden Rule:</strong> Always run cells from top to bottom in order!</div></div>",
+      "type": "tutorial",
+      "target_cell": null
+    },
+    {
+      "title": "🎮 Interactive Learning Features",
+      "content": "<div><p>This learning platform includes several interactive features to enhance your education:</p><p><strong>🎯 Learning Tools Available:</strong></p><ul><li><strong>📱 Dashboard Integration:</strong> <a href=\"http://localhost:3000\" target=\"_blank\">Practice scenarios</a></li><li><strong>🗃️ Database Browser:</strong> <a href=\"http://localhost:7474\" target=\"_blank\">Neo4j queries</a></li><li><strong>📊 Code Examples:</strong> Ready-to-run security analysis</li><li><strong>🧪 Challenges:</strong> Test your skills with practice problems</li></ul><p><strong>💡 Learning Strategy:</strong></p><ol><li><em>Read</em> the concepts in text cells</li><li><em>Run</em> the code examples</li><li><em>Practice</em> on the dashboard</li><li><em>Experiment</em> with modifications</li></ol><div style=\"background: #f3e5f5; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #9c27b0;\"><strong>🎯 Success Tip:</strong> Active practice beats passive reading - run every code example!</div></div>",
+      "type": "overview",
+      "target_cell": null
+    },
+    {
+      "title": "🧪 Try Your First Security Query",
+      "content": "<div><p>Let's run a simple security analysis to get you started!</p><p><strong>🔍 What This Example Does:</strong></p><ul><li>Connects to the security database</li><li>Runs a basic inventory query</li><li>Shows different types of security assets</li><li>Demonstrates fundamental concepts</li></ul><p><strong>📊 Understanding the Results:</strong></p><ul><li>Each row represents a type of security asset</li><li>The count shows how many of each type exist</li><li>This inventory is the foundation of security analysis</li></ul><div style=\"background: #e3f2fd; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #2196f3;\"><strong>💡 Connection:</strong> This same data powers all the dashboard scenarios!</div></div>",
+      "type": "execute",
+      "target_cell": 0,
+      "auto_execute": false
+    },
+    {
+      "title": "🛠️ Troubleshooting Common Issues", 
+      "content": "<div><p>Every learner encounters issues - here's how to solve the most common ones:</p><p><strong>🚨 Common Problems & Solutions:</strong></p><table style=\"width: 100%; margin: 15px 0; border-collapse: collapse;\"><tr style=\"background: #f8f9fa;\"><th style=\"padding: 8px; border: 1px solid #dee2e6;\">Problem</th><th style=\"padding: 8px; border: 1px solid #dee2e6;\">Solution</th></tr><tr><td style=\"padding: 8px; border: 1px solid #dee2e6;\">\"ModuleNotFoundError\"</td><td style=\"padding: 8px; border: 1px solid #dee2e6;\">Restart kernel and run setup cells</td></tr><tr><td style=\"padding: 8px; border: 1px solid #dee2e6;\">\"Connection failed\"</td><td style=\"padding: 8px; border: 1px solid #dee2e6;\">Check Docker services are running</td></tr><tr><td style=\"padding: 8px; border: 1px solid #dee2e6;\">\"Variable not defined\"</td><td style=\"padding: 8px; border: 1px solid #dee2e6;\">Run all cells from the beginning</td></tr><tr><td style=\"padding: 8px; border: 1px solid #dee2e6;\">\"Kernel appears to be dead\"</td><td style=\"padding: 8px; border: 1px solid #dee2e6;\">Kernel → Restart & Run All</td></tr></table><p><strong>🔄 Universal Fix:</strong> When in doubt, restart everything!</p><div style=\"background: #d4edda; padding: 12px; border-radius: 6px; margin: 15px 0; border-left: 3px solid #28a745;\"><strong>✅ Remember:</strong> Technical issues are learning opportunities - don't get discouraged!</div></div>",
+      "type": "overview",
+      "target_cell": null
+    },
+    {
+      "title": "🚀 Ready to Start Your Security Journey!",
+      "content": "<div><p><strong>🎉 You're ready to become a cybersecurity expert!</strong></p><div style=\"background: #d4edda; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #28a745;\"><h4 style=\"color: #155724; margin-top: 0;\">✅ You Now Know:</h4><ul style=\"color: #155724;\"><li>🗺️ How to navigate the learning platform</li><li>⌨️ Essential Jupyter notebook skills</li><li>🎯 The recommended learning sequence</li><li>🛠️ How to troubleshoot common issues</li></ul></div><div style=\"background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #2196f3;\"><h4 style=\"color: #1976d2; margin-top: 0;\">🚀 Next Steps:</h4><ol style=\"color: #1976d2;\"><li><strong>If you're new to Jupyter:</strong> Start with <code>00-Getting-Started-TUTORIAL.ipynb</code></li><li><strong>If you know Jupyter:</strong> Jump to <code>01-Graph-Fundamentals.ipynb</code></li><li><strong>Want to practice immediately:</strong> Visit the <a href=\"http://localhost:3000\" target=\"_blank\">dashboard</a></li><li><strong>Ready for challenges:</strong> Try <code>02-Attack-Path-Discovery.ipynb</code></li></ol></div><div style=\"background: #fff3cd; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #ffc107;\"><h4 style=\"color: #856404; margin-top: 0;\">🎯 Learning Philosophy:</h4><p style=\"color: #856404; margin-bottom: 0;\">Security is about understanding relationships, patterns, and behaviors. Every concept you learn here applies directly to protecting real systems from cyber threats.</p></div><p style=\"text-align: center; margin-top: 20px;\"><strong>🛡️ Let's make the digital world more secure! 🚀</strong></p></div>",
+      "type": "overview",
+      "target_cell": null
+    }
+  ],
+  "prerequisites": [
+    "Basic computer literacy",
+    "Interest in cybersecurity",
+    "No prior programming experience required"
+  ],
+  "related_notebooks": [
+    "00-Getting-Started-TUTORIAL.ipynb",
+    "01-Graph-Fundamentals.ipynb", 
+    "02-Attack-Path-Discovery.ipynb",
+    "05-Anomaly-Detection-ML.ipynb"
+  ]
+}

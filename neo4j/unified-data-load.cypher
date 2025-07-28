@@ -162,7 +162,7 @@ CREATE (dev_user:User:AWSUser {
 }),
 
 // Multi-Cloud Federation
-(azure_contractor:AzureUser {
+(azure_contractor:AzureUser:AzureADUser {
   id: 'azure-contractor-001',
   name: 'contractor.external@partner.com',
   email: 'contractor.external@partner.com',
@@ -257,7 +257,7 @@ CREATE (dev_user:User:AWSUser {
   risk_reason: 'Bucket contains PII and has public access'
 }),
 
-(discovered_contractor:AzureUser {
+(discovered_contractor:AzureUser:AzureADUser {
   id: 'discovered-contractor-001',
   name: 'contractor-discovered',
   cloud_provider: 'Azure',
